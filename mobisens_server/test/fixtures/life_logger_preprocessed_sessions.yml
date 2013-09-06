@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  session_id: 1
+  centroid_id: 1
+  device_id: MyString
+
+two:
+  session_id: 1
+  centroid_id: 1
+  device_id: MyString

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sports" />
+  	
+  	<TextView
+  	    android:id="@+id/profile_title"
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="wrap_content"
+  	    android:layout_marginTop="2dp"
+  	    android:ellipsize="end"
+  	    android:gravity="center_horizontal"
+  	    android:textSize="12dp" />
+  
+</LinearLayout>

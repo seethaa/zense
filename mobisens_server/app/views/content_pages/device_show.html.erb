@@ -1,0 +1,28 @@
+<table cellpadding="0" cellspacing="0" style="width: 100%; height: 100%;" >
+  <tr>
+    <td>
+      <div class="back_to_messagebox" >
+        <div class="back_link_container" onclick="javascript:redirect_to('/messages/device_index?device_id=<%= "#{@device_id}" -%>');" >
+          <div class="message_icon" style="display: inline;" >
+            <img alt="icon" width="32px" height="32px" src="/images/message_icon.png"/>
+          </div>
+          <div class="back_link_title">
+            Back to MessageBox
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="message_td">
+      <div style="text-align: center; margin: 5px;" ><h2><%= @message_title %></h2></div>
+    </td>
+  </tr>
+  <tr>
+    <td class="message_td">
+      <div style=" text-align: justify; margin: 20px;" >
+        <%= @content_page.content %>
+      </div>
+    </td>
+  </tr>
+</table>

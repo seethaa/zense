@@ -1,0 +1,22 @@
+<h1>Listing share_session_members</h1>
+
+<table>
+  <tr>
+    <th>Share session</th>
+    <th>Member</th>
+  </tr>
+
+<% @share_session_members.each do |share_session_member| %>
+  <tr>
+    <td><%=h share_session_member.share_session_id %></td>
+    <td><%=h share_session_member.member_id %></td>
+    <td><%= link_to 'Show', share_session_member %></td>
+    <td><%= link_to 'Edit', edit_share_session_member_path(share_session_member) %></td>
+    <td><%= link_to 'Destroy', share_session_member, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New share_session_member', new_share_session_member_path %>

@@ -1,0 +1,40 @@
+
+<table width="96%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <div style="font-size: 1.6em; font-weight: bold; float: left; " >Device List</div>
+        <div class="clear"></div>
+
+        <div class="error_message" style="height: 20px;" >
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+
+        <hr/>
+
+        <table width="90%" cellpadding="3px" >
+          <tr>
+            <td width="50%" align="center" >Device ID</td>
+            <td width="50%" align="center" >Created Time</td>
+            
+          </tr>
+
+        <% @addresses.each do |address| %>
+          <tr>
+            <td align="center" ><%= address.device_id %></td>
+            <td align="center" ><%= address.created_at.getlocal.to_s :db %></td>
+
+          </tr>
+        <% end %>
+        </table>
+        <br/>
+        <div style="text-align: center;">
+
+          <%= will_paginate @addresses %>
+        </div>
+        <hr/>
+      </div>
+    </td>
+  </tr>
+</table>

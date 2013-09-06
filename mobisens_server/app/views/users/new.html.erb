@@ -1,0 +1,50 @@
+<table align="center" width="50%">
+  <tr>
+    <td>
+      <div class="page page_paginated panel" style="height: 230px;" >
+        <% form_for(@user) do |f| %>
+        
+        <table width="100%">
+          <tr>
+            <td colspan="2" >
+              <h2>Sign Up</h2>
+              <hr/>
+              <div style="height: 25px;" class="error_message" >
+                <%= flash[:notice] %>
+                <% flash[:notice] = '' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>User Name</td>
+            <td><%= f.text_field :login, {:size => 30} %></td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td><%= f.password_field :password, {:size => 30} %></td>
+          </tr>
+          <tr>
+            <td>Confirm Password</td>
+            <td><%= f.password_field :password_confirmation, {:size => 30} %></td>
+          </tr>
+          <tr>
+            <td>Authentication Key</td>
+            <td><%= text_field_tag :auth_key, nil, {:size => 30} %></td>
+          </tr>
+          <tr><td colspan=2>&nbsp;</td></tr>
+          <tr>
+            <td colspan=2>
+              <table align=center>
+                <tr>
+                  <td align=center><%= f.submit 'Sign Up' %></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <% end %>
+      </div>
+      
+    </td>
+  </tr>
+</table>

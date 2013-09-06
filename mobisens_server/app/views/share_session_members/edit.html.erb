@@ -1,0 +1,20 @@
+<h1>Editing share_session_member</h1>
+
+<% form_for(@share_session_member) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :share_session_id %><br />
+    <%= f.text_field :share_session_id %>
+  </p>
+  <p>
+    <%= f.label :member_id %><br />
+    <%= f.text_field :member_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @share_session_member %> |
+<%= link_to 'Back', share_session_members_path %>

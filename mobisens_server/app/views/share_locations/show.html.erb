@@ -1,0 +1,23 @@
+<p>
+  <b>Device:</b>
+  <%=h @share_location.device_id %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%=h @share_location.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%=h @share_location.longitude %>
+</p>
+
+<p>
+  <b>Timestamp:</b>
+  <%=h @share_location.timestamp %>
+</p>
+
+
+<%= link_to 'Edit', edit_share_location_path(@share_location) %> |
+<%= link_to 'Back', share_locations_path %>

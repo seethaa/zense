@@ -1,0 +1,2 @@
+module ShareLocationsHelper
+end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  file_path: MyString
+  exported: false
+  generate_time: 1
+
+two:
+  file_path: MyString
+  exported: false
+  generate_time: 1

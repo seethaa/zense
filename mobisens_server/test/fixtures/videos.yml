@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  timestamp: 1
+  annotation: MyString
+
+two:
+  timestamp: 1
+  annotation: MyString

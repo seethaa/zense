@@ -1,0 +1,49 @@
+<table width="80%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>Show Message</h2>
+        <hr/>
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <% form_for @message do |f| %>
+        <table width="100%" >
+          <tr>
+            <td>
+              Target Device
+            </td>
+            <td>
+              <%=h @message.device_id %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Message Title
+            </td>
+            <td>
+              <%=h @message.title %>
+              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Message Content URL
+            </td>
+            <td>
+              <%=h @message.url %>
+            </td>
+          </tr>
+        </table>
+        <br/>
+        <br/>
+        <center>
+          <%= link_to 'Edit', edit_message_path(@message) %> |
+          <%= link_to 'Back', messages_path %>
+        </center>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>

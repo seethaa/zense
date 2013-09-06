@@ -1,0 +1,16 @@
+<h1>Editing share_session</h1>
+
+<% form_for(@share_session) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :owner_device_id %><br />
+    <%= f.text_field :owner_device_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @share_session %> |
+<%= link_to 'Back', share_sessions_path %>

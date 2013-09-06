@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  
+    <!-- 
+    <com.google.android.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:apiKey="0j1ghTB5TfO175msSg8GRemZF6JMgU_bvYLGtkQ"
+    />
+     -->
+     
+   <fragment
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+    
+    <!-- How to get a key: http://code.google.com/android/add-ons/google-apis/mapkey.html (Deprecated) -->
+    <!-- Debug -->
+    <!-- android:apiKey="0j1ghTB5TfO175msSg8GRemZF6JMgU_bvYLGtkQ" -->
+    <!-- Release -->
+    <!-- android:apiKey="0j1ghTB5TfO2LbX25FBUY_sVG1zQxZuLnV3Py8Q" -->
+    
+    <!-- Now use Google API Console to get the API Key: -->
+    <!-- https://code.google.com/apis/console/b/1/?pli=1#project:39657644035:overview -->
+    <!-- Username: mobisens.lifelogger.cmu@gmail.com -->
+    <!-- Password: The default WIFI password for CMUSV -->
+    
+    <!-- If you have any question, please contact: pang.wu@hotmail.com -->
+
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" >
+
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true" >
+
+             <Spinner
+                 android:id="@+id/spMapType"
+                 style="@style/Holo.Light.Spinner"
+                 
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 />
+
+         </LinearLayout>
+     </RelativeLayout>
+     
+     
+
+</FrameLayout>

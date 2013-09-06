@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout1" android:layout_height="match_parent" android:orientation="vertical" android:padding="10px">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:id="@+id/lyEditAddress" android:visibility="visible">
+            <TextView android:text="@string/gift_instruction" android:layout_marginBottom="10px" android:layout_marginTop="5px" android:layout_height="wrap_content" android:id="@+id/textView5" android:layout_width="wrap_content" android:textSize="16px"></TextView>
+            <TextView android:text="Address:" android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_width="match_parent" android:textSize="14px" android:layout_marginTop="20px"></TextView>
+            <EditText android:text="EditText" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/etxtAddress" android:inputType="textCapWords|textMultiLine"></EditText>
+            <LinearLayout android:orientation="horizontal" android:id="@+id/linearLayout7" android:layout_height="wrap_content" android:layout_width="match_parent">
+                <LinearLayout android:layout_weight="1" android:orientation="vertical" android:id="@+id/linearLayout8" android:layout_height="wrap_content" android:layout_width="match_parent">
+                    <TextView android:text="City" android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_width="wrap_content" android:textSize="14px"></TextView>
+                    <EditText android:text="EditText" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/etxtCity" android:inputType="textCapWords"></EditText>
+                </LinearLayout>
+                <LinearLayout android:layout_weight="1" android:orientation="vertical" android:id="@+id/linearLayout9" android:layout_height="wrap_content" android:layout_width="match_parent">
+                    <TextView android:text="State/Province" android:layout_height="wrap_content" android:id="@+id/textView3" android:layout_width="wrap_content" android:textSize="14px"></TextView>
+                    <EditText android:text="EditText" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/etxtState" android:inputType="textCapCharacters"></EditText>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="match_parent">
+                <LinearLayout android:gravity="fill" android:layout_weight="1" android:orientation="vertical" android:id="@+id/linearLayout3" android:layout_height="match_parent" android:layout_width="match_parent">
+                    <TextView android:text="Country" android:layout_height="wrap_content" android:id="@+id/textView7" android:layout_width="wrap_content" android:textSize="14px"></TextView>
+                    <EditText android:text="EditText" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/etxtCountry" android:inputType="textCapCharacters"></EditText>
+                </LinearLayout>
+                <LinearLayout android:gravity="fill" android:layout_weight="1" android:orientation="vertical" android:id="@+id/linearLayout4" android:layout_height="match_parent" android:layout_width="match_parent">
+                    <TextView android:text="Zipcode" android:lines="1" android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_width="wrap_content" android:textSize="14px"></TextView>
+                    <EditText android:text="EditText" android:layout_height="wrap_content" android:inputType="number" android:layout_width="match_parent" android:id="@+id/etxtZipcode"></EditText>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_marginBottom="5px" android:layout_marginTop="5px" android:id="@+id/linearLayout6" android:layout_height="wrap_content" android:layout_width="match_parent">
+                <TextView android:text="Email (* Optional)" android:layout_height="wrap_content" android:id="@+id/textView6" android:layout_width="wrap_content" android:textSize="14px"></TextView>
+                <EditText android:text="EditText" android:layout_height="wrap_content" android:id="@+id/etxtEmail" android:layout_width="match_parent" android:inputType="textEmailAddress"></EditText>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginTop="30px">
+                <Button android:onClick="onSubmitButtonClick" android:layout_weight="1" android:id="@+id/btnSubmit" android:text="Submit" android:layout_marginRight="5px" android:layout_height="wrap_content" android:layout_marginLeft="5px" android:layout_width="wrap_content"></Button>
+                <Button android:onClick="onCancelButtonClick" android:layout_weight="1" android:id="@+id/btnCancel" android:layout_marginRight="5px" android:layout_height="wrap_content" android:layout_marginLeft="5px" android:layout_width="wrap_content" android:text="Back"></Button>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:id="@+id/lyProcessing" android:orientation="vertical" android:layout_height="match_parent" android:visibility="gone">
+            <ProgressBar android:layout_gravity="center" android:layout_height="wrap_content" android:id="@+id/progressBar1" android:layout_width="wrap_content" android:layout_marginTop="50px"></ProgressBar>
+            <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center" android:layout_marginTop="20px" android:text="Processing..." android:id="@+id/tvProcessing" android:textSize="14px"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

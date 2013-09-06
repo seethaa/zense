@@ -1,0 +1,33 @@
+<table width="80%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>New Content Page</h2>
+        <hr/>
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <% form_for @content_page do |f| %>
+        <table width="100%" >
+          <tr>
+            <td>Text Content</td>
+          </tr>
+          <tr>
+            
+            <td>
+              <%= f.text_area :content, :class => 'text_area'%>
+            </td>
+          </tr>
+
+        </table>
+        <center>
+          <div style="height: 30px;"></div>
+          <%= f.submit 'Create' %>
+          <input type=button value="Back" onclick="javascript:redirect_to('<%= content_pages_path -%>');"/>
+        </center>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>

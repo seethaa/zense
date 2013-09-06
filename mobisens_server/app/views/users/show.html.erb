@@ -1,0 +1,26 @@
+<table align="center" width="50%">
+  <tr>
+    <td>
+      <div class="page page_paginated panel" style="height: 230px;" >
+        <table width="100%">
+          <tr>
+            <td colspan="2" >
+              <h2>User Info</h2>
+              <hr/>
+              <div style="height: 25px;" class="error_message" >
+                <%= flash[:notice] %>
+                <% flash[:notice] = '' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>User Name:</td>
+            <td><%= @user.login %></td>
+          </tr>
+          <tr><td colspan=2>&nbsp;</td></tr>
+        </table>
+      </div>
+
+    </td>
+  </tr>
+</table>

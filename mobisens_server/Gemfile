@@ -1,0 +1,50 @@
+source 'http://rubygems.org'
+
+gem 'rails',	'2.3.11'
+gem 'bundler'
+gem "paperclip", '~> 2.3.11'
+gem 'authlogic'
+gem 'ar-extensions'
+gem 'will_paginate', '~> 2.3.11'
+# gem 'mime-types'
+gem 'rack'
+gem 'json'
+gem 'timezone'
+
+
+gem 'mongrel_cluster'
+gem 'mysql'
+
+platforms :ruby_19 do
+  gem 'mongrel', '1.2.0.pre2', :platforms => 'ruby_19'
+  gem 'ruby-debug19', :platforms => 'ruby_19'
+end
+
+platforms :ruby_18 do
+#  gem 'mongrel'
+  gem 'ruby-debug'
+end
+
+
+group :development do
+  gem 'rake'
+  gem 'sqlite3-ruby'
+  gem 'ruby-debug', :platforms => 'ruby_18'
+  gem 'ruby-debug-ide'
+# Windows users may need to add the next line, whatever you did to make fast debugger work, put it in here
+#  gem linecache, '0.43'
+  gem 'rdoc', '>= 2.5.11'
+  gem 'rspec'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'rake'
+  gem 'sqlite3-ruby'
+  
+  gem 'ruby-debug', :platforms => 'ruby_18'
+  gem 'ruby-debug-ide'
+  gem 'rdoc', '>= 2.5.11'
+  gem 'rspec'
+  gem 'rspec-rails'
+end

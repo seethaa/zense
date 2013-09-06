@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:orientation="vertical"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     >
+     
+    <LinearLayout
+        android:id="@+id/lyHeader"
+        android:layout_width="match_parent"
+        android:layout_height="17dp"
+        android:background="@drawable/main_header_bg_selector"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:text="Carnegie Mellon MobiSens"
+                android:textSize="11sp" />
+     </LinearLayout>
+        
+     <ListView  
+         android:id="@android:id/list"
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content" 
+         />
+</LinearLayout>

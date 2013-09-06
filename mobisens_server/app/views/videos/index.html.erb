@@ -1,0 +1,77 @@
+
+<table width="96%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <div style="font-size: 1.6em; font-weight: bold; float: left; " >Video Annotations</div>
+        <div style="float: right; margin-right: 5px; ">
+          <%=  link_to 'Delete All', {:action => 'delete_all'}, :confirm => 'Are you sure to remove all these files?' %>
+        </div>
+        <div class="clear"></div>
+
+        <div class="error_message" style="height: 20px;" >
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+
+        <% form_tag(:action => "index") do %>
+        <div>
+          <div style="display: inline;" >
+            <%= select_tag(:device_id,
+              options_for_select(@devices.map {|p| [ p.device_id, p.device_id ] },
+              params[:device_id])) %>
+          </div>
+          <div style="display: inline;" >
+            <%= submit_tag 'Search' %>
+          </div>
+          <% if params[:device_id] != nil %>
+          <div style="display: inline;" >
+            <a href="<%= "/videos/calendar/#{params[:device_id]}/"  -%>" target="_blank" >Calendar View</a>
+          </div>
+          
+          <div style="width: 20px; display: inline;">&nbsp;</div>
+          <div style="display: inline;" >
+            <%= link_to 'Show All', :action => 'index' %>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
+
+        <hr/>
+
+        <table cellpadding="3px" >
+          <tr>
+            <td width="15%" align="center" >Video URL</td>
+            <td width="20%" align="center" >Device ID</td>
+            <td width="20%" align="center" >Description</td>
+            <td width="15%" align="center" >File Size (KB)</td>
+            <td width="30%" align="center" >Record Time</td>
+            <td>&nbsp;</td>
+
+          </tr>
+
+        <% @videos.each do |video| %>
+          <tr>
+            <td align="center" ><%= link_to "Download", video.video.url %></td>
+            <td align="center" ><%= video.device_id %></td>
+            <td align="center" >
+              <% if video.annotation.length < 20 %>
+              <%=h video.annotation %>
+              <% else %>
+              <%=h "#{video.annotation[0..17]}..." %>
+              <% end %>
+            </td>
+            <td align="center" ><%=h "%0.2f" % (video.video_file_size.to_f / 1024) %></td>
+            <td align="center" ><%=h Time.at(video.timestamp / 1000).getlocal.to_s(:db) %></td>
+            <td><%= link_to 'Delete', video, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+        <% end %>
+        </table>
+        <hr/>
+        <div style="height:20px;"></div>
+        <%= link_to 'New Video', new_video_path %>
+      </div>
+    </td>
+  </tr>
+</table>
+

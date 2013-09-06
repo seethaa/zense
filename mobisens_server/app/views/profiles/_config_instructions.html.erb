@@ -1,0 +1,353 @@
+<style type="text/css">
+table.sample {
+	border-width: 1px;
+	border-spacing: 1px;
+	border-style: hidden;
+	border-color: gray;
+	border-collapse: collapse;
+	background-color: white;
+}
+table.sample th {
+	border-width: 1px;
+	padding: 1px;
+	border-style: dotted;
+	border-color: gray;
+	background-color: white;
+}
+table.sample td {
+	border-width: 1px;
+	padding: 1px;
+	border-style: dotted;
+	border-color: gray;
+	background-color: white;
+}
+</style>
+
+<table class="sample" >
+  <tr>
+    <td>Configuration Line & Possible Value</td>
+    <td>Explanation</td>
+  </tr>
+  <tr>
+    <td>
+      accelerometer: on/off;
+    </td>
+    <td>
+      Turn accelerometer sensor on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      compass: on/off;
+    </td>
+    <td>
+      Turn compass sensor on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      gyro: on/off;
+    </td>
+    <td>
+      Turn gyroscope sensor on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      light: on/off;
+    </td>
+    <td>
+      Turn light sensor on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      orientation: on/off;
+    </td>
+    <td>
+      Turn orientation sensor on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      temperature: on/off;
+    </td>
+    <td>
+      Turn temperature sensor on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      battery_status: on/off;
+    </td>
+    <td>
+      Turn battery status scanner on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      call_monitor: on/off;
+    </td>
+    <td>
+      Turn call monitor on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      gps: on/off;
+    </td>
+    <td>
+      Turn GPS on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      wifi_scan: on/off;
+    </td>
+    <td>
+      Turn WIFI scanner on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      wifi_scan: on/off;
+    </td>
+    <td>
+      Turn WIFI scanner on/off.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      battery_status_scan_interval: number;
+    </td>
+    <td>
+      Battery scanner scan interval, in ms, must larger than 120000.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      gps_dump_interval: number;
+    </td>
+    <td>
+      GPS scanner scan interval, in ms, must larger than 120000.
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      sensor_sampling_interval: number;
+    </td>
+    <td>
+      Sensor (Accelerometer, Gyro, Compass, Orientation, Light, Temperature sensors) sampling interval, in ms, must larger than 100.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      wifi_scan_interval: number;
+    </td>
+    <td>
+      WIFI scanner scan interval, in ms, must larger than 120000.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      wifi_outdoor_scan_interval: number;
+    </td>
+    <td>
+      Outdoor WIFI scanner scan interval, in ms, must larger than 120000.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      upload_interval: number;
+    </td>
+    <td>
+      Data upload interval, in ms, must larger than 120000.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      get_profile_interval: number;
+    </td>
+    <td>
+      The download cycle of profile, in ms, must larger than 120000.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      annotation_request_interval: number;
+    </td>
+    <td>
+      The minimum screen dim time for getting a pop-up notification dialog, which will request for activity annotation.
+      The unit is ms, must larger than 120000.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      gps_slowstart_threshold: number;
+    </td>
+    <td>
+      The initial ceiling threshold of GPS slow start sampling algorithm, in ms, must larger than 1200000.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      gps_samelocation_distance: number;
+    </td>
+    <td>
+      The estimate accuracy of GPS system, in meter, must larger than 10. If two point's distance is within this number, they will be recognized as one by the system.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      wifi_samelocation_intersect_percentage: number;
+    </td>
+    <td>
+      The percentage of intersected access points retrieved between two WIFI scans. If the actual percentage exceed this number,
+      the system will think the phone stays at the same location during the scans. Minimum value: 50.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      upload_when_charging_only: true/false;
+    </td>
+    <td>
+      Only upload data while the phone is charging.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      activity_merge_threshold: number;
+    </td>
+    <td>
+      Two similar activity detected within this time period will be merged to one instance. Unit: million second.
+      Min value: 60000.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      similar_activity_threshold: number, from 0 ~ 100;
+    </td>
+    <td>
+      If the similarity percentage of two activities exceed this threshold, they will be marked with same label.
+      Min value: 51.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      collection_data_size: number;
+    </td>
+    <td>
+      Number of data points in each block.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      lifelogger_window_size: number;
+    </td>
+    <td>
+      The windows_size field from Lifelogger's configuration.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      lifelogger_step_size: number;
+    </td>
+    <td>
+      The window_step_size field from Lifelogger's configuration.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      ngram_max_n: number;
+    </td>
+    <td>
+      The maximum n-gram number used to calculate the similarity of two activities. Minimum value is 3.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      cos_similarity_threshold: number;
+    </td>
+    <td>
+      The cosine similarity threshold when comparing two n-gram models.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      similar_activity_threshold_2: number;
+    </td>
+    <td>
+      Used by the new K-Means-n-gram similar activity detection algorithm. If the similarity percentage of two activities exceed this threshold, they will be marked with same label.
+      Min value: 71.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      edge_distance: number;
+    </td>
+    <td>
+      The blocks used to further confirm an activity boundary after the n-gram algorithm detect a suspected activity edge.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      max_sample_length: number;
+    </td>
+    <td>
+      The maximum number of blocks that a sample can contain.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      gps_open_window: number;
+    </td>
+    <td>
+      The time allows for location manager to obtain a fix in each phone wake up cycle (in million second).<br/>
+      The maximum number is 60000 (one minute), minimum number is 5000 (5 seconds).
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      phone_wakeup_duration: number;
+    </td>
+    <td>
+      Phone wake up cycle (in million second).<br/>
+      The maximum number is 60000 (one minute), minimum number is 10000 (10 seconds).
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      profile_timeout: number;
+    </td>
+    <td>
+      The timeout interval for a special profile (in million second).<br/>
+      No maximum/minimum value, value smaller than zero means never expire.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      debug_mode: true/false;
+    </td>
+    <td>
+      Let the phone shows configuration panel.
+    </td>
+  </tr>
+</table>

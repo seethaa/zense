@@ -1,0 +1,22 @@
+
+<table width="50%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated panel" style="height: auto;" >
+        <h2>Users</h2>
+        <hr/>
+        
+        <table width="100%">
+            <% @users.each do |user| %>
+            <tr>
+              <td><%=h user.login %></td>
+              <td align="center"><%= link_to 'Edit', edit_user_path(user), :method => :get %></td>
+              <td align="center"><%= link_to 'Delete', user, :confirm => 'Are you sure to delete this user?', :method => :delete %></td>
+            </tr>
+            <% end %>
+        </table>
+      </div>
+    </td>
+  </tr>
+</table>
+

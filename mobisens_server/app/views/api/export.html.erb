@@ -1,0 +1,90 @@
+<script type="text/javascript">
+  $(function() {
+    $("#start_timestamp").text(new Date().getTime());
+    $("#end_timestamp").text(new Date().getTime());
+
+    $( "#start_datepicker" ).datepicker({
+      onSelect: function(dateText, inst) {
+        var date = $( "#start_datepicker" ).datepicker("getDate");
+        var timestamp = date.getTime();
+        $("#start_timestamp").val(timestamp);
+        checkStartAndEndTime();
+      }
+    });
+    
+    $("#end_datepicker").datepicker({
+      onSelect: function(dateText, inst) {
+        var date = $( "#end_datepicker" ).datepicker("getDate");
+        var timestamp = date.getTime();
+        $("#end_timestamp").val(timestamp);
+        checkStartAndEndTime();
+      }
+    });
+  });
+
+
+  function checkStartAndEndTime(){
+    var start = parseInt($("#start_timestamp").text());
+    var end = parseInt($("#end_timestamp").text());
+    if(end < start){
+      $("#error_message").text("End date must before start date.")
+    }
+  }
+
+</script>
+
+<table width="70%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <div style="font-size: 1.6em; font-weight: bold; float: left; " >Export Data to LifeLogger</div>
+        <div class="clear" style="height: 20px;" ></div>
+        <hr/>
+        <% form_tag :action => 'do_export' do  %>
+        
+        <table width="90%" cellpadding="3px" style="margin-left: 20px;" >
+          <tr>
+            <td colspan="2">
+              <div id="error_message" class="error_message" style="height: 20px;" >
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Device:</td>
+            <td>
+              <%= select_tag(:device_id, options_for_select(@devices.map {|device| [ device[:name], device[:id] ] })) %>
+              
+            </td>
+          </tr>
+
+          <tr>
+            <td>Start Date:</td>
+            <td>
+              <input id="start_datepicker" type="text"></input>
+              <input id="start_timestamp" name="start_timestamp" type="hidden"></input>
+            </td>
+          </tr>
+
+          <tr>
+            <td>End Date:</td>
+            <td>
+              <input id="end_datepicker" type="text"></input>
+              <input id="end_timestamp" name="end_timestamp" type="hidden"></input>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" >
+              <div style="height:20px;"></div>
+              <div style="text-align: center">
+                <%= submit_tag "Export" %>
+              </div>
+            </td>
+          </tr>
+        
+        </table>
+        <% end %>
+        <hr/>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <ScrollView android:layout_width="match_parent" android:id="@+id/scrollView1" android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:id="@+id/LinearLayout01" android:layout_height="match_parent" android:paddingLeft="10dp" android:paddingRight="10dp">
+            <TextView android:id="@+id/textView1" android:layout_marginBottom="5dp" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginTop="20dp" android:text="Sharing you current location and activity:"></TextView>
+            <TextView android:id="@+id/textView7" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="If you turn this option on, your location and current activity can be view by those who are in the same circles. You can also see other people's activity in those circles by turning this option on. Please make sure you have enabled the GPS to make the sharing work properly."></TextView>
+            <CheckBox android:layout_marginTop="20dp" android:textSize="18dp" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/chkShare" android:text="Share My Location &amp; Current Activity Automatically"></CheckBox>
+        </LinearLayout>
+    </ScrollView>
+    
+</LinearLayout>

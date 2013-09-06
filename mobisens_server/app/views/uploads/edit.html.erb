@@ -1,0 +1,16 @@
+<h1>Editing upload</h1>
+
+<% form_for(@upload) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :upload_time %><br />
+    <%= f.datetime_select :upload_time %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @upload %> |
+<%= link_to 'Back', uploads_path %>

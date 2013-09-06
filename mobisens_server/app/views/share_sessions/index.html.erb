@@ -1,0 +1,20 @@
+<h1>Listing share_sessions</h1>
+
+<table>
+  <tr>
+    <th>Owner device</th>
+  </tr>
+
+<% @share_sessions.each do |share_session| %>
+  <tr>
+    <td><%=h share_session.owner_device_id %></td>
+    <td><%= link_to 'Show', share_session %></td>
+    <td><%= link_to 'Edit', edit_share_session_path(share_session) %></td>
+    <td><%= link_to 'Destroy', share_session, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New share_session', new_share_session_path %>

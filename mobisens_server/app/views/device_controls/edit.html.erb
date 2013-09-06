@@ -1,0 +1,39 @@
+<table width="80%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>Create Device Configuration</h2>
+        <hr/>
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <% form_for @device_control do |f| %>
+        <table width="100%" >
+          <tr>
+            <td>
+              Profile:
+            </td>
+            <td>
+              <%= f.select :profile_id, Profile.all.collect { |profile| [profile.name, profile.id] } %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Device ID (Input '0' for all devices):
+            </td>
+            <td>
+              <%= f.text_field :device_id %>
+            </td>
+          </tr>
+        </table>
+        <center>
+          <div style="height: 30px;"></div>
+          <%= f.submit 'Update' %>
+          <input type=button value="Back" onclick="javascript:redirect_to('<%= device_controls_path -%>');"/>
+        </center>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>

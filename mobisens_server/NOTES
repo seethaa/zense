@@ -1,0 +1,177 @@
+This is how I configure it.
+
+Run the command in the rails project to configure
+
+
+mongrel_rails cluster::configure -e development -p 8000 -a 127.0.0.1 -N 3
+
+
+Run the command in the rails project to start server
+
+
+mongrel_rails cluster::start
+
+
+Configure Apache Balancer
+
+
+<VirtualHost *:3000>
+
+    DocumentRoot /var/www/
+
+    ServerName localhost
+
+
+    ErrorLog logs/mobisense
+
+    CustomLog logs/mobisense common
+
+
+    <Proxy balancer://mongrelcluster>
+
+      BalancerMember http://127.0.0.1:8000
+
+      BalancerMember http://127.0.0.1:8001
+
+      BalancerMember http://127.0.0.1:8002
+
+    </Proxy>
+
+
+    ProxyPass / balancer://mongrelcluster
+
+    ProxyPreserveHost on
+
+
+</VirtualHost>
+
+
+References:
+
+
+http://blog.codahale.com/2006/06/19/time-for-a-grown-up-server-rails-mongrel-apache-capistrano-and-you/
+
+http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html
+
+
+Configure SELinux to Allow Forwarding
+
+
+Following this : http://wuhai.wordpress.com/2009/02/19/mod_proxy-selinux/
+
+
+# sestatus -b | grep httpd
+
+allow_httpd_anon_write                 off
+
+allow_httpd_bugzilla_script_anon_write off
+
+allow_httpd_mod_auth_pam               off
+
+allow_httpd_nagios_script_anon_write   off
+
+allow_httpd_squid_script_anon_write    off
+
+allow_httpd_sys_script_anon_write      off
+
+httpd_builtin_scripting                on
+
+httpd_can_network_connect              off
+
+httpd_can_network_connect_db           off
+
+httpd_can_network_relay                off
+
+httpd_disable_trans                    off
+
+httpd_enable_cgi                       on
+
+httpd_enable_ftp_server                off
+
+httpd_enable_homedirs                  on
+
+httpd_rotatelogs_disable_trans         off
+
+httpd_ssi_exec                         off
+
+httpd_suexec_disable_trans             off
+
+httpd_tty_comm                         on
+
+httpd_unified                          on
+
+# togglesebool httpd_can_network_connect
+
+httpd_can_network_connect: active
+
+# sestatus -b | grep httpd
+
+allow_httpd_anon_write                 off
+
+allow_httpd_bugzilla_script_anon_write off
+
+allow_httpd_mod_auth_pam               off
+
+allow_httpd_nagios_script_anon_write   off
+
+allow_httpd_squid_script_anon_write    off
+
+allow_httpd_sys_script_anon_write      off
+
+httpd_builtin_scripting                on
+
+httpd_can_network_connect              on
+
+httpd_can_network_connect_db           off
+
+httpd_can_network_relay                off
+
+httpd_disable_trans                    off
+
+httpd_enable_cgi                       on
+
+httpd_enable_ftp_server                off
+
+httpd_enable_homedirs                  on
+
+httpd_rotatelogs_disable_trans         off
+
+httpd_ssi_exec                         off
+
+httpd_suexec_disable_trans             off
+
+httpd_tty_comm                         on
+
+httpd_unified                          on
+
+# setsebool -P httpd_can_network_connect=1
+
+
+Change Apache listening port (with SELinux)
+
+
+Search for "Listen" in httpd.conf and change the port following it.
+
+
+SELinux settings : http://danwalsh.livejournal.com/9275.html
+
+
+semanage port -l | grep http
+
+http_cache_port_t tcp 3128, 8080, 8118
+
+http_cache_port_t udp 3130
+
+http_port_t tcp 80, 443, 488, 8008, 8009, 8443
+
+pegasus_http_port_t tcp 5988
+
+pegasus_https_port_t tcp 5989
+
+
+semanage port -a -t http_port_t -p tcp 3000
+
+
+where 3000 is the port number.
+
+Create db in mysql: CREATE DATABASE mobisens DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;

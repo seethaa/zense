@@ -1,0 +1,39 @@
+<% form_for(@user) do |f| %>
+<div class="error_message" >
+  <%= flash[:notice] %>
+  <% flash[:notice] = '' %>
+</div>
+
+<table align=left width=50% class="" border="0" cellpadding="2" cellspacing="1">
+  <tr>
+    <td colspan=2 class="pageHeading">Edit User<hr/></td>
+  </tr>
+  <tr>
+    <td><%= f.label "User Name" %></td>
+    <td><%= f.text_field :login %></td>
+  </tr>
+  <!-- user cannot change passwords of other users -->
+  <% if @user == current_user %>
+  <tr>
+    <td><%= f.label "New Password" %></td>
+    <td><%= f.password_field :password %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Confirm Password" %></td>
+    <td><%= f.password_field :password_confirmation %></td>
+  </tr>
+  <% end %>
+  <tr><td colspan=2>&nbsp;</td></tr>
+  <tr>
+    <td align=center colspan=2>
+      <table align=center>
+        <tr align=center>
+          <td><input type=button value="Back" onclick="javascript:history.back(1);"/></td>
+          <td><%= f.submit 'Update' %></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<% end %>
+<br/>

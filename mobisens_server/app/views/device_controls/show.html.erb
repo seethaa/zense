@@ -1,0 +1,51 @@
+<table width="60%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>Device Configuration Details</h2>
+        <hr/>
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <table width="100%" >
+          <tr>
+            <td>
+              Device ID:
+            </td>
+            <td>
+              <%= @device_control.device_id %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Profile Name:
+            </td>
+            <td>
+              <%= @device_control.profile.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="height: 120px;">
+              Profile Configuration:
+              </div>
+            </td>
+            <td>
+              <div class="fake_text_area">
+                <%= @device_control.profile.config.gsub("\n", "<br/>") %>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div style="height: 30px;"></div>
+        <hr/>
+        <center>
+          <div style="height: 10px;"></div>
+          <input type=button value="Edit" onclick="javascript:redirect_to('<%= edit_device_control_path(@device_control) -%>');"/>
+          <input type=button value="Back" onclick="javascript:redirect_to('<%= device_controls_path -%>');"/>
+        </center>
+      </div>
+    </td>
+  </tr>
+</table>

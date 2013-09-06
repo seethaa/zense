@@ -1,0 +1,45 @@
+<table width="60%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>View Profile</h2>
+        <hr/>
+        <div class="error_message" >
+        </div>
+        <table width="100%" >
+          <tr>
+            <td>
+              Profile Name:
+            </td>
+            <td>
+              <%= @profile.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Profile Image:
+            </td>
+            <td>
+              <%= image_tag(@profile.photo.url, :size => "48x48", :alt => "Profile Image") %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="height: 120px;">Profile Configuration:</div>
+            </td>
+            <td>
+              <div class="fake_text_area"><%= @profile.config.gsub("\n", "<br/>") %></div>
+            </td>
+          </tr>
+        </table>
+        <div style="height: 30px;"></div>
+        <hr/>
+        <center>
+          <div style="height: 10px;"></div>
+          <input type=button value="Edit" onclick="javascript:redirect_to('<%= edit_profile_path(@profile) -%>');"/>
+          <input type=button value="Back" onclick="javascript:window.history.back();"/>
+        </center>
+      </div>
+    </td>
+  </tr>
+</table>

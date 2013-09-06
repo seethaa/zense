@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menu_on_actionbar" android:title="Options" android:icon="@drawable/ic_menu_more" android:showAsAction="always|withText">
+        <menu>
+		    <item
+		        android:id="@+id/reset_training_menu"
+		        android:icon="@drawable/ic_menu_revert"
+		        android:title="Reset Training Data" android:showAsAction="always"/>
+		    <item
+		        android:id="@+id/clear_annolist_menu"
+		        android:icon="@drawable/ic_menu_clear_playlist"
+		        android:title="Clear Annotation List" android:showAsAction="always"/>
+		    </menu>
+    </item>
+</menu>

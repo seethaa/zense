@@ -1,0 +1,18 @@
+<p>
+  <b>Device:</b>
+  <%=h @share_activity.device_id %>
+</p>
+
+<p>
+  <b>Activity:</b>
+  <%=h @share_activity.activity %>
+</p>
+
+<p>
+  <b>Timestamp:</b>
+  <%=h @share_activity.timestamp %>
+</p>
+
+
+<%= link_to 'Edit', edit_share_activity_path(@share_activity) %> |
+<%= link_to 'Back', share_activities_path %>

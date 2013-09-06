@@ -1,0 +1,24 @@
+<h1>Listing share_activities</h1>
+
+<table>
+  <tr>
+    <th>Device</th>
+    <th>Activity</th>
+    <th>Timestamp</th>
+  </tr>
+
+<% @share_activities.each do |share_activity| %>
+  <tr>
+    <td><%=h share_activity.device_id %></td>
+    <td><%=h share_activity.activity %></td>
+    <td><%=h share_activity.timestamp %></td>
+    <td><%= link_to 'Show', share_activity %></td>
+    <td><%= link_to 'Edit', edit_share_activity_path(share_activity) %></td>
+    <td><%= link_to 'Destroy', share_activity, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New share_activity', new_share_activity_path %>

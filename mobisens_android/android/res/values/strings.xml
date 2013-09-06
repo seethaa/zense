@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+    <string name="SystemSensTitle">MobiSens control panel</string>
+    <string name="app_name">MobiSens</string>
+    <string name="default_logfile_name">/cache/systemsense.log</string>
+    <string name="systemsens_service_started">System sensor is running</string>
+    <string name="systemsens_service_started_msg">Started system sensor</string>
+    <string name="systemsens_service_stopped">System sensor is not running</string>
+    <string name="systemsens_service_stopped_msg">Stopped system sensor</string>
+    <string name="local_service_connected">Connected to local service</string>
+    <string name="local_service_disconnected">Disconnected from local service</string>
+    <string name="local_service_error">Error in getting information</string>
+    <string name="systemsensl_service_label">MobiSens Service</string>
+    <string name="battery_info_status_label">"Battery status: "</string>
+    <string name="battery_info_scale_label">"Battery scale: "</string>
+    <string name="battery_info_level_label">"Battery level: "</string>
+    <string name="battery_info_health_label">"Battery health: "</string>
+    <string name="battery_info_technology_label">"Battery technology: "</string>
+    <string name="battery_info_voltage_label">"Battery voltage: "</string>
+    <string name="battery_info_voltage_units">mV</string>
+    <string name="battery_info_temperature_label">Battery temperature: </string>
+    <string name="battery_info_temperature_units"> \u00B0 C</string>
+    <string name="battery_info_uptime">Time since boot:</string>
+    <string name="battery_info_awake_battery">Awake time on battery:</string>
+    <string name="battery_info_awake_plugged">Awake time when charging:</string>
+    <string name="battery_info_screen_on">Screen ON time:</string>
+    <string name="battery_info_status_unknown">Unknown</string>
+    <string name="battery_info_status_charging">Charging</string>
+    <string name="battery_info_status_charging_ac">(AC)</string>
+    <string name="battery_info_status_charging_usb">(USB)</string>
+    <string name="battery_info_status_discharging">Discharging</string>
+    <string name="battery_info_status_not_charging">Not charging</string>
+    <string name="battery_info_status_full">Full</string>
+    <string name="battery_info_health_unknown">Unknown</string>
+    <string name="battery_info_health_good">Good</string>
+    <string name="battery_info_health_overheat">Overheat</string>
+    <string name="battery_info_health_dead">Dead</string>
+    <string name="battery_info_health_over_voltage">Over voltage</string>
+    <string name="battery_info_health_unspecified_failure">Unknown error</string>
+    <string name="battery_default">No Battery Information</string>
+    <string name="button_start_logger">Start Logger </string>
+    <string name="button_exit">Stop Logger</string>
+    <string name="button_refresh">Refresh</string>
+    <string name="tv_status">Status</string>
+    <string name="tv_logger_status">Logger Status: </string>
+    <string name="tv_battery">Battery: </string>
+    <string name="tv_no_battery_info">No Battery Information: </string>
+    <string name="tv_usage_stat">Usage Statistics: </string>
+
+    <string-array name="global_op">
+        <item>None</item>
+        <item>Delete all data files</item>
+        <item>Start all services</item>
+        <item>Stop all running services</item>
+        <item>Reset all parameters</item>
+    </string-array>
+    <string-array name="phone_positions">
+        <item>Head</item>
+        <item>Left Arm</item>
+        <item>Right Arm</item>
+        <item>Chest</item>
+        <item>Left Shoulder</item>
+        <item>Right Shoulder</item>
+        <item>Left Hand</item>
+        <item>Right Hand</item>
+        <item>Left Leg</item>
+        <item>Right Leg</item>
+        <item>Left foot</item>
+        <item>Right foot</item>
+    </string-array>
+
+    <string name="none_found">No Bluetooth devices found</string>
+    <string name="discoverying_bluetooth">Discoverying bluetooth devices...</string>
+    <string name="start_all_services">Start Services</string>
+    <string name="end_all_services">Stop Services</string>
+    <string name="device_id">Device ID:</string>
+    <string name="gift_instruction">If you wish to receive small gifts for providing data, please provide your mailing address.</string>
+    <string name="get_info">Downloading Information ...</string>
+    <string name="upload_info">Uploading ...</string>
+    <string name="update_address_failed">&quot;Failed to change the address, please make sure you've connected to the Internet.&quot;</string>
+    <string name="get_address_failed">&quot;Fail to detect register server, please make sure you have connected to the Internet.&quot;</string>
+    <string name="btn_messagebox_text">Message Box</string>
+    <string name="messagebox_notify_ticker_text">MobiSens New Message</string>
+    <string name="messagebox_notify_content_text">Select to view all of them.</string>
+    <string name="eula_accept">Accept</string>
+    <string name="eula_refuse">Decline</string>
+    <string name="eula_title">End User License Agreement</string>
+    <string name="service_running_notify_ticker_text">MobiSens: Collecting Data.</string>
+    <string name="service_running_notify_content_text">Select to view details.</string>
+    <string name="date_format">yyyy-MM-dd</string>
+    <string name="time_format">hh:mm AA</string>
+
+    <string-array name="default_activities">
+        <item>Walking</item>
+        <item>Running</item>
+        <item>Driving</item>
+        <item>Eating</item>
+        <item>Cooking</item>
+        <item>Working before computer</item>
+        <item>Sleeping</item>
+        <item>Cycling</item>
+        <item>Biking</item>
+        <item>Washing dishes</item>
+        <item>Washing clothes</item>
+        <item>Having breakfast</item>
+        <item>Having lunch</item>
+        <item>Having dinner</item>
+        <item>Watching TV</item>
+        <item>Playing video game</item>
+        <item>Gardening</item>
+    </string-array>
+
+    <string name="invalid_annotation">Please make sure the starting time is before ending time, and the activity name is not empty.</string>
+    <string name="annotation_done">Annotation has been saved successfully.</string>
+    <string name="annotation_request">&quot;It has been more than {0} minutes since your last operation on the phone, would you please tell us what you did in this period?&quot;</string>
+    <string name="request_to_enable_wifi">MobiSens needs to enable WIFI for Wireless Access Points information collection. Would you like to enable it?</string>
+    <string name="message_dialog_title">MobiSens Message</string>
+    <string name="request_to_enable_gps">MobiSens needs to collect location data from GPS, please enable GPS from your phone settings.</string>
+    <string name="tag_text_anno_tab">text_anno</string>
+    <string name="tag_video_anno_tab">video_anno</string>
+    <string name="short_video_saved">&quot;Step 1: The video has been saved. You can click the button again to retake a new one.&quot;</string>
+    <string name="video_annotation_done">Video submitted.</string>
+    <string name="activity_annotation_title">&quot;My Activities&quot;</string>
+    <string name="activity_annotation_description">&quot;View &amp; edit your activity segmentations.&quot;</string>
+    <string name="activity_messagebox_title">Message Box</string>
+    <string name="activity_messagebox_description">&quot;&quot;</string>
+    <string name="update_unread_message">update_unread_message</string>
+    <string name="unread_message_format">You have {0} unread message(s).</string>
+    <string name="activity_start_service_description">Click to begin data collection.</string>
+    <string name="activity_end_service_description">Click to stop data collection.</string>
+    <string name="messagebox_network_error">Cannot connect to MobiSens Messagebox due to a network error. Please try again later.</string>
+    <string name="about_menu">About...</string>
+    <string name="eula_menu">User Agreement</string>
+    <string name="about_title">About MobiSens</string>
+    <string name="annotation_name">annotation_name</string>
+    <string name="name_picker_title">Pick a possible name...</string>
+    <string name="name_picker_input_new_item">Input...</string>
+    <string name="activity_life_stream">Life Stream</string>
+    <string name="activity_life_stream_description">View your lifelog online.</string>
+    <string name="activity_go_pushing">Push Data</string>
+    <string name="activity_go_pushing_description">Push your data to Life Stream.</string>
+    <string name="activity_abort_pushing">Abort Pushing</string>
+    <string name="activity_abort_pushing_description">End the current pushing progress.</string>
+    <string name="message_title_general_network_error">Network Error</string>
+    <string name="message_general_network_error">MobiSens cannot connect to the upload server, please make sure you have Internet connection and try again.</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_web_view">WebView</string>
+    <string name="old_play_store">MobiSens needs Google Play Store Service to run. However, the current Play Store is outdated. Please update the Play Store.</string>
+    <string-array name="map_types">
+        <item >Street</item>
+        <item >Terrian</item>
+        <item >Hybrid</item>
+        <item >Sattelite</item>
+    </string-array>
+    
+    <string-array name="switcher_app_action_list">
+        <item>Map View</item>
+        <item>List View</item>
+        
+    </string-array>
+    <string name="unknown_activity">Unknown Activity</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    
+
+</resources>

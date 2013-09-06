@@ -1,0 +1,87 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Carnegie Mellon MobiSens</title>
+  <%= link_tag '/mobisens.png', :rel => 'shortcut icon', :type => 'image/png' %>
+  <%= stylesheet_link_tag 'scaffold.css', 'project_template.css', 'jquery-ui.css' %>
+  <%= javascript_include_tag 'jquery-1.8.2.js', 'application.js', 'jquery-ui.js' %>
+</head>
+<body>
+  <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td colspan="2">
+        <div class="pageHeader">
+          <!--
+          <img width="244" height="35" border="0" title="Carnegie Mellon University Website Home Page" src="images/cmu_logo.gif" alt="Carnegie Mellon University Website Home Page"></img>
+          -->
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="190" valign="top" class="navPanel" >
+          <ul class="menu">
+            <li>
+              <div style="height: 20px;"></div>
+            </li>
+            <li>
+
+              <div>
+                <img alt="Put Your Project Logo Here" src="/images/mobi_logo.png" width="190px"/>
+              </div>
+            </li>
+            
+              <% if current_user %>
+            <li>
+              <a href="/uploads">Uploads</a>
+            </li>
+            <li>
+              <a href="/videos">Video Annotations</a>
+            </li>
+            <li>
+              <a href="/profiles">Profiles</a>
+            </li>
+            <li>
+              <a href="/special_profiles/index">Manage Special Profiles</a>
+            </li>
+            <li>
+              <a href="/device_controls">Device Control</a>
+            </li>
+            <li>
+              <a href="/address/list">Device List</a>
+            </li>
+            <li>
+              <a href="/content_pages">Content Management</a>
+            </li>
+            <li>
+              <a href="/messages">Message Management</a>
+            </li>
+            <li>
+              <a href="/api/export">Export Data</a>
+            </li>
+            <li>
+              <a href="/user_sessions/destroy/<%= current_user.id -%>">Logout</a>
+            </li>
+              <% else %>
+            <li>
+              <a href="/user_sessions/new">Login</a>
+            </li>
+              
+              <% end %>
+            
+            <li>
+              <div style="height: 80px;">&nbsp;</div>
+            </li>
+            <li><a href="/main/peoples">People</a></li>
+            <li><a href="/main/contact">Contact Us</a></li>
+          </ul>
+      </td>
+      <td valign="top" style="background-color: #f4f4f4;">
+        <div class="content" id="page_content" >
+        <%= yield %>
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

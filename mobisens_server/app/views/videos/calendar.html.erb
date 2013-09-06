@@ -1,0 +1,126 @@
+<script type="text/javascript">
+  var device_id = <%= @selected_device.device_id -%>;
+</script>
+
+<script type='text/javascript'>
+
+  $(document).ready(function() {
+    var height = $(document).height() - 105;
+    
+
+    var calendar = $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      slotMinutes: 15,
+      selectable: true,
+      selectHelper: true,
+      defaultView: "<%= @view -%>",
+      select: function(start, end, allDay) {
+        //alert("Event Start date" + start);
+
+        // Convert the javascript Date object to Unix timestamp
+        var unixTime = parseInt(start.getTime() / 1000);
+        //alert("Event Start date" + unixTime);
+        var view = $('#calendar').fullCalendar('getView');
+        window.location.href = '/videos/calendar/' + device_id + '/' + unixTime + '/' + view.name;
+        return false;
+      },
+      editable: true,
+      events: <%=  @videos_json.to_json %>,
+      eventClick: function(event, jsEvent, view){
+         //window.location.href = '/videos/edit/' + event.id + '/' + view.name;
+         setupJWPlayer(event.url);
+         var playerFrame = $("#player_container");
+         playerFrame.css('left', jsEvent.pageX);
+         playerFrame.css('top', jsEvent.pageY);
+         playerFrame.show();
+         $("#title").text(event.title);
+         return false;
+        }
+    });
+
+    calendar.fullCalendar('gotoDate', <%=  @ts.year -%>, <%=  @ts.month - 1 -%>, <%= @ts.day -%> );
+
+    calendar.fullCalendar('option', 'height', height);
+  });
+
+
+
+
+</script>
+
+<script type="text/javascript">
+  $(window).resize(function() {
+    var height = $(document).height() - 95;
+    calendar.fullCalendar('option', 'height', height);
+  });
+
+
+  function setupJWPlayer(video_url)
+  {
+    jwplayer("jwplayer_container").setup({
+        flashplayer: "/swf/player.swf",
+        file: video_url,
+        width: 340,
+        height: 200,
+        events: {
+            onComplete: function() {
+                
+            },
+            onReady: function(){
+              // Don't remove this line, it will initialize the loading and first screen of the video.
+              jwplayer("jwplayer_container").seek(0);
+            },
+            onTime: function(event){
+              //alert(event.position + ", " + videoEndPosition);
+              
+            }
+        }
+    });
+  }
+
+  function hideVideoPanel(){
+    $("#player_container").hide();
+    return false;
+  }
+  
+</script>
+
+<div style="width: 100%; text-align: center; padding-top: 15px;" >
+  <% form_tag(:action => "calendar") do %>
+    <div>
+      <div style="display: inline;" >
+        <%= select_tag(:id,
+          options_for_select(@devices.map {|p| [ p.device_id, p.device_id ] },
+          @selected_device.device_id)) %>
+      </div>
+      <div style="display: inline;" >
+        <%= submit_tag 'Switch to Device' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="clear"></div>
+
+<div id='calendar' style="width: 90%; margin-left: auto; margin-right: auto; margin-top: 0px; "></div>
+<div id="player_container" style="position: absolute; z-index: 1000;  display: none;">
+  <div class="page_paginated" style=" background-color: white; height: 240px; width: 340px;">
+    <div style="margin: 10px;" >
+      <div id="title" style="display: inline; height: 20px; line-height: 20px; vertical-align: middle;" >Title</div>
+      <div  onclick="javascript:hideVideoPanel();" class="snippets" style="float: right; display: inline; width: 20px; height: 20px;">
+        <img id="btn_hide_video_panel" title="Close Panel" alt="Show/Hide Question Panel" src="/images/collapse.png" width="20px" height="20px"/>
+      </div>
+    </div>
+    
+    <div style="margin-buttom: 10px; margin-top: 10px;" >
+      <div id="jwplayer_container"></div>
+    </div>
+  </div>
+
+</div>
+
+
+

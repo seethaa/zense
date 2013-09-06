@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent" android:background="@drawable/main_header_bg_selector" android:layout_height="wrap_content" android:id="@+id/lyHeader" android:orientation="vertical">
+        <TextView android:layout_gravity="center" android:text="Carnegie Mellon MobiSens" android:layout_marginTop="15dp" android:id="@+id/textView7" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="18dp"></TextView>
+        <TextView android:layout_marginLeft="10dp" android:gravity="center" android:layout_gravity="center" android:text="{title}" android:layout_marginTop="5dp" android:textStyle="normal" android:layout_marginBottom="15dp" android:id="@+id/tvTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10dp" android:textSize="21dp"></TextView>
+    </LinearLayout>
+    <ScrollView android:id="@+id/scrollView1" android:layout_height="match_parent" android:layout_width="match_parent">
+        <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/tvContent" android:textSize="18dp" android:text="{content}" android:layout_margin="10dp"></TextView>
+    </ScrollView>
+</LinearLayout>

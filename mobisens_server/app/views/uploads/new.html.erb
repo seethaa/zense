@@ -1,0 +1,49 @@
+<table width="60%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>New Upload</h2>
+        <hr/>
+        <div class="error_message" style="height: 30px;" >
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <% form_for(@upload, :html => {:multipart => true}) do |f| %>
+        <table width="100%" >
+          <tr>
+            <td>
+              Record File:
+            </td>
+            <td>
+              <%= f.file_field :record %>
+              <%= f.hidden_field :device_id, :value => 0 %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              File Type
+            </td>
+            <td>
+              <%= f.select(:file_type, Upload.FILE_TYPE.collect {|p| [ p[:name], p[:id] ] }) %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Upload Password
+            </td>
+            <td>
+              <%= f.text_field :upload_password %>
+            </td>
+          </tr>
+        </table>
+        <center>
+          <div style="height: 30px;"></div>
+          <%= f.submit 'Upload' %>
+        </center>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>
+
+

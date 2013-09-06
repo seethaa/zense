@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost android:layout_width="match_parent" android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/tab_annos">
+    <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout1" android:layout_height="match_parent" android:orientation="vertical">
+        <TabWidget android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@android:id/tabs"></TabWidget>
+        <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent" android:id="@android:id/tabcontent">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/tab_text_anno" android:visibility="gone">
+                <ScrollView android:id="@+id/scrollView1" android:layout_height="match_parent" android:layout_width="match_parent">
+                    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:id="@+id/LinearLayout01" android:layout_height="match_parent" android:paddingLeft="10dp" android:paddingRight="10dp">
+                        <TextView android:layout_height="wrap_content" android:id="@+id/TextView01" android:text="Step 1: Input the activity name." android:layout_width="wrap_content" android:layout_marginTop="10dp" android:textSize="20dp"></TextView>
+                        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:id="@+id/linearLayout4" android:layout_marginTop="10dp">
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical" android:id="@+id/linearLayout6">
+                                <AutoCompleteTextView android:text="AutoCompleteTextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/atxtActivity"></AutoCompleteTextView>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <CheckBox android:textSize="20dp" android:layout_marginTop="30dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/chkStep2" android:text="  Step 2 (Optional): "></CheckBox>
+                        <TextView android:text="Specifiy starting &amp; ending time of that activity." android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="5dp"></TextView>
+                        <TextView android:id="@+id/textView7" android:layout_width="match_parent" android:layout_height="wrap_content" android:text='If this step was skipped, the phone will capture 20 seconds training data after you clicked "submit". Then automatically detect incoming actitivies that are similar to the training data.'></TextView>
+                        <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical" android:layout_marginTop="20dp" android:id="@+id/timeSelectorContainer" android:visibility="gone">
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="horizontal" android:id="@+id/LinearLayout02">
+                                <TextView android:layout_height="wrap_content" android:id="@+id/textView3" android:layout_weight="1.4" android:text="Start: " android:layout_width="match_parent" android:textSize="18dp"></TextView>
+                                <Button android:layout_height="wrap_content" android:onClick="onPickerClicked" android:text="Button" android:layout_weight="1" android:layout_width="match_parent" android:id="@+id/btnPickStartDate"></Button>
+                                <Button android:layout_height="wrap_content" android:onClick="onPickerClicked" android:text="Pick..." android:layout_weight="1.2" android:layout_width="match_parent" android:id="@+id/btnPickStartTime"></Button>
+                            </LinearLayout>
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="horizontal" android:id="@+id/linearLayout3">
+                                <TextView android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_weight="1.4" android:text="End: " android:layout_width="match_parent" android:textSize="18dp"></TextView>
+                                <Button android:layout_height="wrap_content" android:onClick="onPickerClicked" android:text="Button" android:layout_weight="1" android:layout_width="match_parent" android:id="@+id/btnPickEndDate"></Button>
+                                <Button android:layout_height="wrap_content" android:onClick="onPickerClicked" android:text="Pick..." android:layout_weight="1.2" android:layout_width="match_parent" android:id="@+id/btnPickEndTime"></Button>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <TextView android:layout_height="wrap_content" android:id="@+id/TextView02" android:text="Step 3: Submit!" android:layout_width="wrap_content" android:textSize="20dp" android:layout_marginTop="30dp"></TextView>
+                        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical" android:id="@+id/linearLayout5">
+                            <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical" android:id="@+id/linearLayout7">
+                                <TextView android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_marginTop="10dp" android:text="You cannot modify the annotation once submitted."></TextView>
+                                <Button android:layout_height="wrap_content" android:layout_marginTop="20px" android:onClick="onSubmitClicked" android:layout_gravity="center" android:text="Submit" android:layout_width="200px" android:id="@+id/btnLabel"></Button>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</TabHost>
+

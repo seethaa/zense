@@ -1,0 +1,24 @@
+<h1>Editing share_activity</h1>
+
+<% form_for(@share_activity) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :device_id %><br />
+    <%= f.text_field :device_id %>
+  </p>
+  <p>
+    <%= f.label :activity %><br />
+    <%= f.text_field :activity %>
+  </p>
+  <p>
+    <%= f.label :timestamp %><br />
+    <%= f.text_field :timestamp %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @share_activity %> |
+<%= link_to 'Back', share_activities_path %>

@@ -1,0 +1,56 @@
+<table width="96%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <div style="font-size: 1.6em; font-weight: bold; float: left; " >Special Profiles</div>
+
+        <div class="clear"></div>
+
+        <div class="error_message" style="height: 20px;" >
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+
+        <hr/>
+
+        <br/>
+        <table cellpadding="3px" >
+          <tr>
+            <th width="40%" align="center" >Profile ID</th>
+            <th>&nbsp;</th>
+            <th width="40%" align="center" colspan="2" >Profile</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+
+          </tr>
+
+        <% @profiles.each do |profile| %>
+          <tr>
+            <td align="center" ><%= profile[:profile].id %></td>
+            <td align="center" style="width: 32px;" ><%= image_tag(profile[:profile].photo.url, :size => "32x32", :alt => profile[:profile].name) %></td>
+            <td align="left" ><%= profile[:profile].name %></td>
+            <td><%= link_to 'Show', profile[:profile] %></td>
+            <td><%= link_to 'Delete', :action => :delete, :id => profile[:special_profile].id %></td>
+          </tr>
+        <% end %>
+        </table>
+        <br/>
+
+        <hr/>
+        <% form_tag(nil, :method => 'get') do %>
+        <div>
+          <div style="display: inline;" >
+          <%= select_tag(:profile_id,
+            options_for_select(Profile.all.map {|p| [ p.name, p.id ] })) %>
+          </div>
+
+          <div style="display: inline;" >
+            <%= submit_tag 'Add to Special Profiles' %>
+          </div>
+
+        </div>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,13 @@
+<p>
+  <b>Share session:</b>
+  <%=h @share_session_member.share_session_id %>
+</p>
+
+<p>
+  <b>Member:</b>
+  <%=h @share_session_member.member_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_share_session_member_path(@share_session_member) %> |
+<%= link_to 'Back', share_session_members_path %>

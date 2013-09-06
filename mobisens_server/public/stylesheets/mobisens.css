@@ -1,0 +1,78 @@
+/* 
+    Document   : mobisens
+    Created on : Jul 2, 2011, 9:01:38 PM
+    Author     : wupang
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.message {
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    background-color: white;
+}
+
+
+
+.message:hover{
+    background-color: #ff9900;
+}
+
+.new_message {
+    display: block;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    padding: 5px;
+}
+
+.message_title{
+    overflow: hidden;
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+}
+
+.message_icon{
+    width: 32px;
+    height: 38px;
+    line-height: 38px;
+    vertical-align: middle;
+    float: left;
+    margin-right: 10px;
+    display: inline;
+}
+
+.message_td{
+    border-bottom: dotted 1px #AAAAAA;
+}
+
+.back_to_messagebox{
+    background-color: #BBBBBB;
+    height: 46px;
+    width: 100%;
+}
+
+.back_link_container{
+    height: 32px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.back_link_title{
+    overflow: hidden;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+    display: inline;
+}
+

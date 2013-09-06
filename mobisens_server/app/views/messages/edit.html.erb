@@ -1,0 +1,55 @@
+<table width="80%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>Create Message</h2>
+        <hr/>
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <% form_for @message do |f| %>
+        <table width="100%" >
+          <tr>
+            <td>
+              Target Device
+            </td>
+            <td>
+              <%= f.select :device_id, @devices.collect { |device| [device[:name], device[:id]] } %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Message Title
+            </td>
+            <td>
+              <%= f.text_field :title, :class => 'text_field_align_with_text_area' %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Read
+            </td>
+            <td>
+              <%= f.check_box :read %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Message Content URL
+            </td>
+            <td>
+              <%= f.text_area :url, :class => 'text_area' %>
+            </td>
+          </tr>
+        </table>
+        <center>
+          <div style="height: 30px;"></div>
+          <%= f.submit 'Update' %>
+          <input type=button value="Back" onclick="javascript:redirect_to('/messages');"/>
+        </center>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>

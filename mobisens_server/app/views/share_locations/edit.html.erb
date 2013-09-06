@@ -1,0 +1,28 @@
+<h1>Editing share_location</h1>
+
+<% form_for(@share_location) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :device_id %><br />
+    <%= f.text_field :device_id %>
+  </p>
+  <p>
+    <%= f.label :latitude %><br />
+    <%= f.text_field :latitude %>
+  </p>
+  <p>
+    <%= f.label :longitude %><br />
+    <%= f.text_field :longitude %>
+  </p>
+  <p>
+    <%= f.label :timestamp %><br />
+    <%= f.text_field :timestamp %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @share_location %> |
+<%= link_to 'Back', share_locations_path %>

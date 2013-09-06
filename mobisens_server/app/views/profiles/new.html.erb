@@ -1,0 +1,52 @@
+<table width="80%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>Create Profile</h2>
+        <hr/>
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <% form_for(@profile, :html => { :multipart => true }) do |f| %>
+        <table width="100%" >
+          <tr>
+            <td>
+              Profile Name:
+            </td>
+            <td>
+              <%= f.text_field :name, :class => 'text_field_align_with_text_area' %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Profile Image:
+            </td>
+            <td>
+              <%= f.file_field :photo, :class => 'text_field_align_with_text_area', :accept => 'image/png,image/gif,image/jpeg' %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Profile Configuration:
+            </td>
+            <td>
+              <%= f.text_area :config, :value => Profile.default_profile, :class => 'text_area' %>
+            </td>
+          </tr>
+        </table>
+        <center>
+          <div style="height: 30px;"></div>
+          <%= f.submit 'Create' %>
+          <input type=button value="Back" onclick="javascript:redirect_to('/profiles');"/>
+        </center>
+        <% end %>
+
+        <hr/>
+        <div>
+          <%= render :partial => 'config_instructions.html' %>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

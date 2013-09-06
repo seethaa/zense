@@ -1,0 +1,67 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    //alert("document.ready");
+    $("#device_id_text").autocomplete({
+      source: []
+    });
+
+    $.getJSON("/address/device_list_json", {}, function(data, textStatus, jqXHR){
+      //alert("Hey!");
+      $("#device_id_text").autocomplete("option", "source", data);
+    });
+  });
+</script>
+
+<style type="text/css">
+  .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
+</style>
+
+<table width="80%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <h2>Create Message</h2>
+        <hr/>
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+        <% form_for @message do |f| %>
+        <table width="100%" >
+          <tr>
+            <td>
+              Target Device
+            </td>
+            <td>
+              <%= text_field_tag :device_id_text %>
+              <%= f.select :device_id, @devices.collect { |device| [device[:name], device[:id]] } %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Message Title
+            </td>
+            <td>
+              <%= f.text_field :title, :class => 'text_field_align_with_text_area' %>
+              <%= f.hidden_field :read, :value => "false" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Message Content URL
+            </td>
+            <td>
+              <%= f.text_area :url, :class => 'text_area' %>
+            </td>
+          </tr>
+        </table>
+        <center>
+          <div style="height: 30px;"></div>
+          <%= f.submit 'Create' %>
+          <input type=button value="Back" onclick="javascript:redirect_to('/messages');"/>
+        </center>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>

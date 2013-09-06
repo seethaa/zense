@@ -1,0 +1,57 @@
+
+
+<table width="76%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <div style="font-size: 1.6em; font-weight: bold; float: left; " >Device Configurations</div>
+        <div style="float: right; margin-right: 5px; ">
+          <%=  link_to 'Delete All', {:action => 'delete_all'},
+            :confirm => "Are you sure to remove all these device configurations?\n"
+            %>
+        </div>
+        <div class="clear"></div>
+
+        <div class="error_message">
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+
+        <hr/>
+
+        <table cellpadding="3px" >
+          <tr>
+            <td width="30%" align="center" colspan="2" >Profile</td>
+            <td width="75%" align="center" >Device ID</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+
+          </tr>
+
+        <% @device_controls.each do |device_control| %>
+          <tr>
+            <td align="center" ><%= image_tag(device_control.profile.photo.url, :size => "32x32", :alt => device_control.profile.name) %></td>
+            <td align="left"><%= device_control.profile.name %></td>
+            <% if device_control.device_id == 0 %>
+            <td align="center" >Default</td>
+            <% else %>
+            <td align="center" ><%= device_control.device_id %></td>
+            <% end %>
+
+            <td><%= link_to 'Show', device_control %></td>
+            <td><%= link_to 'Edit', edit_device_control_path(device_control) %></td>
+            <td>
+              <%= link_to 'Delete', device_control, :confirm => "Are you sure to delete this device configuration?",
+                :method => :delete %>
+            </td>
+          </tr>
+        <% end %>
+        </table>
+        <hr/>
+        <div style="height:20px;"></div>
+        <%= link_to 'Create Device Configuration', new_device_control_path %>
+      </div>
+    </td>
+  </tr>
+</table>

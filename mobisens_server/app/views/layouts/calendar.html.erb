@@ -1,0 +1,28 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Carnegie Mellon MobiSens</title>
+  <%= link_tag '/mobisens.png', :rel => 'shortcut icon', :type => 'image/png' %>
+  <%= stylesheet_link_tag 'scaffold.css', 'project_template.css', 'fullcalendar.css' %>
+  <%= javascript_include_tag 'jquery-1.8.2.js', 'fullcalendar.js', 'application.js' %>
+  <%= javascript_include_tag 'swfobject.js', 'jwplayer.js' %>
+  <style type="text/css">
+    td, th
+    {
+      font-size: 12px;
+      height: 16px;
+
+      text-align: justify;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="pageHeader">
+    <!--
+    <img width="244" height="35" border="0" title="Carnegie Mellon University Website Home Page" src="images/cmu_logo.gif" alt="Carnegie Mellon University Website Home Page"></img>
+    -->
+  </div>
+  <%= yield %>
+</body>
+</html>

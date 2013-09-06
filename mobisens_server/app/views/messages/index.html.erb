@@ -1,0 +1,57 @@
+<table width="96%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated" style="width: auto; height: auto; margin-top: 30px;">
+        <div style="font-size: 1.6em; font-weight: bold; float: left; " >Message List</div>
+        <div class="clear"></div>
+
+        <div class="error_message" style="height: 20px;" >
+          <%= flash[:notice] %>
+          <% flash[:notice] = '' %>
+        </div>
+
+        <hr/>
+
+        <table>
+          <tr>
+            <th width="10%" >Device</th>
+            <th width="5%">Read</th>
+            <th width="30%">Title</th>
+            <th width="15%">Create Date</th>
+            <th width="5%">&nbsp;</th>
+            <th width="5%">&nbsp;</th>
+            <th width="5%">&nbsp;</th>
+          </tr>
+
+        <% @messages.each do |message| %>
+          <tr>
+            <td width="10%" ><%=h message.device_id %></td>
+            <td width="5%" ><%=h message.read %></td>
+            <td>
+              <% if message.title.length < 30 %>
+              <%=h message.title %>
+              <% else %>
+              <%=h "#{message.title[0..27]}..." %>
+              <% end %>
+            </td>
+            <td width="15%" ><%=h message.created_at.getlocal.to_s(:db) %></td>
+            <td width="5%" ><%= link_to 'Show', message %></td>
+            <td width="5%" ><%= link_to 'Edit', edit_message_path(message) %></td>
+            <td width="5%" ><%= link_to 'Destroy', message, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+        <% end %>
+        </table>
+        <br/>
+        <div style="text-align: center;">
+
+          <%= will_paginate @messages %>
+        </div>
+        <hr/>
+
+        <%= link_to 'Create Message', new_message_path %>
+
+        
+      </div>
+    </td>
+  </tr>
+</table>

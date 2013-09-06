@@ -1,0 +1,58 @@
+<table width="50%" align="center" >
+  <tr>
+    <td>
+      <div class="page page_paginated panel">
+        <table width="100%" border="0">
+          <tr>
+            <td colspan="2" >
+              <h2 style="float: left;" >Login</h2>
+              <div style="float:right;">
+                <%= link_to "Sign Up", :controller => 'users', :action => 'new' %>
+              </div>
+              <div class="clear"></div>
+              <hr/>
+              <div style="height: 30px;" class="error_message" >
+                <%= flash[:notice] %>
+              </div>
+            </td>
+            </tr>
+            <% form_tag @user_session do  %>
+            <tr>
+              <td>
+                User Name
+              </td>
+              <td>
+                <%= text_field_tag "user_session[login]", nil %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Password
+              </td>
+              <td>
+                <%= password_field_tag "user_session[password]", nil %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="height: 30px;">&nbsp;</div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <center>
+                  <%= submit_tag " Login " %>
+                  
+                </center>
+                
+              </td>
+            </tr>
+            <% end %>
+        </table>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
+
