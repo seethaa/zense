@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
 
     <string name="app_name">mobisens_ui</string>
     <string name="menu_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">I will track your daily activities and record in your timeline. A life pattern will assign to each activity. You can always modify the details to get  more accurate pattern tracking of your life!</string>
     <string name="app_id">228677850621432</string>
     <string name="get_started">To get started, login using Facebook</string>
     <string name="skip_login">Skip Login</string>
@@ -70,5 +69,8 @@
         <item>http://samples.ogp.me/314483491980251</item> <!-- Indian -->
         <item></item>
     </string-array>
+
+    <string name="title_activity_wizard1">Wizard1</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
