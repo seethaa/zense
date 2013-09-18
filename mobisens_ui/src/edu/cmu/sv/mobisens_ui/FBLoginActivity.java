@@ -48,7 +48,7 @@ public class FBLoginActivity extends FragmentActivity {
         public void call(Session session, SessionState state, Exception exception) {
             onSessionStateChange(session, state, exception);
         }
-    };
+    };    
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

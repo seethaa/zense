@@ -1,0 +1,6 @@
+./project.properties
+./.git
+*.classpath
+./gen    
+./bin
+*.class  
