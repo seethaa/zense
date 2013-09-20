@@ -11,4 +11,11 @@
     <color name="black">#000000</color>
     <color name="light_bluish">#81DAF5</color>
 
+    
+    <color name="yellow">#FFFF00</color>
+    <color name="fuchsia">#FF00FF</color>
+    <color name="red">#FF0000</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="gray">#808080</color>
+    
 </resources>

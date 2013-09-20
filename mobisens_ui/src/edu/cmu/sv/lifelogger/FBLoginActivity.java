@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package edu.cmu.sv.mobisens_ui;
+package edu.cmu.sv.lifelogger;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -37,6 +37,8 @@ import com.facebook.model.GraphObject;
 import com.facebook.model.GraphPlace;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.*;
+
+import edu.cmu.sv.mobisens_ui.R;
 
 import java.util.*;
 

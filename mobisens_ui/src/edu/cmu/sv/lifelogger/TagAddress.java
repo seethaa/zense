@@ -1,6 +1,8 @@
-package edu.cmu.sv.mobisens_ui;
+package edu.cmu.sv.lifelogger;
 
 import java.util.ArrayList;
+
+import edu.cmu.sv.mobisens_ui.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,12 +26,9 @@ public class TagAddress extends Activity {
 		return true;
 	}
 	
-	
-	
-	
 
 	 ListView listView;
-	 
+
 	 ArrayList< String>arrayList; // list of the strings that should appear in ListView
 	 ArrayAdapter arrayAdapter; // a middle man to bind ListView and array list 
 	 
@@ -42,7 +41,7 @@ public class TagAddress extends Activity {
 	        listView = (ListView) findViewById(R.id.lstDemo);
 	        
 	        
-	        // LIST OF STRINGS / DATA THAT SHOULD APPEAR IN LISTVIEW HERE WE HAVE HARD CODED IT WE CAN TAKE THIS INPUT FROM USER AS WELL
+	        //TODO: Take these strings from users. currently hardcoded
 	        
 	        arrayList = new ArrayList();
 	        arrayList.add("Home");
@@ -51,7 +50,6 @@ public class TagAddress extends Activity {
 	        arrayList.add("No Tag/Remove Tag");
 	        arrayList.add("Add Tag");
 	        
-	       
 	        
 	        
 	        arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_single_choice,arrayList);

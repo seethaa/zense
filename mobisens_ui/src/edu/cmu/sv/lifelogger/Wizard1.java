@@ -1,5 +1,6 @@
-package edu.cmu.sv.mobisens_ui;
+package edu.cmu.sv.lifelogger;
 
+import edu.cmu.sv.mobisens_ui.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

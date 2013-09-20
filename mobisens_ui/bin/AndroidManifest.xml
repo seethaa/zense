@@ -27,7 +27,7 @@
         android:value="@string/app_id" />
         
         
-       <activity android:name=".FBLoginActivity"
+       <activity android:name="edu.cmu.sv.lifelogger.FBLoginActivity"
                   android:label="@string/app_name"
                   android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -42,7 +42,7 @@
     
         
         <activity
-            android:name="edu.cmu.sv.mobisens_ui.Wizard1"
+            android:name="edu.cmu.sv.lifelogger.Wizard1"
             android:label="@string/title_activity_wizard1" >
         </activity>
     </application>
