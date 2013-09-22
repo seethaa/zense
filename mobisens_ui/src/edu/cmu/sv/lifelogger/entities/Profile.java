@@ -8,6 +8,12 @@ package edu.cmu.sv.lifelogger.entities;
  */
 public class Profile {
 	String mName;
+	String mEmailAddress;
+	int mNumPhotos;
+	int mNumLifePatters;
+	int mNumLocations;
+	String mStatus; //should this be same as FB status?
+	
 	public String getmName() {
 		return mName;
 	}
@@ -68,11 +74,7 @@ public class Profile {
 	}
 
 
-	String mEmailAddress;
-	int mNumPhotos;
-	int mNumLifePatters;
-	int mNumLocations;
-	String mStatus; //should this be same as FB status?
+
 	
 	
 	//TODO: Empty constructor for now. fill in when implementing P1-P2
