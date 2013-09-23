@@ -15,68 +15,68 @@ import edu.cmu.sv.mobisens_ui.R;
 
 public class DashboardActivity extends Activity {
 
-	   
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ActionBar actionBar = getActionBar();
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(true);
 		setContentView(R.layout.pie_chart);
-		
-        //TODO: Change to appropriate xml layout
+
+		//TODO: Change to appropriate xml layout
 		//Set dataset: item and value
-				PieDataset dataset = new PieDataset();
+		PieDataset dataset = new PieDataset();
 
-				dataset.setValue("home", 10.0);
-				dataset.setValue("work", 20.0);
-				dataset.setValue("shop", 30.0);
-				dataset.setValue("other", 40.0);
-				
-				
-//				RelativeLayout relative = (RelativeLayout)findViewById(R.id.relative);
-//				relative.addView(new PiePlot(this, dataset));
-				
-//				RingPlot ringchart = (RingPlot)findViewById(R.id.test_chart);
-//				ringchart.setDataset(dataset);		
-				
-				// Draw the ring chart
-				PiePlot ringchart = (PiePlot)findViewById(R.id.test_chart);
-				ringchart.setDataset(dataset);
-				// Draw piechart or ringchat
-				ringchart.setisRingChart(true);
+		dataset.setValue("home", 10.0);
+		dataset.setValue("work", 20.0);
+		dataset.setValue("shop", 30.0);
+		dataset.setValue("other", 40.0);
 
-				
+
+		//				RelativeLayout relative = (RelativeLayout)findViewById(R.id.relative);
+		//				relative.addView(new PiePlot(this, dataset));
+
+		//				RingPlot ringchart = (RingPlot)findViewById(R.id.test_chart);
+		//				ringchart.setDataset(dataset);		
+
+		// Draw the ring chart
+		PiePlot ringchart = (PiePlot)findViewById(R.id.test_chart);
+		ringchart.setDataset(dataset);
+		// Draw piechart or ringchat
+		ringchart.setisRingChart(true);
+
+
 		/*
 				WindowManager winManager = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
 				@SuppressWarnings("deprecation")
 				int winWidth = winManager.getDefaultDisplay().getWidth();
 				int winHeight = winManager.getDefaultDisplay().getHeight();
-				
+
 				Log.d(TAG, "widht = " +winWidth+ "height" +winHeight);
-		*/
+		 */
 
 		/*		For automatically refreshing		*/
-//				mHandler.sendEmptyMessageDelayed(1, 3000);
-				
-			}
+		//				mHandler.sendEmptyMessageDelayed(1, 3000);
 
-			
-			private Handler mHandler = new Handler(){
-				public void handleMessage(Message msg){
-					PiePlot ringchart = (PiePlot)findViewById(R.id.test_chart);
-					PieDataset dataset = new PieDataset();
-					dataset.setValue("home", 10.0);
-					dataset.setValue("work", 20.0);
-					dataset.setValue("shop", 30.0);
-					dataset.setValue("other", 40.0);
-					dataset.setValue("new", 40.0);
-					ringchart.setDataset(dataset);
-				}
-			};
+	}
 
-			
-			
-			
+
+	private Handler mHandler = new Handler(){
+		public void handleMessage(Message msg){
+			PiePlot ringchart = (PiePlot)findViewById(R.id.test_chart);
+			PieDataset dataset = new PieDataset();
+			dataset.setValue("home", 10.0);
+			dataset.setValue("work", 20.0);
+			dataset.setValue("shop", 30.0);
+			dataset.setValue("other", 40.0);
+			dataset.setValue("new", 40.0);
+			ringchart.setDataset(dataset);
+		}
+	};
+
+
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -104,7 +104,7 @@ public class DashboardActivity extends Activity {
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 		}
-		
+
 		//TODO: Add Settings activity piece
 		//TODO: CHoose correct drawables in action_bar in res/menu
 		return true;
