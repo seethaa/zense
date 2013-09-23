@@ -1,3 +1,5 @@
+package sv.cmu.edu.dataquery;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,8 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
+
 
 
 /**
@@ -54,13 +55,13 @@ public final class PercentageDataset {
 		System.out.println("len of ActivityTimeMap: " + Integer.toString(ActivityTimeMap.size()));
 
 		Double dCumulate = 0.0;
-		Iterator it = ActivityTimeMap.entrySet().iterator();
+		Iterator<Entry<String, Integer>> it = ActivityTimeMap.entrySet().iterator();
 		while ( it.hasNext() ){
 			ActivitySummary ActSum = new ActivitySummary();
 			Entry thisEntry = (Entry)it.next();
 			
 			ActSum.Activity = (String) thisEntry.getKey();
-			ActSum.ActivityTotalTime = (int) thisEntry.getValue();
+			ActSum.ActivityTotalTime = ((Integer) thisEntry.getValue()).intValue();
 			Double dPercent = (double)ActSum.ActivityTotalTime / (double)iTotalValue * 100;
 			if( it.hasNext() ){
 				ActSum.ActivityPercentage = 

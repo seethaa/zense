@@ -1,7 +1,6 @@
-
+package sv.cmu.edu.dataquery;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public final class DatasetUtilities {
 		
 		Set<String> keys = dataset.keySet();
 		int totalValue = 0;
-		Iterator iterator = keys.iterator();
+		Iterator<String> iterator = keys.iterator();
 		while (iterator.hasNext()){
 			String current = (String) iterator.next();
 			if (current != null){
