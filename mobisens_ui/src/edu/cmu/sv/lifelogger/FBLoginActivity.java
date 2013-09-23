@@ -54,13 +54,13 @@ public class FBLoginActivity extends FragmentActivity {
 
     private final String PENDING_ACTION_BUNDLE_KEY = "com.facebook.samples.hellofacebook:PendingAction";
 
-    private Button postStatusUpdateButton;
-    private Button postPhotoButton;
-    private Button pickFriendsButton;
-    private Button pickPlaceButton;
+//    private Button postStatusUpdateButton;
+//    private Button postPhotoButton;
+//    private Button pickFriendsButton;
+//    private Button pickPlaceButton;
     private LoginButton loginButton;
-    private ProfilePictureView profilePictureView;
-    private TextView greeting;
+//    private ProfilePictureView profilePictureView;
+//    private TextView greeting;
     private PendingAction pendingAction = PendingAction.NONE;
     private ViewGroup controlsContainer;
     private GraphUser user;
@@ -105,9 +105,9 @@ public class FBLoginActivity extends FragmentActivity {
             pendingAction = PendingAction.valueOf(name);
         }
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_login);
 
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.authButton);
         loginButton.setUserInfoChangedCallback(new LoginButton.UserInfoChangedCallback() {
             @Override
             public void onUserInfoFetched(GraphUser user) {
@@ -119,36 +119,36 @@ public class FBLoginActivity extends FragmentActivity {
             }
         });
 
-        profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
-        greeting = (TextView) findViewById(R.id.greeting);
-
-        postStatusUpdateButton = (Button) findViewById(R.id.postStatusUpdateButton);
-        postStatusUpdateButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                onClickPostStatusUpdate();
-            }
-        });
-
-        postPhotoButton = (Button) findViewById(R.id.postPhotoButton);
-        postPhotoButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                onClickPostPhoto();
-            }
-        });
-
-        pickFriendsButton = (Button) findViewById(R.id.pickFriendsButton);
-        pickFriendsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                onClickPickFriends();
-            }
-        });
-
-        pickPlaceButton = (Button) findViewById(R.id.pickPlaceButton);
-        pickPlaceButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                onClickPickPlace();
-            }
-        });
+//        profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
+//        greeting = (TextView) findViewById(R.id.greeting);
+//
+//        postStatusUpdateButton = (Button) findViewById(R.id.postStatusUpdateButton);
+//        postStatusUpdateButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                onClickPostStatusUpdate();
+//            }
+//        });
+//
+//        postPhotoButton = (Button) findViewById(R.id.postPhotoButton);
+//        postPhotoButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                onClickPostPhoto();
+//            }
+//        });
+//
+//        pickFriendsButton = (Button) findViewById(R.id.pickFriendsButton);
+//        pickFriendsButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                onClickPickFriends();
+//            }
+//        });
+//
+//        pickPlaceButton = (Button) findViewById(R.id.pickPlaceButton);
+//        pickPlaceButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                onClickPickPlace();
+//            }
+//        });
 
         controlsContainer = (ViewGroup) findViewById(R.id.main_ui_container);
 
@@ -201,6 +201,8 @@ public class FBLoginActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data, dialogCallback);
+    
+     
     }
 
     @Override
@@ -235,17 +237,21 @@ public class FBLoginActivity extends FragmentActivity {
         Session session = Session.getActiveSession();
         boolean enableButtons = (session != null && session.isOpened());
 
-        postStatusUpdateButton.setEnabled(enableButtons || canPresentShareDialog);
-        postPhotoButton.setEnabled(enableButtons);
-        pickFriendsButton.setEnabled(enableButtons);
-        pickPlaceButton.setEnabled(enableButtons);
+//        postStatusUpdateButton.setEnabled(enableButtons || canPresentShareDialog);
+//        postPhotoButton.setEnabled(enableButtons);
+//        pickFriendsButton.setEnabled(enableButtons);
+//        pickPlaceButton.setEnabled(enableButtons);
 
         if (enableButtons && user != null) {
-            profilePictureView.setProfileId(user.getId());
-            greeting.setText(getString(R.string.hello_user, user.getFirstName()));
+//            profilePictureView.setProfileId(user.getId());
+//            greeting.setText(getString(R.string.hello_user, user.getFirstName()));
+             
+            Intent intent = new Intent(this, DashboardActivity.class);
+    		startActivity(intent);
+            
         } else {
-            profilePictureView.setProfileId(null);
-            greeting.setText(null);
+//            profilePictureView.setProfileId(null);
+//            greeting.setText(null);
         }
     }
 
