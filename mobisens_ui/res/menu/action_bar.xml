@@ -3,11 +3,11 @@
     
     <item android:id="@+id/timeline"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/ic_launcher" />
+          android:icon="@drawable/list_icon" />
     
     <item android:id="@+id/profile"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/ic_launcher" />
+          android:icon="@drawable/profile_icon" />
     
       <item android:id="@+id/settings"
           android:showAsAction="ifRoom"
