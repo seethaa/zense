@@ -10,6 +10,8 @@
     <color name="red">#F37451</color>
     <color name="black">#000000</color>
     <color name="light_bluish">#81DAF5</color>
+    <color name="transparent">#00000000</color>
+    
 
     <color name="zsky_blue">#33b5eb</color>
     

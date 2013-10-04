@@ -15,8 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
-import edu.cmu.sv.dataquery.ActivitySummary;
-import edu.cmu.sv.dataquery.PercentageDataset;
+
 import edu.cmu.sv.mobisens_ui.R;
 
 
@@ -35,14 +34,14 @@ public class DashboardActivity extends Activity {
 		//TODO: Change to appropriate xml layout
 		//Set dataset: item and value
 		
-		try {
-			List<ActivitySummary> ActivitySummaryList = PercentageDataset.FetchPercentageDatat("1111", "1", "2");
+	/*	try {
+	//		List<ActivitySummary> ActivitySummaryList = PercentageDataset.FetchPercentageDatat("1111", "1", "2");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-				PieDataset dataset = new PieDataset();
+*/				PieDataset dataset = new PieDataset();
 
 
 				dataset.setValue("driving", 20.0);
