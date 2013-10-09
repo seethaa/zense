@@ -15,6 +15,7 @@ import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -61,8 +62,23 @@ public class PieChartBuilder extends Activity {
 		mRenderer.setZoomButtonsVisible(true);
 		mRenderer.setStartAngle(180);
 		mRenderer.setDisplayValues(true);
+		mRenderer.setBackgroundColor(Color.WHITE);
+		
+	    //mRenderer.setMarginsColor(Color.argb(0x00,0x01,0x01,0x01));
 		//mValue.setEnabled(true);
 
+		final Button button = (Button) findViewById(R.id.button1);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+                // Perform action on click   
+                Intent activityChangeIntent = new Intent(PieChartBuilder.this, BarChartActivityLevel.class);
+
+                // currentContext.startActivity(activityChangeIntent);
+
+                PieChartBuilder.this.startActivity(activityChangeIntent);
+            }
+        });
 	}
 
 
