@@ -54,7 +54,7 @@ public class BarChartActivityLevel extends Activity {
             public void onClick(View v) {
             	
                 // Perform action on click   
-                Intent activityChangeIntent = new Intent(BarChartActivityLevel.this, PieChartBuilder.class);
+                Intent activityChangeIntent = new Intent(BarChartActivityLevel.this, PieChartBuilderActivity.class);
 
                 // currentContext.startActivity(activityChangeIntent);
 

@@ -38,6 +38,7 @@ import com.facebook.model.GraphPlace;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.*;
 
+import edu.cmu.sv.lifelogger.database.DashboardActivityLevelManager;
 import edu.cmu.sv.mobisens_ui.R;
 
 import java.util.*;
@@ -246,7 +247,7 @@ public class FBLoginActivity extends FragmentActivity {
 //            profilePictureView.setProfileId(user.getId());
 //            greeting.setText(getString(R.string.hello_user, user.getFirstName()));
              
-            Intent intent = new Intent(this, DashboardActivity.class);
+            Intent intent = new Intent(this, PieChartBuilderActivity.class);
     		startActivity(intent);
             
         } else {

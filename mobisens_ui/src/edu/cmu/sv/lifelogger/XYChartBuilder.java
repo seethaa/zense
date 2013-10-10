@@ -120,7 +120,7 @@ public class XYChartBuilder extends Activity {
         public void onClick(View v) {
         	
             // Perform action on click   
-            Intent activityChangeIntent = new Intent(XYChartBuilder.this, PieChartBuilder.class);
+            Intent activityChangeIntent = new Intent(XYChartBuilder.this, PieChartBuilderActivity.class);
 
             // currentContext.startActivity(activityChangeIntent);
 
