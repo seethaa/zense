@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import edu.cmu.sv.lifelogger.database.DashboardActivityLevelManager;
@@ -46,7 +48,35 @@ public class BarChartActivityLevel extends Activity {
 		highest = 1;
 
 		netheight = new int[activityArray.length];
+		
+		final Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+                // Perform action on click   
+                Intent activityChangeIntent = new Intent(BarChartActivityLevel.this, PieChartBuilder.class);
 
+                // currentContext.startActivity(activityChangeIntent);
+
+                BarChartActivityLevel.this.startActivity(activityChangeIntent);
+            }
+        });
+
+        
+        final Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+                // Perform action on click   
+                Intent activityChangeIntent = new Intent(BarChartActivityLevel.this, XYChartBuilder.class);
+
+                // currentContext.startActivity(activityChangeIntent);
+
+                BarChartActivityLevel.this.startActivity(activityChangeIntent);
+            }
+        });
+        
+        
 	}
 
 	public class bsAdapter extends BaseAdapter {

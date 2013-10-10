@@ -61,11 +61,12 @@
         <activity
             android:name="edu.cmu.sv.lifelogger.BarChartBuilder"
             android:label="@string/app_name" >
+           
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.PieChartBuilder"
             android:label="@string/app_name" >
-           
+
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.TimelineActivity"
@@ -78,11 +79,14 @@
         <activity
             android:name="edu.cmu.sv.mobisens_ui.BarChartTest"
             android:label="@string/title_activity_bar_chart_test" >
-        </activity>
+
+                    </activity>
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity
             android:name="edu.cmu.sv.lifelogger.BarChartActivityLevel"
-            android:label="@string/app_name" >
+            
+            android:label="@string/app_name">
+ 		   
         </activity>
     </application>
 

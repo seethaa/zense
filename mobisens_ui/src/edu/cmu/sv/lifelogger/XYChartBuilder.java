@@ -32,6 +32,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -95,7 +96,8 @@ public class XYChartBuilder extends Activity {
 
     // set some properties on the main renderer
     mRenderer.setApplyBackgroundColor(true);
-    mRenderer.setBackgroundColor(Color.argb(100, 255, 255, 255));
+   // mRenderer.setBackgroundColor(Color.argb(100, 255, 255, 255));
+    mRenderer.setBackgroundColor(Color.WHITE);
     mRenderer.setAxesColor(Color.RED);
     mRenderer.setGridColor(Color.BLUE);
     //mRenderer.setXAxisMax(24);
@@ -113,13 +115,24 @@ public class XYChartBuilder extends Activity {
 
     // the button that handles the new series of data creation
    // mNewSeries = (Button) findViewById(R.id.new_series);
+    final Button button = (Button) findViewById(R.id.button1);
+    button.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+        	
+            // Perform action on click   
+            Intent activityChangeIntent = new Intent(XYChartBuilder.this, PieChartBuilder.class);
 
+            // currentContext.startActivity(activityChangeIntent);
+
+            XYChartBuilder.this.startActivity(activityChangeIntent);
+        }
+    });
 
     
   }
 
   /**
-   * Function to rendder the line chart after addition of every point
+   * Function to renderer the line chart after addition of every point
    * 
    * @param x
    * @param y
@@ -140,7 +153,9 @@ public class XYChartBuilder extends Activity {
     super.onResume();
     if (mChartView == null) {
       LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+      layout.setBackgroundColor(Color.WHITE);
       mChartView = ChartFactory.getLineChartView(this, mDataset, mRenderer);
+      mChartView.setBackgroundColor(Color.WHITE);
       // enable the chart click events
       mRenderer.setClickEnabled(true);
       mRenderer.setSelectableBuffer(10);
@@ -178,6 +193,8 @@ public class XYChartBuilder extends Activity {
     // create a new renderer for the new series
     XYSeriesRenderer renderer = new XYSeriesRenderer();
     mRenderer.addSeriesRenderer(renderer);
+    mRenderer.setMarginsColor(Color.argb(0x00,0x01,0x01,0x01));
+    //mRenderer.setBackgroundColor(Color.CYAN);
     // set some renderer properties
     renderer.setPointStyle(PointStyle.CIRCLE);
     renderer.setFillPoints(true);
