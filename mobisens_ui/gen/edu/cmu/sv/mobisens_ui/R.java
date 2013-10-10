@@ -155,6 +155,8 @@ containing a value of this type.
         public static final int title_text=0x7f010003;
     }
     public static final class color {
+        public static final int actionbar_bg=0x7f060012;
+        public static final int activity_black=0x7f060013;
         public static final int black=0x7f06000e;
         public static final int com_facebook_blue=0x7f060002;
         public static final int com_facebook_loginview_text_color=0x7f060006;
@@ -164,19 +166,21 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_connected_text_color=0x7f060003;
         public static final int com_facebook_usersettingsfragment_not_connected_text_color=0x7f060005;
         public static final int dark_gray=0x7f06000b;
-        public static final int fuchsia=0x7f060013;
-        public static final int gray=0x7f060015;
+        public static final int fuchsia=0x7f060017;
+        public static final int gray=0x7f060019;
         public static final int greenDark=0x7f060008;
         public static final int greenDark2=0x7f060007;
         public static final int greenLight=0x7f060009;
         public static final int light_bluish=0x7f06000f;
         public static final int light_gray=0x7f06000c;
         public static final int red=0x7f06000d;
-        public static final int silver=0x7f060014;
+        public static final int silver=0x7f060018;
         public static final int transparent=0x7f060010;
         public static final int white=0x7f06000a;
-        public static final int yellow=0x7f060012;
-        public static final int zsky_blue=0x7f060011;
+        public static final int yellow=0x7f060016;
+        public static final int zblue=0x7f060011;
+        public static final int zdark_gray=0x7f060014;
+        public static final int zsky_blue=0x7f060015;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -227,7 +231,7 @@ containing a value of this type.
         public static final int com_facebook_list_section_header_background=0x7f020016;
         public static final int com_facebook_loginbutton_silver=0x7f020017;
         public static final int com_facebook_logo=0x7f020018;
-        public static final int com_facebook_picker_default_separator_color=0x7f02005b;
+        public static final int com_facebook_picker_default_separator_color=0x7f02005e;
         public static final int com_facebook_picker_item_background=0x7f020019;
         public static final int com_facebook_picker_list_focused=0x7f02001a;
         public static final int com_facebook_picker_list_longpressed=0x7f02001b;
@@ -259,41 +263,44 @@ containing a value of this type.
         public static final int facebook=0x7f020035;
         public static final int header_settings=0x7f020036;
         public static final int header_share=0x7f020037;
-        public static final int ic_launcher=0x7f020038;
-        public static final int icon=0x7f020039;
-        public static final int list_icon=0x7f02003a;
-        public static final int location_place=0x7f02003b;
-        public static final int poi=0x7f02003c;
-        public static final int poi_box=0x7f02003d;
-        public static final int poi_edit=0x7f02003e;
-        public static final int profile_icon=0x7f02003f;
-        public static final int right_arrow=0x7f020040;
-        public static final int shopping=0x7f020041;
-        public static final int shopping_l=0x7f020042;
-        public static final int shopping_s=0x7f020043;
-        public static final int sleeping=0x7f020044;
-        public static final int sleeping_l=0x7f020045;
-        public static final int sleeping_s=0x7f020046;
-        public static final int social_facebook=0x7f020047;
-        public static final int social_google=0x7f020048;
-        public static final int social_twitter=0x7f020049;
-        public static final int summary_card_bg=0x7f02004a;
-        public static final int unknown=0x7f02004b;
-        public static final int unknown_l=0x7f02004c;
-        public static final int unknown_s=0x7f02004d;
-        public static final int walking=0x7f02004e;
-        public static final int walking_l=0x7f02004f;
-        public static final int walking_s=0x7f020050;
-        public static final int weather_cloudy=0x7f020051;
-        public static final int weather_night=0x7f020052;
-        public static final int weather_rainy=0x7f020053;
-        public static final int weather_snow=0x7f020054;
-        public static final int weather_sunny=0x7f020055;
-        public static final int weather_thunderstorm=0x7f020056;
-        public static final int weather_wind=0x7f020057;
-        public static final int working=0x7f020058;
-        public static final int working_l=0x7f020059;
-        public static final int working_s=0x7f02005a;
+        public static final int ic_action_person=0x7f020038;
+        public static final int ic_action_settings=0x7f020039;
+        public static final int ic_action_view_as_list=0x7f02003a;
+        public static final int ic_launcher=0x7f02003b;
+        public static final int icon=0x7f02003c;
+        public static final int list_icon=0x7f02003d;
+        public static final int location_place=0x7f02003e;
+        public static final int poi=0x7f02003f;
+        public static final int poi_box=0x7f020040;
+        public static final int poi_edit=0x7f020041;
+        public static final int profile_icon=0x7f020042;
+        public static final int right_arrow=0x7f020043;
+        public static final int shopping=0x7f020044;
+        public static final int shopping_l=0x7f020045;
+        public static final int shopping_s=0x7f020046;
+        public static final int sleeping=0x7f020047;
+        public static final int sleeping_l=0x7f020048;
+        public static final int sleeping_s=0x7f020049;
+        public static final int social_facebook=0x7f02004a;
+        public static final int social_google=0x7f02004b;
+        public static final int social_twitter=0x7f02004c;
+        public static final int summary_card_bg=0x7f02004d;
+        public static final int unknown=0x7f02004e;
+        public static final int unknown_l=0x7f02004f;
+        public static final int unknown_s=0x7f020050;
+        public static final int walking=0x7f020051;
+        public static final int walking_l=0x7f020052;
+        public static final int walking_s=0x7f020053;
+        public static final int weather_cloudy=0x7f020054;
+        public static final int weather_night=0x7f020055;
+        public static final int weather_rainy=0x7f020056;
+        public static final int weather_snow=0x7f020057;
+        public static final int weather_sunny=0x7f020058;
+        public static final int weather_thunderstorm=0x7f020059;
+        public static final int weather_wind=0x7f02005a;
+        public static final int working=0x7f02005b;
+        public static final int working_l=0x7f02005c;
+        public static final int working_s=0x7f02005d;
     }
     public static final class id {
         public static final int ImageView01=0x7f040011;
@@ -307,24 +314,25 @@ containing a value of this type.
         public static final int LinearLayout03=0x7f040017;
         public static final int LinearLayout04=0x7f04001b;
         public static final int LinearLayout1=0x7f04000b;
-        public static final int RBtextToShow=0x7f04004f;
+        public static final int RBtextToShow=0x7f040053;
         public static final int TextView01=0x7f040012;
         public static final int TextView02=0x7f040016;
         public static final int TextView03=0x7f040022;
         public static final int TextView04=0x7f040020;
         public static final int TextView05=0x7f04001a;
         public static final int TextView06=0x7f04001e;
-        public static final int action_settings=0x7f040055;
-        public static final int activity_icon=0x7f04004c;
-        public static final int address=0x7f04004d;
+        public static final int action_settings=0x7f040059;
+        public static final int activity=0x7f04004c;
+        public static final int activity_icon=0x7f040051;
+        public static final int address=0x7f040050;
         public static final int app_title=0x7f040009;
         public static final int authButton=0x7f04000a;
         public static final int btn_chart=0x7f040008;
         public static final int button1=0x7f04000f;
         public static final int centeredTextToShow=0x7f040023;
-        public static final int chart=0x7f040050;
-        public static final int checkboxes_list=0x7f04004e;
-        public static final int colortext02=0x7f040048;
+        public static final int chart=0x7f040054;
+        public static final int checkboxes_list=0x7f040052;
+        public static final int colortext02=0x7f040049;
         public static final int com_facebook_login_activity_progress_bar=0x7f040027;
         public static final int com_facebook_picker_activity_circle=0x7f040026;
         public static final int com_facebook_picker_checkbox=0x7f040029;
@@ -345,24 +353,27 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_login_button=0x7f040039;
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f040037;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f040038;
-        public static final int editableText=0x7f04004a;
+        public static final int dialogButtonOK=0x7f04004d;
+        public static final int editableText=0x7f04004b;
         public static final int fragment_container=0x7f040042;
+        public static final int fulllist=0x7f040046;
         public static final int greeting=0x7f04003c;
+        public static final int image=0x7f04004e;
         public static final int imageView1=0x7f040013;
         public static final int large=0x7f040002;
-        public static final int lin02=0x7f040047;
+        public static final int lin02=0x7f040048;
         public static final int linearLayout1=0x7f040010;
         public static final int linearLayout2=0x7f04000d;
         public static final int linearLayout3=0x7f040014;
         public static final int linearlay=0x7f040003;
-        public static final int list=0x7f040046;
+        public static final int list=0x7f040047;
         public static final int listview=0x7f040004;
         public static final int login_button=0x7f04003b;
         public static final int lstDemo=0x7f04000e;
         public static final int mainLayout=0x7f040043;
         public static final int main_ui_container=0x7f04003a;
-        public static final int menu_settings=0x7f040054;
-        public static final int name=0x7f04004b;
+        public static final int menu_settings=0x7f040058;
+        public static final int name=0x7f04004f;
         public static final int nameEdit=0x7f040024;
         public static final int normal=0x7f040001;
         public static final int pickFriendsButton=0x7f040040;
@@ -370,17 +381,17 @@ containing a value of this type.
         public static final int picker_subtitle=0x7f040034;
         public static final int postPhotoButton=0x7f04003f;
         public static final int postStatusUpdateButton=0x7f04003e;
-        public static final int profile=0x7f040052;
+        public static final int profile=0x7f040056;
         public static final int profilePicture=0x7f04003d;
         public static final int relative=0x7f040044;
-        public static final int settings=0x7f040053;
+        public static final int settings=0x7f040057;
         public static final int small=0x7f040000;
         public static final int test_chart=0x7f040045;
-        public static final int textToShow=0x7f040049;
+        public static final int textToShow=0x7f04004a;
         public static final int textView1=0x7f040005;
         public static final int textView2=0x7f04000c;
         public static final int textView3=0x7f040007;
-        public static final int timeline=0x7f040051;
+        public static final int timeline=0x7f040055;
         public static final int title=0x7f040006;
     }
     public static final class layout {
@@ -414,10 +425,12 @@ containing a value of this type.
         public static final int simplerow=0x7f03001b;
         public static final int single_datepicker_layout=0x7f03001c;
         public static final int single_edittext_layout=0x7f03001d;
-        public static final int timeline_item=0x7f03001e;
-        public static final int vert_checkboxes_layout=0x7f03001f;
-        public static final int vert_radiobutton_layout=0x7f030020;
-        public static final int xy_chart=0x7f030021;
+        public static final int timeline_dialog=0x7f03001e;
+        public static final int timeline_item=0x7f03001f;
+        public static final int timeline_segment_header=0x7f030020;
+        public static final int vert_checkboxes_layout=0x7f030021;
+        public static final int vert_radiobutton_layout=0x7f030022;
+        public static final int xy_chart=0x7f030023;
     }
     public static final class menu {
         public static final int action_bar=0x7f0a0000;
@@ -548,10 +561,8 @@ containing a value of this type.
  API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f080002;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static final int AppTheme=0x7f080003;
+        public static final int MyActionBar=0x7f080004;
+        public static final int MyTheme=0x7f080003;
         public static final int com_facebook_loginview_default_style=0x7f080000;
         public static final int com_facebook_loginview_silver_style=0x7f080001;
     }
@@ -580,7 +591,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:multi_select
+          @attr name android:multi_select
         */
         public static final int com_facebook_friend_picker_fragment_multi_select = 0;
         /** Attributes that can be used with a com_facebook_login_view.
@@ -613,7 +624,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:confirm_logout
+          @attr name android:confirm_logout
         */
         public static final int com_facebook_login_view_confirm_logout = 0;
         /**
@@ -627,7 +638,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:fetch_user_info
+          @attr name android:fetch_user_info
         */
         public static final int com_facebook_login_view_fetch_user_info = 1;
         /**
@@ -641,7 +652,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:login_text
+          @attr name android:login_text
         */
         public static final int com_facebook_login_view_login_text = 2;
         /**
@@ -655,7 +666,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:logout_text
+          @attr name android:logout_text
         */
         public static final int com_facebook_login_view_logout_text = 3;
         /** Attributes that can be used with a com_facebook_picker_fragment.
@@ -691,7 +702,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.cmu.sv.mobisens_ui:done_button_background
+          @attr name android:done_button_background
         */
         public static final int com_facebook_picker_fragment_done_button_background = 6;
         /**
@@ -705,7 +716,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:done_button_text
+          @attr name android:done_button_text
         */
         public static final int com_facebook_picker_fragment_done_button_text = 4;
         /**
@@ -719,7 +730,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:extra_fields
+          @attr name android:extra_fields
         */
         public static final int com_facebook_picker_fragment_extra_fields = 1;
         /**
@@ -733,7 +744,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:show_pictures
+          @attr name android:show_pictures
         */
         public static final int com_facebook_picker_fragment_show_pictures = 0;
         /**
@@ -747,7 +758,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:show_title_bar
+          @attr name android:show_title_bar
         */
         public static final int com_facebook_picker_fragment_show_title_bar = 2;
         /**
@@ -757,7 +768,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.cmu.sv.mobisens_ui:title_bar_background
+          @attr name android:title_bar_background
         */
         public static final int com_facebook_picker_fragment_title_bar_background = 5;
         /**
@@ -771,7 +782,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:title_text
+          @attr name android:title_text
         */
         public static final int com_facebook_picker_fragment_title_text = 3;
         /** Attributes that can be used with a com_facebook_place_picker_fragment.
@@ -804,7 +815,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:radius_in_meters
+          @attr name android:radius_in_meters
         */
         public static final int com_facebook_place_picker_fragment_radius_in_meters = 0;
         /**
@@ -818,7 +829,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:results_limit
+          @attr name android:results_limit
         */
         public static final int com_facebook_place_picker_fragment_results_limit = 1;
         /**
@@ -832,7 +843,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:search_text
+          @attr name android:search_text
         */
         public static final int com_facebook_place_picker_fragment_search_text = 2;
         /**
@@ -846,7 +857,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:show_search_box
+          @attr name android:show_search_box
         */
         public static final int com_facebook_place_picker_fragment_show_search_box = 3;
         /** Attributes that can be used with a com_facebook_profile_picture_view.
@@ -875,7 +886,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.cmu.sv.mobisens_ui:is_cropped
+          @attr name android:is_cropped
         */
         public static final int com_facebook_profile_picture_view_is_cropped = 1;
         /**
@@ -893,7 +904,7 @@ containing a value of this type.
 <tr><td><code>normal</code></td><td>-3</td><td></td></tr>
 <tr><td><code>large</code></td><td>-4</td><td></td></tr>
 </table>
-          @attr name edu.cmu.sv.mobisens_ui:preset_size
+          @attr name android:preset_size
         */
         public static final int com_facebook_profile_picture_view_preset_size = 0;
     };

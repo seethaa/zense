@@ -12,7 +12,12 @@
     <color name="light_bluish">#81DAF5</color>
     <color name="transparent">#00000000</color>
     
+    <color name="zblue">#33B5E5</color>
+    
 
+     <color name="actionbar_bg">#DDDDDD</color>
+      <color name="activity_black">#333333</color>
+     <color name="zdark_gray">#666666</color>
     <color name="zsky_blue">#33b5eb</color>
     
     

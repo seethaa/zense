@@ -1,7 +1,9 @@
 package edu.cmu.sv.lifelogger.entities;
 
+import android.graphics.drawable.Drawable;
+
 public class TimelineItem {
-	private String mActivity_icon;
+	private Drawable mActivity_icon;
 	private String mActivity_name;
 	private String mStart_time;
 	private String mEnd_time;
@@ -18,12 +20,12 @@ public class TimelineItem {
 		this.mEnd_location = end_location;
 	}
 
-	public String getmActivity_icon() {
+	public Drawable getmActivity_icon() {
 		return mActivity_icon;
 	}
 
 
-	public void setmActivity_icon(String mActivity_icon) {
+	public void setmActivity_icon(Drawable mActivity_icon) {
 		this.mActivity_icon = mActivity_icon;
 	}
 

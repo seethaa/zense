@@ -21,7 +21,7 @@ import edu.cmu.sv.mobisens_ui.R;
 
 public class DashboardActivity extends Activity {
 
-
+    
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class DashboardActivity extends Activity {
 		}
 		
 */				PieDataset dataset = new PieDataset();
-
 
 				dataset.setValue("driving", 20.0);
 				dataset.setValue("work", 20.0);
@@ -109,7 +108,7 @@ public class DashboardActivity extends Activity {
 	{
 		if (item.getItemId() == R.id.timeline)
 		{
-			Intent intent = new Intent(this, TimelineActivity.class);
+			Intent intent = new Intent(this, TimelineTestActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile)
 		{
