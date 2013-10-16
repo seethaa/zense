@@ -104,20 +104,6 @@ public class BarChartActivityLevel extends Activity {
 			}
 		});
 
-		final Button button2 = (Button) findViewById(R.id.button2);
-		button2.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-
-				// Perform action on click
-				Intent activityChangeIntent = new Intent(
-						BarChartActivityLevel.this, XYChartBuilder.class);
-
-				// currentContext.startActivity(activityChangeIntent);
-
-				BarChartActivityLevel.this.startActivity(activityChangeIntent);
-			}
-		});
-
 	}
 
 	public class bsAdapter extends BaseAdapter {

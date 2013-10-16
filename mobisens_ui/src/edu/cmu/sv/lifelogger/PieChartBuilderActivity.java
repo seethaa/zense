@@ -70,6 +70,10 @@ public class PieChartBuilderActivity extends Activity {
 		mRenderer.setStartAngle(180);
 		mRenderer.setDisplayValues(true);
 		mRenderer.setBackgroundColor(Color.WHITE);
+		mRenderer.setLabelsTextSize(18);
+		mRenderer.setLabelsColor(getResources().getColor(R.color.black));
+		
+		mRenderer.setLegendTextSize(18);
 
 		//mRenderer.setMarginsColor(Color.argb(0x00,0x01,0x01,0x01));
 		//mValue.setEnabled(true);
