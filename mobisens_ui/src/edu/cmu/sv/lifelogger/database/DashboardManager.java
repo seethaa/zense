@@ -10,6 +10,7 @@ import edu.cmu.sv.lifelogger.entities.TimelineItem;
 public class DashboardManager {
 
 	//TODO: Change this to get real data
+	//TODO: Add variable for icon location
 	public static ArrayList<ActivityItem> getAllPieChartData() {
 		ArrayList<ActivityItem> data  = new ArrayList<ActivityItem>();
 		
@@ -29,6 +30,8 @@ public class DashboardManager {
 		data.add(t7);
 		return data;
 	}
+	
+	
 	
 	
 	
