@@ -92,7 +92,7 @@
         <!-- Indian -->
         <item></item>
     </string-array>
-
+	<string name="activity_level">ACTIVITY LEVEL</string>	
     <string name="add_values">Add values to the chart</string>
     <string name="x">X</string>
     <string name="y">Y</string>

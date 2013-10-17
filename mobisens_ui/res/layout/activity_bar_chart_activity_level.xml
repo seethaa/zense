@@ -27,12 +27,17 @@
             android:gravity="left"
             android:textColor="#000"
             android:color="@color/transparent" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-           android:layout_weight="8"  
-            />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_gray"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/activity_level"
+        android:textColor="@color/white" />
 
     <edu.cmu.sv.lifelogger.HorizontalListView
         android:id="@+id/listview"

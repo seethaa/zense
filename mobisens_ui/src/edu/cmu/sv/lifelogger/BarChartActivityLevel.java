@@ -46,13 +46,10 @@ public class BarChartActivityLevel extends Activity {
 	int[] activitySummarySeriesPoints = getSeriesPoints();
 	int[][] activitySummarySeriesDataset = DashboardActivityLevelManager.getSeriesDataset();
 	int[] activitySummaryActivityArray = activitySummarySeriesDataset[0];
-	
 
-	
 	public int[] getSeriesPoints () {
 		int seriesLength = dataList.size() ;
-		int x[] = new int [seriesLength];
-		
+		int x[] = new int [seriesLength];		
 		for (int i = 0; i < x.length; i++) {
 			x[i] = i;
 		}
@@ -269,9 +266,14 @@ public class BarChartActivityLevel extends Activity {
 			else if (activity_name.toString().equalsIgnoreCase("walking")){
 				imgActivityIcon.setImageResource(R.drawable.walking);
 			}
+			else if (activity_name.toString().equalsIgnoreCase("sleeping")){
+				imgActivityIcon.setImageResource(R.drawable.sleeping);
+			}
+			else if (activity_name.toString().equalsIgnoreCase("shopping")){
+				imgActivityIcon.setImageResource(R.drawable.shopping);
+			}
 			else{
 				imgActivityIcon.setImageResource(R.drawable.unknown);
-
 			}
 			
 			tvcol2.setHeight(20);
