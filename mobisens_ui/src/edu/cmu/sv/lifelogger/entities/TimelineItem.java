@@ -10,6 +10,10 @@ public class TimelineItem {
 	private String mStart_location;
 	private String mEnd_location;
 
+	//to make it easier
+	private String mTopTxt;
+	private String mBottomTxt;
+
 
 	public TimelineItem(String activity_name, String start_time, String end_time,
 			String start_location, String end_location) {
@@ -18,6 +22,11 @@ public class TimelineItem {
 		this.mEnd_time = end_time;
 		this.mStart_location = start_location;
 		this.mEnd_location = end_location;
+	}
+
+	public TimelineItem(String toptxt, String bottomtxt) {
+		this.mTopTxt = toptxt;
+		this.mBottomTxt = bottomtxt;
 	}
 
 	public Drawable getmActivity_icon() {
@@ -81,18 +90,28 @@ public class TimelineItem {
 
 
 	public String getTimelineTopText(){
-		return this.mActivity_name + " " + this.mStart_time + " - " + this.mEnd_time;
+
+//		if (mTopTxt==null){
+			return this.mActivity_name + " " + this.mStart_time + " - " + this.mEnd_time;
+//		}
+
+//		return mTopTxt;
 	}
 
 	public String getTimelineSubText(){
-		String subtext = "";
-		if (this.mStart_location.equalsIgnoreCase(this.mEnd_location)){
-			subtext = mStart_location; 
-		}
-		else{
-			subtext = this.mStart_location + " to " + this.mEnd_location;
-		}
-		return subtext;
+//		if (mBottomTxt==null){
+
+			String subtext = "";
+			if (this.mStart_location.equalsIgnoreCase(this.mEnd_location)){
+				subtext = mStart_location; 
+			}
+			else{
+				subtext = this.mStart_location + " to " + this.mEnd_location;
+			}
+			return subtext;
+
+//		}
+//		return mBottomTxt;
 	}
 
 

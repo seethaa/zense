@@ -72,7 +72,7 @@ public class LazyAdapter extends ArrayAdapter<TimelineItem> {
 		name.setTypeface(typeface);
 		//		 name.setTextSize(14);
 		//		 name.setTextColor(activity.getResources().getColor(R.color.activity_black));
-		TextView email_address = (TextView) vi.findViewById(R.id.address); // start time
+		TextView email_address = (TextView) vi.findViewById(R.id.bottomTxt); // start time
 
 		TimelineItem item;
 		item = data.get(position);

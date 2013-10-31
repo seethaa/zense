@@ -112,7 +112,7 @@ public class DashboardActivity extends Activity {
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile)
 		{
-			Intent intent = new Intent(this, ProfileActivity.class);
+			Intent intent = new Intent(this, GoogleMapActivity.class);
 			startActivity(intent);
 		}else if (item.getItemId() == R.id.settings)
 		{

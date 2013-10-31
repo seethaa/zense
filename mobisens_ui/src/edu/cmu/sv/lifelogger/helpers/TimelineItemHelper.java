@@ -22,13 +22,14 @@ import edu.cmu.sv.mobisens_ui.R;
  */
 public class TimelineItemHelper {
 	private ArrayList<String> mResult;
+	private TimelineItem mItem;
 	private Context cxt;
 	private String text;
 	private LinearLayout mainlayout;
 
 	public TimelineItemHelper(Context cxt, TimelineItem item, LinearLayout mainlayout, OnClickListener listen ){
 
-
+		this.mItem = item;
 		this.cxt = cxt;
 		this.text = text;
 		this.mainlayout = mainlayout;
@@ -45,18 +46,27 @@ public class TimelineItemHelper {
 		name.setTypeface(typeface);
 		//		 name.setTextSize(14);
 		//		 name.setTextColor(activity.getResources().getColor(R.color.activity_black));
-		TextView email_address = (TextView) newView0.findViewById(R.id.address); // start time
+		TextView bottom_txt = (TextView) newView0.findViewById(R.id.bottomTxt); // start time
 
 
 		ImageView activity_icon = (ImageView) newView0.findViewById(R.id.activity_icon); // start time
 
-		settimelineItemList(item, name, email_address, activity_icon);
-
+		ImageView nextscreen_icon = (ImageView) newView0.findViewById(R.id.next); // start time
 		newView0.setClickable(true);
 		newView0.setOnClickListener(listen);
+		
+		
+		settimelineItemList(item, name, bottom_txt, activity_icon);
+
 
 	}
+	
 
+	public TimelineItem getResult(){
+		System.out.println("getting result");
+		return mItem;
+		
+	}
 	private void settimelineItemList(TimelineItem item, TextView name,
 			TextView address, ImageView activity_icon) {
 		//TODO: Add rest of the pieces

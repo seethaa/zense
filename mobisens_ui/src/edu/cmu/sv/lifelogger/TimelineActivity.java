@@ -92,6 +92,8 @@ public class TimelineActivity extends Activity {
 				//				//						Toast.LENGTH_LONG).show();
 				//
 				//				startActivity(intent);
+				
+				
 			}
 		});
 		this.adapter.notifyDataSetChanged();
