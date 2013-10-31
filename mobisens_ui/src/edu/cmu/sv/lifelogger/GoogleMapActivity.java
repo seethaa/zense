@@ -27,7 +27,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
  
@@ -81,6 +85,17 @@ public class GoogleMapActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googlemap);
  
+
+/*        ListView list;
+        String list_array[]={"Innovantes","InnonvantesIndia","WebDevelopment"};
+        
+        
+        list=(ListView)findViewById(R.id.ListView1);
+        
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1 ,list_array);
+        
+        list.setAdapter(adapter);
+        */
         final Context context = this;
         tvDistanceDuration = (TextView) findViewById(R.id.tv_distance_time);
             
@@ -111,43 +126,8 @@ public class GoogleMapActivity extends FragmentActivity {
             
             
 		}
-        
-        
-        
-   /*     map.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-            	 Toast.makeText(getApplicationContext(),
-            		     "isGooglePlayServicesAvailable SUCCESS",
-            		     Toast.LENGTH_LONG).show();
-            	 
-            	 
-            	 final Dialog dialog = new Dialog(GoogleMapActivity.this);
- 				dialog.setContentView(R.layout.map_popup_dialogue);
- 				dialog.setTitle("Title...");
- 				// set the custom dialog components - text, image and button
- 				TextView text = (TextView) dialog.findViewById(R.id.text);
- 				text.setText("Android custom dialog example!");
- 				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
- 				// if button is clicked, close the custom dialog
- 				dialogButton.setOnClickListener(new OnClickListener() {
- 					@Override
- 					public void onClick(View v) {
- 						dialog.dismiss();
- 					}
- 				});
- 	 
- 				dialog.show();
-            	 
-            	 
-            	 
-            	 
-
-            }
-        });*/
-     
-        
-        final LocationMetaData locData = new LocationMetaData();
+                
+        final ArrayList <LocationMetaData> locData = new ArrayList <LocationMetaData>();
    
         
         
@@ -163,21 +143,39 @@ public class GoogleMapActivity extends FragmentActivity {
 				// custom dialog
 				final Dialog dialog = new Dialog(GoogleMapActivity.this);
 				dialog.setContentView(R.layout.map_popup_dialogue);
-				dialog.setTitle("Title...");
-				// set the custom dialog components - text, image and button
-				TextView text = (TextView) dialog.findViewById(R.id.text);
-				text.setText("Android custom dialog example!");
-				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-				// if button is clicked, close the custom dialog
-				dialogButton.setOnClickListener(new OnClickListener() {
+
+		        ListView list;
+		        String list_array[]={"Home","Work","Shop","Grocery Store","Restaurant","Hotel"};
+		        
+		        
+		        list=(ListView)dialog.findViewById(R.id.ListView1);
+		        
+		        ArrayAdapter adapter = new ArrayAdapter<String>(GoogleMapActivity.this,android.R.layout.simple_list_item_1 ,list_array);
+		        //ArrayAdapter adapter = new ArrayAdapter<String>(GoogleMapActivity.this,dialog.R.layout.simple_list_item_1 ,list_array);
+		        
+		        list.setAdapter(adapter);
+		        
+		        list.setOnItemClickListener(new OnItemClickListener() {
+
 					@Override
-					public void onClick(View v) {
-						m1.setTitle("Test Markere title");
-						locData.setLoc(m1.getPosition());
-						locData.setAnnotation("Test Data");
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						// TODO Auto-generated method stub
+						/*The current location has been annotated with the selected item
+						 * Return the data back to the main activity 
+						 */
+						LocationMetaData locDataTemp = new LocationMetaData();
+						locDataTemp.setAnnotation(arg0.getItemAtPosition(arg2).toString());
+						locDataTemp.setLoc(m1.getPosition());
+						locData.add(locDataTemp);
+						m1.setTitle(locDataTemp.getAnnotation().toString());
 						dialog.dismiss();
 					}
 				});
+		        
+		        
+		        
+		        dialog.setTitle("Tag the location type");
 	 
 				dialog.show();
 				return false;
