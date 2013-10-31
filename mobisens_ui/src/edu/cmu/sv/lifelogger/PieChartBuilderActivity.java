@@ -151,7 +151,6 @@ public class PieChartBuilderActivity extends Activity {
 		} else {
 			mChartView.repaint();
 		}
-		if (isFirstRun == 0)
 			createPieChart();
 	}
 
