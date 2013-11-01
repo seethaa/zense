@@ -6,6 +6,7 @@
     android:layout_marginBottom="20dp"
     android:layout_marginTop="20dp"
     android:background="@color/white"
+   
     android:orientation="horizontal" >
 
     <!-- name of item -->
@@ -22,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="85dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_marginTop="20dp"
         android:text="Default Name"
         android:textColor="@color/activity_black"
@@ -29,22 +32,25 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/next"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="19dp"
         android:layout_marginTop="20dp"
+         android:clickable="true"
         android:src="@drawable/right_arrow" />
 
     <TextView
-        android:id="@+id/address"
+        android:id="@+id/bottomTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignBottom="@+id/next"
         android:layout_alignLeft="@+id/name"
-        android:text="(Default email)"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="(Bottom Text)"
         android:textColor="@color/zdark_gray"
         android:textSize="12dip" />
 
@@ -53,6 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:layout_alignTop="@+id/name"
         android:layout_marginLeft="20dp"
         android:src="@drawable/dining" />
@@ -62,6 +70,8 @@
         android:layout_height="123dip"
         android:layout_above="@id/activity_icon"
         android:layout_alignTop="@+id/activity_icon"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:background="#000000"
         android:orientation="vertical"
         android:rotation="90" />

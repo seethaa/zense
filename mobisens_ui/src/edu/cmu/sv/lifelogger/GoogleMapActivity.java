@@ -17,6 +17,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+
+import org.json.JSONObject;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
@@ -27,6 +30,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -49,6 +53,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -92,7 +97,6 @@ public class GoogleMapActivity extends FragmentActivity {
             
         // Initializing
         markerPoints = new ArrayList<LatLng>();
-  
         // Getting reference to SupportMapFragment of the activity_main
         SupportMapFragment fm = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
  
@@ -227,11 +231,33 @@ public class GoogleMapActivity extends FragmentActivity {
         	
         });
     }    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.googlemap , menu);
-        return true;
-    }
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		// getMenuInflater().inflate(R.menu.login, menu);
+		getMenuInflater().inflate(R.menu.action_bar, menu);
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.timeline) {
+			Intent intent = new Intent(this, TimelineTestActivity.class);
+			startActivity(intent);
+		} else if (item.getItemId() == R.id.profile) {
+			Intent intent = new Intent(this, GoogleMapActivity.class);
+			startActivity(intent);
+		} else if (item.getItemId() == R.id.settings) {
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
+		}
+
+		// TODO: Add Settings activity piece
+		// TODO: CHoose correct drawables in action_bar in res/menu
+		return true;
+	}
+
 }
 
