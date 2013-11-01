@@ -28,5 +28,26 @@ public class ActivityLocationManager {
 		
 	}
 	
+	public static String[] getLocationType(){
+		
+		ArrayList<String> types = new ArrayList<String>();
+		
+		
+		types.add("Home");
+		
+		types.add("Work");
+		types.add("Shop");
+		types.add("Restaurant");
+		types.add("Hotel");
+		types.add("Motel");
+		types.add("Grocery Store");
+		types.add("Other");
+		
+		String[] typesStringArray =(String[]) types.toArray(new String[types.size()]); 
+
+		return typesStringArray;
+		
+	}
+		
 
 }
