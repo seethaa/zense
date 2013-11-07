@@ -86,14 +86,14 @@ public class GoogleMapActivity extends FragmentActivity {
  
     GoogleMap map;
     ArrayList<LatLng> markerPoints;
-    TextView tvDistanceDuration;
+    //TextView tvDistanceDuration;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googlemap);
          final Context context = this;
-        tvDistanceDuration = (TextView) findViewById(R.id.tv_distance_time);
+        //tvDistanceDuration = (TextView) findViewById(R.id.tv_distance_time);
             
         // Initializing
         markerPoints = new ArrayList<LatLng>();
