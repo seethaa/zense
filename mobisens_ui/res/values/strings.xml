@@ -62,6 +62,8 @@
     <string name="pick_seattle_place">Pick a Seattle Place</string>
     <string name="exception">Exception: %1$s</string>
 
+    <string name="desctext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non enim laoreet purus condimentum vestibulum.</string>
+    
     <string-array name="food_types">
         <item>Cheeseburger</item>
         <item>Pizza</item>

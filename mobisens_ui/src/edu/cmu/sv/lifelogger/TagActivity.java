@@ -23,7 +23,7 @@ public class TagActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tag_layout);
+		setContentView(R.layout.description_page);
 		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -31,30 +31,29 @@ public class TagActivity extends Activity{
 			bottomTxt = extras.getString("bottom_txt");
 		}
 		
-		LinearLayout main_layout = (LinearLayout) findViewById(R.id.mainLayout);
+//		LinearLayout main_layout = (LinearLayout) findViewById(R.id.mainLayout);
 		
-		
+		 
 		Toast.makeText(TagActivity.this, bottomTxt + " " + topTxt, Toast.LENGTH_SHORT).show();
 
-//		TimelineItem i = new TimelineItem(topTxt, bottomTxt);
-		
-//		TimelineItemHelper tmh = new TimelineItemHelper(this, i, main_layout, null);
+////		TimelineItem i = new TimelineItem(topTxt, bottomTxt);
+//		
+////		TimelineItemHelper tmh = new TimelineItemHelper(this, i, main_layout, null);
 
-		RelativeLayout newView0 = (RelativeLayout) View.inflate(this,
-				R.layout.timeline_item, null);
-		main_layout.addView(newView0);
+//		RelativeLayout newView0 = (RelativeLayout) View.inflate(this,
+//				R.layout.description_page, null);
+//		main_layout.addView(newView0);
+ 
 
-
-		TextView name = (TextView) newView0.findViewById(R.id.name); // name of activity
+		TextView name = (TextView) findViewById(R.id.name); // name of activity
 		name.setText(topTxt);
-		TextView bottom_txt = (TextView) newView0.findViewById(R.id.bottomTxt); // start time
+		
+		TextView bottom_txt = (TextView) findViewById(R.id.bottomTxt); // start time
 		bottom_txt.setText(bottomTxt);
 
-		ImageView activity_icon = (ImageView) newView0.findViewById(R.id.activity_icon); // start time
-
 		
 		
-
+ 
 		
 	}
 
