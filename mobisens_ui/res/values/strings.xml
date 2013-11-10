@@ -92,7 +92,8 @@
         <!-- Indian -->
         <item></item>
     </string-array>
-	<string name="activity_level">ACTIVITY LEVEL</string>	
+
+    <string name="activity_level">ACTIVITY LEVEL</string>
     <string name="add_values">Add values to the chart</string>
     <string name="x">X</string>
     <string name="y">Y</string>
@@ -107,5 +108,6 @@
     <string name="title_activity_main">AChartEngineBarChart</string>
     <string name="str_btn_chart">Income vs Expense Bar Chart</string>
     <string name="title_activity_bar_chart_activity_level">BarChartActivityLevel</string>
+    <string name="title_activity_test_static_map">TestStaticMap</string>
 
 </resources>

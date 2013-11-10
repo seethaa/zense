@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -27,6 +28,7 @@ import org.json.JSONObject;
  
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -62,9 +64,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
  
+import com.google.android.gms.maps.CameraUpdate;
 //import com.frank.gmap.demo.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
@@ -73,6 +77,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -118,6 +123,10 @@ public class GoogleMapActivity extends FragmentActivity {
     private ListView listView;
     PlaceAdapter placeAdapter;
     ListView annotationList;
+    private ArrayList<LatLng> lastZoomedLocations;
+    
+    
+    
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +147,8 @@ public class GoogleMapActivity extends FragmentActivity {
         map.setMyLocationEnabled(true);
         
         ArrayList<LatLng> locations  = ActivityLocationManager.getAllLocations();
+        
+        zoomInBounds(locations);
         
         PolylineOptions pol = new PolylineOptions();
         pol.color(Color.BLUE);
@@ -177,21 +188,8 @@ public class GoogleMapActivity extends FragmentActivity {
 		        
 		        list=(ListView)dialog.findViewById(R.id.ListView1);
 		        annotationList = list;
-		        getAddress();
-		        
-/*		        //listView = (ListView)findViewById(R.id.httptestlist_listview);
-		        while(placeAdapter!= null){
-
-		        }
-                listView.setAdapter(placeAdapter);
-*/		        
-		        
-		        
-		        ArrayAdapter adapter = new ArrayAdapter<String>(GoogleMapActivity.this,android.R.layout.simple_list_item_1 ,list_array);
-		          //ArrayAdapter adapter = new ArrayAdapter<String>(GoogleMapActivity.this,dialog.R.layout.simple_list_item_1 ,list_array);
-		        
-//		        list.setAdapter(adapter);
-		        
+		        getAddress(m1.getPosition());
+		        final ListView tmpList = list;
 		        list.setOnItemClickListener(new OnItemClickListener() {
 		        	LocationMetaData locDataTemp = new LocationMetaData();
 					@Override
@@ -211,28 +209,12 @@ public class GoogleMapActivity extends FragmentActivity {
 							locDataTemp.setLoc(m1.getPosition());
 							locData.add(locDataTemp);
 							m1.setTitle(locDataTemp.getAnnotation().toString());
+							placeAdapter = null;
+							tmpList.setAdapter(null);
 							m1.hideInfoWindow();
 							m1.showInfoWindow();
 						} else {
-							// Selected text is equal to Other - popup to ask user to input the location
-						/*	AlertDialog.Builder alert = new AlertDialog.Builder(GoogleMapActivity.this);
-						    EditText input = new EditText(GoogleMapActivity.this);
-						    final int inputID = View.generateViewId();
-						    
-						    input.setId(inputID);
-						    //input.setId("myInput");        
-						    alert.setView(input);
-						    String out;
-						    alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						        //@Override
-						        public void onClick(DialogInterface dialoge, int which) {
-						        	
-						            EditText input = (EditText) dialoge.findViewById(inputID);
-						            Editable value = input.getText();
-						            out = value.toString();               
 
-						        }
-						    });*/
 							
 							final Dialog dialog = new Dialog(GoogleMapActivity.this);
 							dialog.setContentView(R.layout.usertag_dialog);
@@ -276,8 +258,110 @@ public class GoogleMapActivity extends FragmentActivity {
 			}
         	
         });
-    }    
+        
+        
+        
+        
+        
+        
+        map.setOnMapClickListener(new OnMapClickListener() {
+			
+			@Override
+			public void onMapClick(LatLng point) {
+				final LatLng m1 = point;
+				// TODO Auto-generated method stub
+				// custom dialog
+				final Dialog dialog = new Dialog(GoogleMapActivity.this);
+				dialog.setContentView(R.layout.map_popup_dialogue);
 
+		        ListView list;
+
+		        
+		        //Get all basic types of places 
+		        String list_array[]= ActivityLocationManager.getLocationType();
+		        
+		        
+		        list=(ListView)dialog.findViewById(R.id.ListView1);
+		        annotationList = list;
+		        getAddress(m1);
+		        final ListView tmpList = list;
+		        list.setOnItemClickListener(new OnItemClickListener() {
+		        	LocationMetaData locDataTemp = new LocationMetaData();
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						// TODO Auto-generated method stub
+						/*The current location has been annotated with the selected item
+						 * Return the data back to the main activity 
+						 */
+						Place selectedLoc = (Place) arg0.getItemAtPosition(arg2);
+						String selectedText = selectedLoc.getName();
+						
+						//String selectedText = arg0.getItemAtPosition(arg2).toString();
+						if(!selectedText.equals("Other")) {
+							locDataTemp = new LocationMetaData();
+							locDataTemp.setAnnotation(selectedText);
+							locDataTemp.setLoc(m1);
+							locData.add(locDataTemp);
+							MarkerOptions markerOptionsNew = new MarkerOptions();
+							markerOptionsNew.position(m1).title(locDataTemp.getAnnotation().toString());
+							map.addMarker(markerOptionsNew);
+							//m1.setTitle(locDataTemp.getAnnotation().toString());
+							placeAdapter = null;
+							tmpList.setAdapter(null);
+						} else {
+
+							
+							final Dialog dialog = new Dialog(GoogleMapActivity.this);
+							dialog.setContentView(R.layout.usertag_dialog);
+							dialog.setTitle("Please tag the location");
+
+
+							final EditText editText = (EditText)dialog.findViewById(R.id.activity);
+							
+							Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+							// if button is clicked, close the custom dialog
+							dialogButton.setOnClickListener(new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									locDataTemp = new LocationMetaData();
+									String annotationString = editText.getText().toString();
+									locDataTemp.setAnnotation(annotationString);
+									locDataTemp.setLoc(m1);
+									locData.add(locDataTemp);
+									MarkerOptions markerOptionsNew = new MarkerOptions();
+									markerOptionsNew.position(m1).title(locDataTemp.getAnnotation().toString());
+									map.addMarker(markerOptionsNew);
+									dialog.dismiss();
+									
+								}
+							});
+
+							dialog.show();
+							
+						}
+
+						dialog.dismiss();
+					}
+				});
+		        
+		        
+		        
+		        dialog.setTitle("Tag the location type");
+	 
+				dialog.show();				
+			}
+		});
+        
+        
+        
+        
+        
+        
+        
+        
+    }    
+    
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -287,6 +371,101 @@ public class GoogleMapActivity extends FragmentActivity {
 		return true;
 	}
 
+	
+	
+
+	public double[] zoomInBounds(final ArrayList<LatLng> locations) {
+		
+		if(locations.size() == 0){
+			CameraUpdate zoom = CameraUpdateFactory.zoomTo(0);
+			this.map.animateCamera(zoom);
+			return new double[0];
+		}
+		
+	    double minLat = 0;
+	    double minLng = 0;
+	    double maxLat = 0;
+	    double maxLng = 0;
+
+	    int length = locations.size();
+	    
+	    for (int i = 0; i< length; i++) {
+	    	double[] latlng = {locations.get(i).latitude, locations.get(i).longitude}; 
+	    			//locations.get(i);
+	    	
+	    	if(i == 0){
+	    		minLat = latlng[0];
+	    		maxLat = latlng[0];
+	    		minLng = latlng[1];
+	    		maxLng = latlng[1];
+	    	}else{
+	    	
+		        minLat = Math.min(latlng[0], minLat);
+		        maxLat = Math.max(latlng[0], maxLat);
+	    	
+		        minLng = Math.min(latlng[1], minLng);
+		        maxLng = Math.max(latlng[1], maxLng);
+	    	
+	    	}
+	    }
+	    /*final MapController controller = getMapView().getController();
+	    controller.zoomToSpan(
+	                       Math.abs(minLat - maxLat), Math.abs(minLong - maxLong));*/
+	    
+	    final LatLngBounds zoomBounds = new LatLngBounds(new LatLng(minLat, minLng), new LatLng(maxLat, maxLng));
+	    
+	    CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng((maxLat + minLat) / 2,
+	        						(maxLng + minLng) / 2));
+	    //getMapView().getCameraPosition().zoom
+	    this.map.animateCamera(center);
+	    
+	    // What a hack!
+	    // Solution from: http://stackoverflow.com/questions/13692579/movecamera-with-cameraupdatefactory-newlatlngbounds-crashes
+	    getMapView().setOnCameraChangeListener(new OnCameraChangeListener() {
+
+		    @Override
+		    public void onCameraChange(CameraPosition arg0) {
+		        // Move camera.
+		    	if(zoomBounds != null){
+		    		try{
+				    	getMapView().moveCamera(CameraUpdateFactory.newLatLngBounds(zoomBounds, 50));
+				        // Remove listener to prevent position reset on camera move.
+				    	getMapView().setOnCameraChangeListener(null);
+				    	
+				    	lastZoomedLocations = locations;
+		    		}catch(Exception ex){
+		    			ex.printStackTrace();
+		    		}
+		    	}
+		    }
+		});
+	    
+	    
+	    
+	    
+	    return new double[]{(maxLat + minLat) / 2, (maxLng + minLng) / 2};
+	}
+	    
+	public GoogleMap getMapView() {
+		android.support.v4.app.FragmentManager fregmentManager = getSupportFragmentManager();
+		
+		if(fregmentManager != null){
+			SupportMapFragment mapFragment = ((SupportMapFragment)fregmentManager.findFragmentById(R.id.map));
+			try{
+				GoogleMap map = mapFragment.getMap();
+				return map;
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}
+		
+		return null;
+	}
+
+	
+	
+	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.timeline) {
@@ -306,9 +485,12 @@ public class GoogleMapActivity extends FragmentActivity {
 	}
 
 
-    public  void  getAddress(){
-    	latitude = "37.379297";
-        longitude = "-122.060680";
+    public  void  getAddress(LatLng position){
+    	Double tempLong = new Double(position.longitude);
+    	Double tempLat = new Double(position.latitude);
+    	
+    	latitude = tempLat.toString();
+        longitude = tempLong.toString();
         new GetCurrentLocation().execute(latitude, longitude);
     }
 
@@ -336,6 +518,9 @@ public class GoogleMapActivity extends FragmentActivity {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             assert result;
+            
+            query.setLength(0);
+            
             query.append("https://maps.googleapis.com/maps/api/place/nearbysearch/xml?");
             query.append("location=" +  latitude + "," + longitude + "&");
             query.append("radius=" + radius + "&");
@@ -380,6 +565,7 @@ public class GoogleMapActivity extends FragmentActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            places.clear();
             try {
                 Document xmlResult = loadXMLFromString(result);
                 NodeList nodeList =  xmlResult.getElementsByTagName("result");
@@ -405,9 +591,10 @@ public class GoogleMapActivity extends FragmentActivity {
                         for(int j = 0; j < typeCount; j++) {
                             types[j] = nodeElement.getElementsByTagName("type").item(j).getTextContent();
                         }
-                        place.setVicinity(vicinity.getTextContent());
+                        if(vicinity!=null)
+                        	place.setVicinity(vicinity.getTextContent());
                         place.setId(id.getTextContent());
-                        place.setName(name.getTextContent());
+                        	place.setName(name.getTextContent());
                         if(null == rating) {
                             place.setRating(0.0f);
                         } else {
