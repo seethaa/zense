@@ -208,6 +208,11 @@ public class GoogleMapActivity extends FragmentActivity {
 							locDataTemp.setAnnotation(selectedText);
 							locDataTemp.setLoc(m1.getPosition());
 							locData.add(locDataTemp);
+							
+							//broadcast the data
+							broadCastData(locDataTemp);
+							
+							
 							m1.setTitle(locDataTemp.getAnnotation().toString());
 							placeAdapter = null;
 							tmpList.setAdapter(null);
@@ -246,6 +251,15 @@ public class GoogleMapActivity extends FragmentActivity {
 						}
 
 						dialog.dismiss();
+					}
+					private void broadCastData(LocationMetaData tempData) {
+						// TODO Auto-generated method stub
+						Intent intent = new Intent("my.action.string");
+						intent.putExtra("annotation", tempData.annotation); // phoneNo is the sent Number
+						sendBroadcast(intent);
+						
+						
+						//Ming--use AnnotationReceiver to recieve data
 					}
 				});
 		        
