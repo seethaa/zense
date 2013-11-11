@@ -2,13 +2,17 @@ package edu.cmu.sv.mobisens_ui;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import edu.cmu.sv.lifelogger.GoogleMapActivity.QueryGooglePlaces;
+import edu.cmu.sv.lifelogger.database.ActivityLocationManager;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -49,8 +53,31 @@ public class TestStaticMap extends Activity {
 
         @Override
         protected Bitmap doInBackground(String... params) {
-        	String URL = "http://maps.google.com/maps/api/staticmap?center=" +latitude + "," + longitude + "&zoom=15&size=200x200&sensor=false";
-            Bitmap bmp = null;
+//        	String URL = "http://maps.google.com/maps/api/staticmap?center=" +latitude + "," + longitude + "&zoom=15&size=200x200&sensor=false";
+        	
+        	//get all points first
+            ArrayList<LatLng> locations  = ActivityLocationManager.getAllLocations();
+            String allpoints = getStringLocs(locations);
+        	/*
+        	String URL = "http://maps.googleapis.com/maps/api/staticmap?" +
+//              		"center=Brooklyn+Bridge,New+York,NY" +
+              		"&zoom=8" +
+              		"&size=200x200" +
+              		"&maptype=roadmap" +
+              		"&path=color:0x0000ff|weight:5" + //add string here
+              		allpoints+
+              		"&sensor=false";*/
+            
+            String URL = "http://maps.googleapis.com/maps/api/staticmap?" +
+            		"center=Brooklyn+Bridge,New+York,NY" +
+            		"&zoom=13" +
+            		"&size=600x300" +
+            		"&maptype=roadmap" +
+            		"&path=color:0x0000ff|weight:5" +
+            		"|40.737102,-73.990318|40.749825,-73.987963|40.752946,-73.987384|40.755823,-73.986397" +
+            		"&sensor=false";
+//        	System.out.println(URL);
+        	Bitmap bmp = null;
             HttpClient httpclient = new DefaultHttpClient();   
             HttpGet request = new HttpGet(URL); 
 
@@ -69,11 +96,19 @@ public class TestStaticMap extends Activity {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
             return bmp;
         }
 
-        @Override
+        private String getStringLocs(ArrayList<LatLng> locations) {
+        	String result = "";
+        	for (LatLng point: locations){
+        		result = result + "|"+ point.latitude + ","+ point.longitude;
+        		
+        	}
+        	return result;
+		}
+
+		@Override
         protected void onPostExecute(Bitmap result) {
             img.setImageBitmap(result);
         }
@@ -86,9 +121,17 @@ public class TestStaticMap extends Activity {
     }
 
 	
-	public static Bitmap getGoogleMapThumbnail(double lati, double longi){
-        String URL = "http://maps.google.com/maps/api/staticmap?center=" +lati + "," + longi + "&zoom=15&size=200x200&sensor=false";
-        Bitmap bmp = null;
+	/*public static Bitmap getGoogleMapThumbnail(double lati, double longi){
+//        String URL = "http://maps.google.com/maps/api/staticmap?center=" +lati + "," + longi + "&zoom=15&size=200x200&sensor=false";
+        String URL = "http://maps.googleapis.com/maps/api/staticmap?" +
+        		"center=Brooklyn+Bridge,New+York,NY" +
+        		"&zoom=13" +
+        		"&size=600x300" +
+        		"&maptype=roadmap" +
+        		"&path=color:0x0000ff|weight:5" +
+        		"|40.737102,-73.990318|40.749825,-73.987963|40.752946,-73.987384|40.755823,-73.986397" +
+        		"&sensor=false";
+		Bitmap bmp = null;
         HttpClient httpclient = new DefaultHttpClient();   
         HttpGet request = new HttpGet(URL); 
 
@@ -109,5 +152,5 @@ public class TestStaticMap extends Activity {
         }
 
         return bmp;
-    }
+    } */
 }
