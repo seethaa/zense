@@ -42,6 +42,7 @@ public class TagActivity extends Activity{
 	ImageView mImageView ;
 	Bitmap bm;
 
+	public static int zoomlvl = 8;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +113,13 @@ public class TagActivity extends Activity{
 
 			String URL = "http://maps.googleapis.com/maps/api/staticmap?" +
 					//	              		"center=Brooklyn+Bridge,New+York,NY" +
-					"&zoom=8" +
-					"&size=300x160" +
+					//"&zoom="+zoomlvl +
+					"&size=350x200" +
 					"&maptype=roadmap" +
 					"&path=" + URLEncoder.encode("color:0x0000ff|weight:5")+
 					URLEncoder.encode(allpoints)+
 					"&sensor=false";
-
+ 
 			Bitmap bmp = null;
 			HttpClient httpclient = new DefaultHttpClient();   
 			HttpGet request = new HttpGet(URL); 
