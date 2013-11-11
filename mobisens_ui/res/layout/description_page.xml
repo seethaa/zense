@@ -79,12 +79,15 @@
         android:background="@color/zdark_gray"
         android:orientation="vertical" />
 
-    <ImageButton
-        android:id="@+id/imageButton1"
-        android:layout_width="match_parent"
+    
+    <ImageView
+        android:id="@+id/staticIV"
+        android:layout_width="300dp"
         android:layout_height="160dp"
+        android:layout_marginLeft="12dp"
+        android:clickable="true"
         android:layout_weight="4.35"
-        android:src="@drawable/action_location" />
+         />
 
 </LinearLayout>
 

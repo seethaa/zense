@@ -126,7 +126,7 @@ public class GoogleMapActivity extends FragmentActivity {
     private ArrayList<LatLng> lastZoomedLocations;
     
     
-    
+     
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

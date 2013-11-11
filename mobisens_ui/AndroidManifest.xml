@@ -71,6 +71,7 @@
             android:name="edu.cmu.sv.lifelogger.GoogleMapActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
+            
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.TimelineTestActivity"
@@ -96,7 +97,9 @@
         <activity
             android:name="edu.cmu.sv.lifelogger.PieChartBuilderActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+         
+            
+               <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

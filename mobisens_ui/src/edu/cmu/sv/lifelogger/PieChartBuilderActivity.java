@@ -172,7 +172,7 @@ public class PieChartBuilderActivity extends Activity {
 			Intent intent = new Intent(this, GoogleMapActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.settings) {
-			Intent intent = new Intent(this, SettingsActivity.class);
+			Intent intent = new Intent(this, GoogleMapActivity.class);
 			startActivity(intent);
 		}
 
