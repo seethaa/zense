@@ -632,11 +632,7 @@ public class GoogleMapActivity extends FragmentActivity {
             }
             
         }
-        
     }
-
-	
-	
 
 public class PlaceAdapter extends ArrayAdapter<Place> {
     public Context context;
