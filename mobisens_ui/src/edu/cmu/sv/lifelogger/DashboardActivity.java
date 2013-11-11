@@ -112,11 +112,11 @@ public class DashboardActivity extends Activity {
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile)
 		{
-			Intent intent = new Intent(this, GoogleMapActivity.class);
+			Intent intent = new Intent(this, PieChartBuilderActivity.class);
 			startActivity(intent);
 		}else if (item.getItemId() == R.id.settings)
 		{
-			Intent intent = new Intent(this, SettingsActivity.class);
+			Intent intent = new Intent(this, GoogleMapActivity.class);
 			startActivity(intent);
 		}
 

@@ -2,11 +2,14 @@ package edu.cmu.sv.lifelogger;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,6 +34,10 @@ public class TimelineTestActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		cxt=this;
+		
+		ActionBar actionBar = getActionBar();
+
+		actionBar.setDisplayShowTitleEnabled(true);
 
 		setContentView(R.layout.main_vert_lin_layout);
 		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
@@ -104,4 +111,37 @@ public class TimelineTestActivity extends Activity{
 
 
 	};
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		// getMenuInflater().inflate(R.menu.login, menu);
+		getMenuInflater().inflate(R.menu.action_bar, menu);
+
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		if (item.getItemId() == R.id.timeline)
+		{
+			Intent intent = new Intent(this, TimelineTestActivity.class);
+			startActivity(intent);
+		} else if (item.getItemId() == R.id.profile)
+		{
+			Intent intent = new Intent(this, PieChartBuilderActivity.class);
+			startActivity(intent);
+		}else if (item.getItemId() == R.id.settings)
+		{
+			Intent intent = new Intent(this, GoogleMapActivity.class);
+			startActivity(intent);
+		}
+
+		//TODO: Add Settings activity piece
+		//TODO: CHoose correct drawables in action_bar in res/menu
+		return true;
+	}
 }
