@@ -19,7 +19,7 @@ public class ActivityLocationManager {
 		ArrayList<LatLng> locations = new ArrayList<LatLng>();
 		LatLng newPoint = new LatLng( 37.418709,-122.057419);
 		locations.add(newPoint);
-		newPoint = new LatLng( 38.418709,-121.057419);
+		newPoint = new LatLng( 37.418779,-121.057419);
 		locations.add(newPoint);
 		newPoint = new LatLng( 37.379297,-122.060680);
 		locations.add(newPoint);

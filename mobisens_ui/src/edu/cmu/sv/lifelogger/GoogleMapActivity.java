@@ -158,7 +158,7 @@ public class GoogleMapActivity extends FragmentActivity {
         map.addPolyline(pol)  ;
         MarkerOptions markerOptions = new MarkerOptions();
         for (LatLng a : locations) {
-        	markerOptions.position(a).title("Test MEssage");
+        	markerOptions.position(a);
             map.addMarker(markerOptions);
             
             
