@@ -169,12 +169,14 @@ public class GoogleMapActivity extends FragmentActivity {
         
         ArrayList<Place>  taggedPlaces = new ArrayList<Place>();
         taggedPlaces  =  ActivityLocationManager.getTaggedLocations();
-        
-        MarkerOptions taggedMarkerOptions = new MarkerOptions();
-        for (Place a : taggedPlaces) {
-        	taggedMarkerOptions.position(a.getPoint()).title(a.getName());
-            map.addMarker(taggedMarkerOptions);
+		
+        if (taggedPlaces != null) {
+			MarkerOptions taggedMarkerOptions = new MarkerOptions();
+			for (Place a : taggedPlaces) {
+				taggedMarkerOptions.position(a.getPoint()).title(a.getName());
+				map.addMarker(taggedMarkerOptions);
 
+			}
 		}
    
         
