@@ -156,19 +156,29 @@ public class GoogleMapActivity extends FragmentActivity {
         pol.addAll(locations);
         
         map.addPolyline(pol)  ;
-        MarkerOptions markerOptions = new MarkerOptions();
+        
+        
+        
+       /* MarkerOptions markerOptions = new MarkerOptions();
         for (LatLng a : locations) {
         	markerOptions.position(a);
             map.addMarker(markerOptions);
             
             
+		}*/
+        
+        ArrayList<Place>  taggedPlaces = new ArrayList<Place>();
+        taggedPlaces  =  ActivityLocationManager.getTaggedLocations();
+        
+        MarkerOptions taggedMarkerOptions = new MarkerOptions();
+        for (Place a : taggedPlaces) {
+        	taggedMarkerOptions.position(a.getPoint()).title(a.getName());
+            map.addMarker(taggedMarkerOptions);
+
 		}
-                
-        final ArrayList <LocationMetaData> locData = new ArrayList <LocationMetaData>();
    
         
-        
-        
+        final ArrayList <LocationMetaData> locData = new ArrayList <LocationMetaData>();
         map.setOnMarkerClickListener(new OnMarkerClickListener(){
         	
 			@Override

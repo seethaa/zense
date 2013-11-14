@@ -1,5 +1,7 @@
 package edu.cmu.sv.lifelogger.database;
 
+import com.google.android.gms.maps.model.LatLng;
+
 //http://www.mkyong.com/java/jaxb-hello-world-example/
 /**
  * Represents a single Result of a places API call
@@ -8,8 +10,9 @@ package edu.cmu.sv.lifelogger.database;
 public class Place {
     public String vicinity;
     public float[] geometry; //array(0 => lat, 1 => lng)
-    public String id;
-    public String name;
+    public LatLng point ;  //-- convenient variable to return point as latlng(will be same as geometry 
+	public String id;
+    public String name;			//Address
     public float rating;
     public String reference;
     public String[] types;
@@ -34,7 +37,17 @@ public class Place {
 
     public void setGeometry(float[] geometry) {
         this.geometry = geometry;
+        // Now also set the new point in LatLng -- convenience method
+        LatLng newPoint = new LatLng(geometry[0], geometry[1]);
+        this.setPoint(newPoint);
     }
+
+    public LatLng getPoint() {
+		return point;
+	}
+	public void setPoint(LatLng point) {
+		this.point = point;
+	}
 
     public String getId() {
         return id;
