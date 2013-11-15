@@ -69,18 +69,19 @@ public class PieChartBuilderActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.xy_chart);
-		// mValue = (EditText) findViewById(R.id.xValue);
+		// Set the running count of the chart as first time
+		isFirstRun = 0;
+		
 		mRenderer.setZoomButtonsVisible(true);
 		mRenderer.setStartAngle(180);
-		mRenderer.setDisplayValues(true);
+		mRenderer.setDisplayValues(false);
+
 		mRenderer.setBackgroundColor(Color.WHITE);
-		mRenderer.setLabelsTextSize(18);
+		mRenderer.setLabelsTextSize(20);
 		mRenderer.setLabelsColor(getResources().getColor(R.color.black));
+		mRenderer.setLegendTextSize(20);
 
-		mRenderer.setLegendTextSize(18);
-
-		// mRenderer.setMarginsColor(Color.argb(0x00,0x01,0x01,0x01));
-		// mValue.setEnabled(true);
+		
 
 		final Button button = (Button) findViewById(R.id.button1);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -107,8 +108,9 @@ public class PieChartBuilderActivity extends Activity {
 		isFirstRun++;
 		for (ActivityItem a : dataList) {
 
-			value = (double) a.getmTime();
-			mSeries.add(a.getmActivity_name() + "", value);
+			//value = (double) a.getmTime();
+			value  = (double) a.getmPercentage();
+			mSeries.add(a.getmActivity_name() + " " + value + "%", value);
 			SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
 			renderer.setColor(COLORS[(mSeries.getItemCount() - 1)
 			                         % COLORS.length]);
@@ -117,9 +119,24 @@ public class PieChartBuilderActivity extends Activity {
 		}
 	}
 
+	
+	
+	@Override
+	public void onPause() {
+	    super.onPause();  // Always call the superclass method first
+
+	    // Release the Camera because we don't need it when paused
+	    // and other activities might need to use it.
+	    
+	    //mRenderer.removeAllRenderers();
+	}
+	
+	
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
+
 		if (mChartView == null) {
 			LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
 			mChartView = ChartFactory.getPieChartView(this, mSeries, mRenderer);
@@ -131,18 +148,18 @@ public class PieChartBuilderActivity extends Activity {
 					SeriesSelection seriesSelection = mChartView
 							.getCurrentSeriesAndPoint();
 					if (seriesSelection == null) {
-						Toast.makeText(PieChartBuilderActivity.this,
+						/*Toast.makeText(PieChartBuilderActivity.this,
 								"No chart element selected", Toast.LENGTH_SHORT)
-								.show();
+								.show();*/
 					} else {
 						mChartView.repaint();
-						Toast.makeText(
+						/*Toast.makeText(
 								PieChartBuilderActivity.this,
-								"Chart data point index "
-										+ seriesSelection.getPointIndex()
-										+ " selected" + " point value="
+								"You clicked on Activity " 
+										+ mChartView.getc
+										+ " with % value as ="
 										+ seriesSelection.getValue(),
-										Toast.LENGTH_SHORT).show();
+										Toast.LENGTH_SHORT).show();*/
 					}
 				}
 			});
@@ -151,6 +168,7 @@ public class PieChartBuilderActivity extends Activity {
 		} else {
 			mChartView.repaint();
 		}
+		if(isFirstRun==0)	
 			createPieChart();
 	}
 
@@ -169,10 +187,10 @@ public class PieChartBuilderActivity extends Activity {
 			Intent intent = new Intent(this, TimelineTestActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile) {
-			Intent intent = new Intent(this, GoogleMapActivity.class);
+			Intent intent = new Intent(this, PieChartBuilderActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.settings) {
-			Intent intent = new Intent(this, GoogleMapActivity.class);
+			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 		}
 

@@ -19,7 +19,7 @@ public class ActivityLocationManager {
 		ArrayList<LatLng> locations = new ArrayList<LatLng>();
 		LatLng newPoint = new LatLng( 37.418709,-122.057419);
 		locations.add(newPoint);
-		newPoint = new LatLng( 38.418709,-121.057419);
+		newPoint = new LatLng( 37.418779,-121.057419);
 		locations.add(newPoint);
 		newPoint = new LatLng( 37.379297,-122.060680);
 		locations.add(newPoint);
@@ -27,6 +27,36 @@ public class ActivityLocationManager {
 		return locations;
 		
 	}
+
+	
+	public static ArrayList<Place> getTaggedLocations(){
+		
+		ArrayList<Place> locations = new ArrayList<Place>();
+		// Name = address, Geometry for latitude and longitude
+		
+		// THis is the start position of the path
+		LatLng newPoint = new LatLng( 37.418709,-122.057419);
+		Place place = new Place();
+		place.setPoint(newPoint);
+		place.setName("CMU School");
+		locations.add(place);
+		
+		newPoint = new LatLng(37.417709,-122.056419);
+		place = new Place("Random Address ....I donot care about");
+		place.setPoint(newPoint);
+		locations.add(place);
+		
+		
+		// This is the end point
+		newPoint = new LatLng( 37.379297,-122.060680);
+		place = new Place("End Location");
+		place.setPoint(newPoint);
+		locations.add(place);
+		return locations;
+		
+	}
+
+	
 	
 	public static String[] getLocationType(){
 		
