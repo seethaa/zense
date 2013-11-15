@@ -14,6 +14,10 @@ public class DashboardManager {
 	public static ArrayList<ActivityItem> getAllPieChartData() {
 		ArrayList<ActivityItem> data  = new ArrayList<ActivityItem>();
 		
+		/* Care should be taken to add correct percentage for each value. 
+		 * @ToDo write a function to convert a value into percentage
+		 * */
+		
 		ActivityItem t1 = new ActivityItem("Dining", 2, 22);
 		data.add(t1);
 		ActivityItem t2 = new ActivityItem("Driving", 1, 15);
