@@ -58,6 +58,11 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
+            android:name="edu.cmu.sv.lifelogger.MainActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
             android:name="edu.cmu.sv.lifelogger.TagActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
