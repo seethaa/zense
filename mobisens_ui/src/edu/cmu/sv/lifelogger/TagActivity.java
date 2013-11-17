@@ -10,6 +10,30 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.Gallery;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewSwitcher;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -17,33 +41,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
 import edu.cmu.sv.lifelogger.database.ActivityLocationManager;
-import edu.cmu.sv.lifelogger.entities.TimelineItem;
-import edu.cmu.sv.lifelogger.helpers.TimelineItemHelper;
 import edu.cmu.sv.mobisens_ui.R;
 
 
@@ -73,6 +71,8 @@ public class TagActivity extends Activity{
 	private String selectedImagePath;
 	//ADDED
 	private String filemanagerstring;
+
+	public static ArrayList<CustomGallery> photos = null;
 
 
 	@Override
@@ -128,9 +128,17 @@ public class TagActivity extends Activity{
 
 		new LongOperation().execute();
 
+		Gallery g = (Gallery) findViewById(R.id.photoGallery);
+
+		if (photos!=null){
+			g.setAdapter(new ImageAdapter(this));  
+			g.setFadingEdgeLength(40);  
+		}
 
 
 	}
+
+
 
 	private class LongOperation extends AsyncTask<String, Void, Bitmap> {
 
@@ -208,22 +216,18 @@ public class TagActivity extends Activity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		if (item.getItemId() == R.id.timeline)
+		if (item.getItemId() == R.id.attachpics)
 		{
-		
 
-			initImageLoader();
-			init();
 
-			Intent intent = new Intent(this, MainActivity.class);
+			//			initImageLoader();
+			//			init();
+
+			Intent intent = new Intent(this, OpenGalleryActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile)
 		{
 			Intent intent = new Intent(this, PieChartBuilderActivity.class);
-			startActivity(intent);
-		}else if (item.getItemId() == R.id.settings)
-		{
-			Intent intent = new Intent(this, GoogleMapActivity.class);
 			startActivity(intent);
 		}
 
@@ -247,30 +251,25 @@ public class TagActivity extends Activity{
 	}
 
 	private void init() {
+		
+		LinearLayout photo_dialog = (LinearLayout) View.inflate(this, R.layout.description_page, null);
+
 
 		handler = new Handler();
-		gridGallery = (GridView) findViewById(R.id.gridGallery);
+		gridGallery = (GridView) photo_dialog.findViewById(R.id.gridGallery);
 		gridGallery.setFastScrollEnabled(true);
 		adapter = new GalleryAdapter(getApplicationContext(), imageLoader);
 		adapter.setMultiplePick(false);
 		gridGallery.setAdapter(adapter);
 
-		viewSwitcher = (ViewSwitcher) findViewById(R.id.viewSwitcher);
+		viewSwitcher = (ViewSwitcher) photo_dialog.findViewById(R.id.viewSwitcher);
 		viewSwitcher.setDisplayedChild(1);
 
-		imgSinglePick = (ImageView) findViewById(R.id.imgSinglePick);
+		imgSinglePick = (ImageView) photo_dialog.findViewById(R.id.imgSinglePick);
 
-		
+		Intent i = new Intent(Action.ACTION_MULTIPLE_PICK);
+		startActivityForResult(i, 200);
 
-		btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
-		btnGalleryPickMul.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(Action.ACTION_MULTIPLE_PICK);
-				startActivityForResult(i, 200);
-			}
-		});
 
 	}
 
@@ -301,5 +300,36 @@ public class TagActivity extends Activity{
 			adapter.addAll(dataT);
 		}
 	}
+
+	public static void setPhotos(ArrayList<CustomGallery> dataT) {
+		TagActivity.photos = dataT;
+	}
+
+
+	public class ImageAdapter extends BaseAdapter{  
+
+		int mGalleryItemBackground;  
+		public ImageAdapter(Context c)  {     
+			mContext = c;     
+		}  
+		public int getCount(){  
+			return photos.size();  
+		}  
+		public Object getItem(int position){  
+			return position;  
+		}  
+		public long getItemId(int position) {  
+			return position;  
+		}  
+		public View getView(int position, View convertView, ViewGroup parent){  
+			ImageView i = new ImageView(mContext);  
+
+			i.setImageURI(Uri.parse("file://" + photos.get(position).sdcardPath));  
+			i.setScaleType(ImageView.ScaleType.FIT_XY);  
+			i.setLayoutParams(new Gallery.LayoutParams(260, 210));  
+			return i;  
+		}     
+		private Context mContext;  
+	}     
 
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -18,7 +19,6 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1.00"
-            android:background="@drawable/border"
             android:orientation="horizontal" >
 
             <TextView
@@ -50,29 +50,48 @@
                 android:textSize="12dip" />
         </RelativeLayout>
 
-        <EditText
-            android:id="@+id/descEditText"
+        <TextView
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1.00"
+            android:text="Description" />
+
+        <EditText
+            android:id="@+id/descEditText"
+            android:layout_width="354dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/border"
             android:inputType="textMultiLine"
             android:text="@string/desctext" >
         </EditText>
 
         <Gallery
-            android:id="@+id/gallery1"
+            android:id="@+id/photoGallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <GridView
+            android:id="@+id/gridGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.00"
+            android:numColumns="3"
+            tools:listitem="@layout/gallery_item" >
+        </GridView>
+
+     
 
         <ImageView
             android:id="@+id/staticIV"
             android:layout_width="350dp"
             android:layout_height="260dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="4.35"
             android:background="@drawable/border"
             android:clickable="true" />
