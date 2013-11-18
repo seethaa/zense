@@ -169,6 +169,19 @@ public class LocalDbAdapter {
 	
 	
 	
+
+	public long createImageRow(String imageName, String location, Integer activityID)
+	{
+		ContentValues initialValues = new ContentValues();
+		initialValues.put("imageName", imageName);
+		initialValues.put("location", location);
+		initialValues.put("activityID", activityID);
+		
+		System.out.println("HIMZ: creating values");
+		return mDb.insert("Image", null, initialValues);
+	}
+
+	
 	
 
 
