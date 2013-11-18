@@ -1,6 +1,7 @@
 package edu.cmu.sv.lifelogger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.cmu.sv.lifelogger.database.LocalDbAdapter;
 import edu.cmu.sv.lifelogger.database.TimelineManager;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.entities.TimelineSegment;
@@ -29,7 +31,8 @@ public class TimelineTestActivity extends Activity{
 	private static LinearLayout MY_MAIN_LAYOUT;
 	private ArrayList<TimelineSegment> timelineItemList;
 	Context cxt;
-
+	public static LocalDbAdapter db;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +61,15 @@ public class TimelineTestActivity extends Activity{
 		}
 		//		TextViewHelper ctvp = new TextViewHelper(this, "BLAHBLAH", MY_MAIN_LAYOUT);
 
-
+		 db = new LocalDbAdapter(this);
+	     db.open();
+	     
+	     
+	     // Fetcht the images location
+	     
+	     List <String> locations = db.getImagesForActivity(1);
+	     
+	     System.out.println("dummy");
 
 	}
 
