@@ -31,6 +31,7 @@ public class LocalDbAdapter {
 	private Context mCtx;
 
 	private static String imagesTableCreate = "create table Image (imageName text,  location text, activityID integer)";
+	private static String activityTableCreate = "create table ActivityTable ( activityID integer, activityName text,  description text, activityType text)";
 	// 6 states supported, with type as 1= question, 2 = inform. 
 
 	private static final String TAG = "DBHelper";
@@ -59,7 +60,7 @@ public class LocalDbAdapter {
 			System.out.println("In onCreate()");
 
 			db.execSQL(imagesTableCreate);
-
+			db.execSQL(activityTableCreate);
 
 			/* Also seed data for default values */
 			seedData(db);
@@ -70,13 +71,29 @@ public class LocalDbAdapter {
 
 		public void seedData(SQLiteDatabase db){
 			//@ToDo add Seed data here
+			// Seed the activity table first for first activity id
+			createActivityRow(db,1, "Driving", "I was driving from home to work", "Driving");
 			createImageRow(db, "test1.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
 			createImageRow(db, "test2.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
 			
 		}
 
 		
-		public long createImageRow(SQLiteDatabase db,String imageName, String location, Integer activityID)
+		private long createActivityRow(SQLiteDatabase db, int activityID, String activityName,
+				String description, String activityType) {
+
+			ContentValues initialValues = new ContentValues();
+			initialValues.put("activityID", activityID);
+			initialValues.put("activityName", activityName);
+			initialValues.put("description", description);
+			initialValues.put("activityType", activityType);
+			
+			System.out.println("HIMZ: creating values");
+			return db.insert("ActivityTable", null, initialValues);
+			
+		}
+
+		private long createImageRow(SQLiteDatabase db,String imageName, String location, Integer activityID)
 		{
 			ContentValues initialValues = new ContentValues();
 			initialValues.put("imageName", imageName);
@@ -192,6 +209,27 @@ public class LocalDbAdapter {
 	}
 
 	
+	/**
+	 * API to store activity information in our Database
+	 * @param activityID
+	 * @param activityName
+	 * @param description
+	 * @param activityType
+	 * @return
+	 */
+	public long createActivityRow(int activityID, String activityName,
+			String description, String activityType) {
+
+		ContentValues initialValues = new ContentValues();
+		initialValues.put("activityID", activityID);
+		initialValues.put("activityName", activityName);
+		initialValues.put("description", description);
+		initialValues.put("activityType", activityType);
+		
+		System.out.println("HIMZ: creating values");
+		return mDb.insert("ActivityTable", null, initialValues);
+		
+	}
 	
 
 
