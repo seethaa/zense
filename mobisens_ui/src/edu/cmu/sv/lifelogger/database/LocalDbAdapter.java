@@ -138,7 +138,11 @@ public class LocalDbAdapter {
 
 
 
-	
+	/**
+	 * API to fetch all the images from the local DB for the given activity ID
+	 * @param activityID
+	 * @return
+	 */
 	public List<String>  getImagesForActivity(Integer activityID){
 		Cursor c = null;
 		int grpNo=0;
@@ -169,7 +173,13 @@ public class LocalDbAdapter {
 	
 	
 	
-
+	/**
+	 * API to store images location in the local DB
+	 * @param imageName
+	 * @param location
+	 * @param activityID
+	 * @return
+	 */
 	public long createImageRow(String imageName, String location, Integer activityID)
 	{
 		ContentValues initialValues = new ContentValues();
@@ -186,7 +196,7 @@ public class LocalDbAdapter {
 
 
 
-	public static ArrayList<String> convertStringToArray(String str)
+	private static ArrayList<String> convertStringToArray(String str)
 	{
 		List<String> items = new ArrayList<String>(Arrays.asList(str.split("\\s*,\\s*")));
 		System.out.println("arraylist=" + items);
