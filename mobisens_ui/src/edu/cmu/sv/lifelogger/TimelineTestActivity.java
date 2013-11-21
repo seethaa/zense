@@ -62,12 +62,12 @@ public class TimelineTestActivity extends Activity{
 		//		TextViewHelper ctvp = new TextViewHelper(this, "BLAHBLAH", MY_MAIN_LAYOUT);
 
 		 db = new LocalDbAdapter(this);
-	     db.open();
+	    db.open();
 	     
 	     
 	     // Fetcht the images location
 	     
-	     List <String> locations = db.getImagesForActivity(1);
+	     List <String> locations = db.getImagesForActivity(2);
 	     
 	     System.out.println("dummy");
 

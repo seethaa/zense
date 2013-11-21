@@ -23,7 +23,10 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
@@ -128,17 +131,27 @@ public class TagActivity extends Activity{
 
 		new LongOperation().execute();
 
-		Gallery g = (Gallery) findViewById(R.id.photoGallery);
+		Gallery photoGallery = (Gallery) findViewById(R.id.photoGallery);
 
 		if (photos!=null){
-			g.setAdapter(new ImageAdapter(this));  
-			g.setFadingEdgeLength(40);  
+			photoGallery.setAdapter(new ImageAdapter(this));  
+			photoGallery.setFadingEdgeLength(40);  
 		}
+		photoGallery.setOnItemClickListener(new OnItemClickListener() {
 
-
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				//TimelineActivity.db.close();
+				Intent intent = new Intent(TagActivity.this, FacebookShare.class);
+				// TODO Currently hardcoded activity id. Get it dynamically from current activity id
+				intent.putExtra("activityID", 2);
+				startActivity(intent);
+				
+			}
+		});
 	}
-
-
 
 	private class LongOperation extends AsyncTask<String, Void, Bitmap> {
 
@@ -292,7 +305,7 @@ public class TagActivity extends Activity{
 			for (String string : all_path) {
 				CustomGallery item = new CustomGallery();
 				item.sdcardPath = string;
-
+				TimelineTestActivity.db.createImageRow("", item.sdcardPath, 2);
 				dataT.add(item);
 			}
 

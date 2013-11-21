@@ -75,7 +75,9 @@ public class LocalDbAdapter {
 			createActivityRow(db,1, "Driving", "I was driving from home to work", "Driving");
 			createImageRow(db, "test1.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
 			createImageRow(db, "test2.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
-			
+			createImageRow(db, "1384037586887.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 2);
+			createImageRow(db, "1384026465395.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 2);
+			createActivityRow(db, 2, "Dining", "I am eating my laptop", "Dining");
 		}
 
 		
@@ -188,6 +190,33 @@ public class LocalDbAdapter {
 		return labels ;
 	}
 	
+	public String getNameAndDescriptionForActivity(Integer activityID){
+		Cursor c = null;
+		int grpNo=0;
+		String nameAndDescription= new String();			
+		c = mDb.rawQuery("select activityName,description from ActivityTable where activityID = " + "\"" + activityID +"\"", null);
+		
+		try{
+
+
+			if (c.moveToFirst()) {
+				do {
+					   	
+					nameAndDescription = c.getString(0) + ": " + c.getString(1);
+					
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return nameAndDescription ;
+	}
 	
 	
 	/**

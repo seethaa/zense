@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+import edu.cmu.sv.lifelogger.database.LocalDbAdapter;
 import edu.cmu.sv.lifelogger.database.TimelineManager;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.entities.TimelineSegment;
@@ -34,14 +35,16 @@ public class TimelineActivity extends Activity {
 	protected ListView list;
 
 	private ArrayList<TimelineItem> timelineItemList;
-
+	public static LocalDbAdapter db;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.result_list_view);
-
+		//Create the new database
+	 db = new LocalDbAdapter(this);
+     db.open();
 		//		setContentView(R.layout.main_vert_lin_layout);
 		//		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
 
@@ -96,6 +99,8 @@ public class TimelineActivity extends Activity {
 				
 			}
 		});
+
+		
 		this.adapter.notifyDataSetChanged();
 		//		MY_MAIN_LAYOUT.addView(list);
 
