@@ -32,6 +32,7 @@ public class LocalDbAdapter {
 
 	private static String imagesTableCreate = "create table Image (imageName text,  location text, activityID integer)";
 	private static String activityTableCreate = "create table ActivityTable ( activityID integer, activityName text,  description text, activityType text)";
+	private static String userTableCreate = "create table Users( userID integer, userName text,  email text, about text, profilePictureLocation text)";
 	// 6 states supported, with type as 1= question, 2 = inform. 
 
 	private static final String TAG = "DBHelper";
@@ -61,7 +62,7 @@ public class LocalDbAdapter {
 
 			db.execSQL(imagesTableCreate);
 			db.execSQL(activityTableCreate);
-
+			db.execSQL(userTableCreate);
 			/* Also seed data for default values */
 			seedData(db);
 			
@@ -71,6 +72,10 @@ public class LocalDbAdapter {
 
 		public void seedData(SQLiteDatabase db){
 			//@ToDo add Seed data here
+			
+
+			// Create User
+			createUserRow(db,1, "Frank Hsueh", "abc@gmail.com", "I am super man", "");
 			// Seed the activity table first for first activity id
 			createActivityRow(db,1, "Driving", "I was driving from home to work", "Driving");
 			createImageRow(db, "test1.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
@@ -80,7 +85,35 @@ public class LocalDbAdapter {
 			createActivityRow(db, 2, "Dining", "I am eating my laptop", "Dining");
 		}
 
-		
+		/**
+		 * Function to create user in the system. Profile picture must be loaded
+		 *  in to the system
+		 * Assumption now, fetch from facebook all the time
+		 * -- This is only seeding function. NO api should be provided to 
+		 * create users, rather api to fetch user from the backend should be 
+		 * implemented when possible
+		 * @param db
+		 * @param userID
+		 * @param userName
+		 * @param email
+		 * @param about
+		 * @param profilePictureLocation
+		 */
+		private long createUserRow(SQLiteDatabase db, int userID, String userName,
+				String email, String about, String profilePictureLocation) {
+			// TODO Auto-generated method stub
+			ContentValues initialValues = new ContentValues();
+			initialValues.put("userID", userID);
+			initialValues.put("userName", userName);
+			initialValues.put("email", email);
+			initialValues.put("about", about);
+			initialValues.put("profilePictureLocation", profilePictureLocation);
+			
+			System.out.println("HIMZ: creating values");
+			return db.insert("ActivityTable", null, initialValues);
+			
+		}
+
 		private long createActivityRow(SQLiteDatabase db, int activityID, String activityName,
 				String description, String activityType) {
 
@@ -217,7 +250,91 @@ public class LocalDbAdapter {
 
 		return nameAndDescription ;
 	}
+
 	
+
+	public String getUserName(Integer userID){
+		Cursor c = null;
+		String name= new String();			
+		c = mDb.rawQuery("select userName from Users where userID = " + "\"" + userID +"\"", null);
+		
+		try{
+
+
+			if (c.moveToFirst()) {
+				do {
+					   	
+					name = c.getString(0) + ": " + c.getString(1);
+					
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return name ;
+	}
+	
+	
+	public String getUserEmail(Integer userID){
+		Cursor c = null;
+		String email= new String();			
+		c = mDb.rawQuery("select email from Users where userID = " + "\"" + userID +"\"", null);
+		
+		try{
+
+
+			if (c.moveToFirst()) {
+				do {
+					   	
+					email = c.getString(0) + ": " + c.getString(1);
+					
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return email ;
+	}
+
+	/**
+	 * 
+	 * @param userID
+	 * @return
+	 */
+	public String getAboutUser(Integer userID){
+		Cursor c = null;
+		String about= new String();			
+		c = mDb.rawQuery("select about from Users where userID = " + "\"" + userID +"\"", null);
+		
+		try{
+			if (c.moveToFirst()) {
+				do {
+					   	
+					about = c.getString(0) + ": " + c.getString(1);
+					
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+		return about ;
+	}
 	
 	/**
 	 * API to store images location in the local DB
