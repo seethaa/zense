@@ -195,7 +195,7 @@ public class LocalDbAdapter {
 	 * @param activityID
 	 * @return
 	 */
-	public List<String>  getImagesForActivity(Integer activityID){
+	public List<String> getImagesForActivity(Integer activityID){
 		Cursor c = null;
 		int grpNo=0;
 		List<String> labels = new ArrayList<String>();			

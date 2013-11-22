@@ -116,10 +116,10 @@ public class OpenGalleryActivity extends Activity {
 			for (String string : all_path) {
 				CustomGallery item = new CustomGallery();
 				item.sdcardPath = string;
-
+				TimelineTestActivity.db.createImageRow("", item.sdcardPath, 2);
 				dataT.add(item);
 			}
-
+ 
 			viewSwitcher.setDisplayedChild(0);
 			adapter.addAll(dataT);
 			
