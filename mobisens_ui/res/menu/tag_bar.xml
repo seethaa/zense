@@ -9,5 +9,8 @@
           android:showAsAction="ifRoom"
           android:icon="@drawable/ic_action_person" />
     
+    <item android:id="@+id/fbshare"
+          android:showAsAction="ifRoom"
+          android:icon="@drawable/share" />
      
 </menu>

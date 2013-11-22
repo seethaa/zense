@@ -13,6 +13,18 @@
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical" >
 
+        <ImageView
+            android:id="@+id/staticIV"
+            android:layout_width="350dp"
+            android:layout_height="260dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="4.35"
+            android:background="@drawable/border"
+            android:clickable="true" />
+
         <RelativeLayout
             android:layout_width="349dp"
             android:layout_height="wrap_content"
@@ -61,12 +73,14 @@
 
         <EditText
             android:id="@+id/descEditText"
-            android:layout_width="354dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:inputType="textMultiLine"
-            android:text="@string/desctext" >
+            android:layout_weight="4.35"
+            android:ems="10" >
+
         </EditText>
+
+     
 
         <Gallery
             android:id="@+id/photoGallery"
@@ -81,20 +95,6 @@
             android:numColumns="3"
             tools:listitem="@layout/gallery_item" >
         </GridView>
-
-     
-
-        <ImageView
-            android:id="@+id/staticIV"
-            android:layout_width="350dp"
-            android:layout_height="260dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="4.35"
-            android:background="@drawable/border"
-            android:clickable="true" />
     </LinearLayout>
 
 </ScrollView>

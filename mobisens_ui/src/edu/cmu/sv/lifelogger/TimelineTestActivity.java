@@ -40,7 +40,7 @@ public class TimelineTestActivity extends Activity{
 		
 		ActionBar actionBar = getActionBar();
 
-		actionBar.setDisplayShowTitleEnabled(true);
+		actionBar.setDisplayShowTitleEnabled(false);
 
 		setContentView(R.layout.main_vert_lin_layout);
 		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
@@ -86,7 +86,7 @@ public class TimelineTestActivity extends Activity{
 
 			System.out.println("printing name: " + bottomtxt + ", " + txt);
 			
-			Toast.makeText(TimelineTestActivity.this, bottomtxt + " " + txt, Toast.LENGTH_SHORT).show();
+//			Toast.makeText(TimelineTestActivity.this, bottomtxt + " " + txt, Toast.LENGTH_SHORT).show();
 
 			
 

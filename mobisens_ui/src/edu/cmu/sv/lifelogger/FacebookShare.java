@@ -56,7 +56,7 @@ public class FacebookShare extends FragmentActivity {
     private boolean canPresentShareDialog;
 
     private enum PendingAction {
-        NONE,
+        NONE, 
         POST_PHOTO,
         POST_STATUS_UPDATE
     }
@@ -80,7 +80,7 @@ public class FacebookShare extends FragmentActivity {
             Log.d("HelloFacebook", "Success!");
         }
     };
-
+ 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

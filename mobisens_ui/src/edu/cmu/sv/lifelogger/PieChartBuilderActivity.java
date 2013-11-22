@@ -51,7 +51,7 @@ public class PieChartBuilderActivity extends Activity {
 		super.onRestoreInstanceState(savedState);
 		ActionBar actionBar = getActionBar();
 
-		actionBar.setDisplayShowTitleEnabled(true);
+		actionBar.setDisplayShowTitleEnabled(false);
 
 		mSeries = (CategorySeries) savedState.getSerializable("current_series");
 		mRenderer = (DefaultRenderer) savedState
@@ -180,7 +180,7 @@ public class PieChartBuilderActivity extends Activity {
 
 		return true;
 	}
-
+ 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.timeline) {

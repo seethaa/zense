@@ -18,12 +18,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -84,8 +85,14 @@ public class TagActivity extends Activity{
 
 		ActionBar actionBar = getActionBar();
 
-		actionBar.setDisplayShowTitleEnabled(true);
-
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		 getActionBar().setDisplayHomeAsUpEnabled(true);
+		 
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+		    getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+		
 		setContentView(R.layout.description_page);
 
 		Bundle extras = getIntent().getExtras();
@@ -153,6 +160,8 @@ public class TagActivity extends Activity{
 		});
 	}
 
+	
+	
 	private class LongOperation extends AsyncTask<String, Void, Bitmap> {
 
 		@Override
@@ -229,25 +238,31 @@ public class TagActivity extends Activity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		if (item.getItemId() == R.id.attachpics)
-		{
-
-
-			//			initImageLoader();
-			//			init();
-
-			Intent intent = new Intent(this, OpenGalleryActivity.class);
-			startActivity(intent);
-		} else if (item.getItemId() == R.id.profile)
-		{
-			Intent intent = new Intent(this, PieChartBuilderActivity.class);
-			startActivity(intent);
-		}
-
-		//TODO: Add Settings activity piece
-		//TODO: CHoose correct drawables in action_bar in res/menu
-		return true;
+		
+		 switch (item.getItemId()) {
+		    // Respond to the action bar's Up/Home button
+		    case android.R.id.home:
+		        NavUtils.navigateUpFromSameTask(this);
+		        return true; 
+		        
+		    case R.id.attachpics:
+		    	Intent intent = new Intent(this, OpenGalleryActivity.class);
+				startActivity(intent);
+				 return true; 
+		    case R.id.profile:
+		    	Intent intent1 = new Intent(this, PieChartBuilderActivity.class);
+				startActivity(intent1);
+				 return true; 
+		    case R.id.fbshare:
+		    	Intent intent2 = new Intent(this, FacebookShare.class);
+				startActivity(intent2);
+				 return true; 
+		    }
+		    return super.onOptionsItemSelected(item);
+	  
+		
 	}
+
 
 
 	private void initImageLoader() {
@@ -337,6 +352,7 @@ public class TagActivity extends Activity{
 		public View getView(int position, View convertView, ViewGroup parent){  
 			ImageView i = new ImageView(mContext);  
 
+			
 			i.setImageURI(Uri.parse("file://" + photos.get(position).sdcardPath));  
 			i.setScaleType(ImageView.ScaleType.FIT_XY);  
 			i.setLayoutParams(new Gallery.LayoutParams(260, 210));  
