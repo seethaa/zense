@@ -32,8 +32,17 @@ import edu.cmu.sv.mobisens_ui.R;
 
 public class PieChartBuilderActivity extends Activity {
 	/** Colors to be used for the pie slices. */
-	private static int[] COLORS = new int[] { Color.GREEN, Color.BLUE,
-		Color.MAGENTA, Color.CYAN };
+	private static int[] COLORS = new int[] { 
+		Color.rgb(71,60,139), //purple
+		Color.rgb(238,201,0),  //gold
+		Color.rgb(238, 118,0), //orange
+		Color.RED,
+		Color.rgb(0,139,69), //green
+		Color.BLUE,
+		Color.DKGRAY,
+		Color.rgb(0,104,139), //blue
+		Color.YELLOW
+	};
 	/** The main series that will include all the data. */
 	private CategorySeries mSeries = new CategorySeries("");
 	/** The main renderer for the main dataset. */
@@ -64,24 +73,28 @@ public class PieChartBuilderActivity extends Activity {
 		outState.putSerializable("current_series", mSeries);
 		outState.putSerializable("current_renderer", mRenderer);
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.xy_chart);
 		// Set the running count of the chart as first time
 		isFirstRun = 0;
-		
-		mRenderer.setZoomButtonsVisible(true);
+
+		mRenderer.setZoomButtonsVisible(false);
 		mRenderer.setStartAngle(180);
 		mRenderer.setDisplayValues(false);
 
 		mRenderer.setBackgroundColor(Color.WHITE);
 		mRenderer.setLabelsTextSize(20);
-		mRenderer.setLabelsColor(getResources().getColor(R.color.black));
-		mRenderer.setLegendTextSize(20);
+		mRenderer.setLabelsColor(getResources().getColor(R.color.zdark_gray));
+		mRenderer.setLegendTextSize(31);
+		//changed this to not show labels
+		mRenderer.setShowLabels(false);
+		mRenderer.setExternalZoomEnabled(false);
+		mRenderer.setZoomEnabled(false);
+		mRenderer.setScale((float) 1.2);
 
-		
 
 		final Button button = (Button) findViewById(R.id.button1);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +123,7 @@ public class PieChartBuilderActivity extends Activity {
 
 			//value = (double) a.getmTime();
 			value  = (double) a.getmPercentage();
-			mSeries.add(a.getmActivity_name() + " " + value + "%", value);
+			mSeries.add(a.getmActivity_name() + " " + value + "%\n" +"\n", value);
 			SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
 			renderer.setColor(COLORS[(mSeries.getItemCount() - 1)
 			                         % COLORS.length]);
@@ -119,20 +132,20 @@ public class PieChartBuilderActivity extends Activity {
 		}
 	}
 
-	
-	
+
+
 	@Override
 	public void onPause() {
-	    super.onPause();  // Always call the superclass method first
+		super.onPause();  // Always call the superclass method first
 
-	    // Release the Camera because we don't need it when paused
-	    // and other activities might need to use it.
-	    
-	    //mRenderer.removeAllRenderers();
+		// Release the Camera because we don't need it when paused
+		// and other activities might need to use it.
+
+		//mRenderer.removeAllRenderers();
 	}
-	
-	
-	
+
+
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -180,7 +193,7 @@ public class PieChartBuilderActivity extends Activity {
 
 		return true;
 	}
- 
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.timeline) {

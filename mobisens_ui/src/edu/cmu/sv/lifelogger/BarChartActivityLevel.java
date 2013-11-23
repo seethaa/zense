@@ -65,9 +65,15 @@ public class BarChartActivityLevel extends Activity {
 	int[] activityArray = seriesDataset[0];
 
 	// Array to support 11 different activities, including null activity(0)
-	int colorArray[] = { Color.TRANSPARENT, Color.RED, Color.BLUE, Color.GREEN,
-			Color.CYAN, Color.DKGRAY, Color.GRAY, Color.MAGENTA, Color.YELLOW,
-			Color.LTGRAY, Color.BLACK };
+	int colorArray[] = { Color.TRANSPARENT, Color.rgb(71,60,139), //purple
+			Color.rgb(238,201,0),  //gold
+			Color.rgb(238, 118,0), //orange
+			Color.RED,
+			Color.rgb(0,139,69), //green
+			Color.BLUE,
+			Color.DKGRAY,
+			Color.rgb(0,104,139), //blue
+			Color.YELLOW };
 
 	static int colCount = 0;
 
