@@ -46,7 +46,7 @@ public class BarChartActivityLevel extends Activity {
 	int[] activitySummarySeriesPoints = getSeriesPoints();
 	int[][] activitySummarySeriesDataset = DashboardActivityLevelManager.getSeriesDataset();
 	int[] activitySummaryActivityArray = activitySummarySeriesDataset[0];
-
+	
 	public int[] getSeriesPoints () {
 		int seriesLength = dataList.size() ;
 		int x[] = new int [seriesLength];		

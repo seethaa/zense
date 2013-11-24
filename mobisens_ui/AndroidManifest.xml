@@ -55,13 +55,9 @@
         <activity
             android:name="edu.cmu.sv.lifelogger.FBLoginActivity"
             android:label="@string/app_name"
-            
+            android:noHistory="true"
             android:windowSoftInputMode="adjustResize" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.OpenGalleryActivity"
@@ -129,6 +125,11 @@
             android:name="edu.cmu.sv.lifelogger.PieChartBuilderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
+                    <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.TimelineActivity"

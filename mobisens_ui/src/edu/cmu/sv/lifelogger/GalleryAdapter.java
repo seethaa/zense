@@ -1,15 +1,19 @@
 package edu.cmu.sv.lifelogger;
 
 import java.util.ArrayList;
+import java.util.Formatter.BigDecimalLayoutForm;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import edu.cmu.sv.mobisens_ui.R;
 
@@ -148,9 +152,18 @@ public class GalleryAdapter extends BaseAdapter {
 
 		try {
             holder.imgQueue.setImageResource(R.drawable.no_media);
+            DisplayImageOptions options = new DisplayImageOptions.Builder()
+            .showStubImage(R.drawable.no_media)
+            .cacheOnDisc()
+            .resetViewBeforeLoading()
+            .bitmapConfig(Bitmap.Config.RGB_565)
+            .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
+            .build();
 			imageLoader.displayImage("file://" + data.get(position).sdcardPath,
 					holder.imgQueue);
-
+			
+			
+			
 			if (isActionMultiplePick) {
 
 				holder.imgQueueMultiSelected

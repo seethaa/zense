@@ -1,11 +1,11 @@
 package edu.cmu.sv.lifelogger;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.ViewSwitcher;
 
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -57,8 +58,27 @@ public class OpenGalleryActivity extends Activity {
 		ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(
 				this).defaultDisplayImageOptions(defaultOptions).memoryCache(
 				new WeakMemoryCache());
-
-		ImageLoaderConfiguration config = builder.build();
+		
+		File cacheDir = new File(this.getCacheDir(), "imgcachedir");
+	    if (!cacheDir.exists())
+	        cacheDir.mkdir();
+		
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+	            this).threadPoolSize(5)
+	            .threadPriority(Thread.MIN_PRIORITY + 3)
+	            .denyCacheImageMultipleSizesInMemory()
+	            // .memoryCache(new UsingFreqLimitedMemoryCache(2000000)) // You
+	            // can pass your own memory cache implementation
+	            .memoryCacheSize(1048576 * 10)
+	            // 1MB=1048576 *declare 20 or more size if images are more than
+	            // 200
+	            .discCache(new UnlimitedDiscCache(cacheDir))
+	            // You can pass your own disc cache implementation
+	            // .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
+	            .build();
+		
+		
+		//ImageLoaderConfiguration config = builder.build();
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(config);
 	}
@@ -69,8 +89,9 @@ public class OpenGalleryActivity extends Activity {
 		
 		ScrollView descPage = (ScrollView) View.inflate(this, R.layout.description_page, null);
 				
-		gridGallery = (GridView) descPage.findViewById(R.id.gridGallery);
-		
+	//	gridGallery = (GridView) descPage.findViewById(R.id.gridGallery);
+		gridGallery = (GridView) findViewById(R.id.gridGallery);
+
 		
 		gridGallery.setFastScrollEnabled(true);
 		adapter = new GalleryAdapter(getApplicationContext(), imageLoader);
