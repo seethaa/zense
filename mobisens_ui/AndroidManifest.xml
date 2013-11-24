@@ -86,7 +86,7 @@
             android:name="edu.cmu.sv.lifelogger.TagActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" 
-            android:parentActivityName="edu.cmu.sv.lifelogger.TimelineTestActivity" >
+            android:parentActivityName="edu.cmu.sv.lifelogger.TimelineActivity" >
             
         <!-- Parent activity meta-data to support API level 7+ -->
         <meta-data
@@ -104,7 +104,7 @@
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name="edu.cmu.sv.lifelogger.TimelineTestActivity"
+            android:name="edu.cmu.sv.lifelogger.TimelineActivity"
             android:label="@string/app_name"
             android:persistent="true"
             android:windowSoftInputMode="adjustResize" >

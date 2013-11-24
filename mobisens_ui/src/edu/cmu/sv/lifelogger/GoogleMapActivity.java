@@ -495,7 +495,7 @@ public class GoogleMapActivity extends FragmentActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.timeline) {
-			Intent intent = new Intent(this, TimelineTestActivity.class);
+			Intent intent = new Intent(this, TimelineActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile) {
 			Intent intent = new Intent(this, GoogleMapActivity.class);

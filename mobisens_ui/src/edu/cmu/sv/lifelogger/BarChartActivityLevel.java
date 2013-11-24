@@ -336,7 +336,7 @@ public class BarChartActivityLevel extends Activity {
 	{
 		if (item.getItemId() == R.id.timeline)
 		{
-			Intent intent = new Intent(this, TimelineTestActivity.class);
+			Intent intent = new Intent(this, TimelineActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile)
 		{
