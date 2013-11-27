@@ -5,3 +5,4 @@
 ./bin
 *.class  
 /project.properties
+/bin

@@ -1,137 +1,158 @@
 package edu.cmu.sv.lifelogger;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.FrameLayout;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import edu.cmu.sv.lifelogger.database.LocalDbAdapter;
 import edu.cmu.sv.lifelogger.database.TimelineManager;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.entities.TimelineSegment;
-import edu.cmu.sv.lifelogger.helpers.LazyAdapter;
+import edu.cmu.sv.lifelogger.helpers.TimelineItemHelper;
 import edu.cmu.sv.lifelogger.helpers.TimelineSegmentHeader;
 import edu.cmu.sv.mobisens_ui.R;
 
-public class TimelineActivity extends Activity {
 
-	protected static final String TAG_ACTIVITY = "activity_name";
-	protected static final String TAG_START_TIME = "start_time";
-	protected static final String TAG_END_TIME = "end_time";
-	protected static final String TAG_START_LOCATION = "start_location";
-	protected static final String TAG_END_LOCATION = "end_location";
-	protected static final String TAG_ACTIVITY_ICON = "activity_icon";
 
+public class TimelineActivity extends Activity{
 	private static LinearLayout MY_MAIN_LAYOUT;
-
-	private LazyAdapter adapter;
-	protected ListView list;
-
-	private ArrayList<TimelineItem> timelineItemList;
+	private ArrayList<TimelineSegment> timelineItemList;
+	Context cxt;
 	public static LocalDbAdapter db;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		cxt=this;
+		
+		ActionBar actionBar = getActionBar();
 
-		setContentView(R.layout.result_list_view);
-		//Create the new database
-	 db = new LocalDbAdapter(this);
-     db.open();
-		//		setContentView(R.layout.main_vert_lin_layout);
-		//		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
+		actionBar.setDisplayShowTitleEnabled(false);
 
-		//TimelineSegmentHeader rbq = new TimelineSegmentHeader(this, "today", MY_MAIN_LAYOUT);
+		setContentView(R.layout.main_vert_lin_layout);
+		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
 
-		timelineItemList = new ArrayList<TimelineItem>();
+		timelineItemList = TimelineManager.getAllTimelineItems();
 
-		updateTimelineItems();
+		for (TimelineSegment tls: timelineItemList){
+			//add timeline segment
+			TimelineSegmentHeader tsh = new TimelineSegmentHeader(this, tls.getDate().toString(), MY_MAIN_LAYOUT);
 
-		if (timelineItemList == null){
-			Log.d("LIST ", "NO Timeline Items");
-			Toast.makeText(TimelineActivity.this, "NO Timeline Items???", Toast.LENGTH_SHORT).show();
+			ArrayList<TimelineItem> tlItems= tls.getData();
+			for (TimelineItem item: tlItems){
+				//add its items
+				TimelineItemHelper tmh = new TimelineItemHelper(this, item, MY_MAIN_LAYOUT, itemListener);
+
+			}
+
+		}
+		//		TextViewHelper ctvp = new TextViewHelper(this, "BLAHBLAH", MY_MAIN_LAYOUT);
+
+		 db = new LocalDbAdapter(this);
+	    db.open();
+	     
+	     
+	     // Fetcht the images location
+	     
+	     List <String> locations = db.getImagesForActivity(2);
+	     
+	     System.out.println("dummy");
+
+	}
+
+
+	View.OnClickListener itemListener = new View.OnClickListener() {
+		public void onClick(View view) {
+
+			TextView t = (TextView) view.findViewById(R.id.name);
+			String txt = t.getText().toString();
+			
+
+			TextView bottom = (TextView) view.findViewById(R.id.bottomTxt);
+			String bottomtxt = bottom.getText().toString();
+
+			System.out.println("printing name: " + bottomtxt + ", " + txt);
+			
+//			Toast.makeText(TimelineTestActivity.this, bottomtxt + " " + txt, Toast.LENGTH_SHORT).show();
+
+			
+
+			Intent intent = new Intent(TimelineActivity.this,TagActivity.class);
+			intent.putExtra("top_txt", txt);
+			intent.putExtra("bottom_txt", bottomtxt);
+			
+			startActivity(intent);
+
+			/*
+			// custom dialog
+			final Dialog dialog = new Dialog(cxt);
+			dialog.setContentView(R.layout.timeline_dialog);
+			dialog.setTitle(txt);
+
+			// set the custom dialog components - text, image and button
+			//			TextView text = (TextView) dialog.findViewById(R.id.text);
+			//			text.setText("Android custom dialog example!");
+			//			ImageView image = (ImageView) dialog.findViewById(R.id.image);
+			//			image.setImageResource(R.drawable.ic_launcher);
+
+			Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+			// if button is clicked, close the custom dialog
+			dialogButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show(); */
 		}
 
-		//		View child = (View) View.inflate(this,R.layout.result_list_view, null);
 
-		list = (ListView) findViewById(R.id.list);
-
-
-		// Getting adapter by passing data ArrayList
-		adapter = new LazyAdapter(this, timelineItemList);
-		
-//		ArrayList<TimelineSegment> allSegments = TimelineManager.getAllTimelineItems();
-//		for (int i = 1; i < 50; i++) {
-//			adapter.addItem(timelineItemList.get(0));
-//			if (i % 4 == 0) {
-//				adapter.addSeparatorItem(allSegments.get(0).getDate().toString());
-//			}
-//		}
-//		
-		list.setAdapter(adapter);
-
-		// Click list item row
-		list.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-
-				//				timelineItemList.get(position));
-
-				//				Intent intent = new Intent(TimelineActivity.this,GatherInfoActivity.class);
-				//				intent.putExtra(TAG_NAME, timelineItemList.get(position).getName());
-				//				intent.putExtra(TAG_EMAIL, timelineItemList.get(position).getEmail());
-				//				intent.putExtra(TAG_GRADDATE, timelineItemList.get(position).getGradDate());
-				//				intent.putExtra(TAG_AREAINTEREST, timelineItemList.get(position).getAreaInterest());
-				//				//				Toast.makeText(getApplicationContext(), timelineItemList.get(position).get("name"),
-				//				//						Toast.LENGTH_LONG).show();
-				//
-				//				startActivity(intent);
-				
-				
-			}
-		});
-
-		
-		this.adapter.notifyDataSetChanged();
-		//		MY_MAIN_LAYOUT.addView(list);
-
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}  
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();    
-	}
-
-	/**
-	 * Adds all timeline items to array list
-	 */
-
-	private void updateTimelineItems() {
-
-		// TODO Auto-generated method stub
-		timelineItemList = TimelineManager.getAllTimelineItems().get(0).getData();
-	} 
+	};
 	
-	public static class ViewHolder {
-        public LinearLayout llView;
-    }
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		// getMenuInflater().inflate(R.menu.login, menu);
+		getMenuInflater().inflate(R.menu.action_bar, menu);
+
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		if (item.getItemId() == R.id.timeline)
+		{
+			Intent intent = new Intent(this, TimelineActivity.class);
+			startActivity(intent);
+		} else if (item.getItemId() == R.id.profile)
+		{
+			Intent intent = new Intent(this, PieChartBuilderActivity.class);
+			startActivity(intent);
+		}else if (item.getItemId() == R.id.settings)
+		{
+			Intent intent = new Intent(this, GoogleMapActivity.class);
+			startActivity(intent);
+		}
+
+		//TODO: Add Settings activity piece
+		//TODO: CHoose correct drawables in action_bar in res/menu
+		return true;
+	}
 }

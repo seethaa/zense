@@ -22,16 +22,17 @@ public class DashboardManager {
 		data.add(t1);
 		ActivityItem t2 = new ActivityItem("Driving", 1, 15);
 		data.add(t2);
-		ActivityItem t3 = new ActivityItem("Shopping", 1, 1);
+		ActivityItem t3 = new ActivityItem("Shopping", 1, 4);
 		data.add(t3);
-		ActivityItem t4 = new ActivityItem("Sleeping", 7, 30);
+		ActivityItem t4 = new ActivityItem("Sleeping", 7, 27);
 		data.add(t4);
-		ActivityItem t5 = new ActivityItem("Misc", 1, 1);
-		data.add(t5);
-		ActivityItem t6 = new ActivityItem("Working", 8, 30);
+	
+		ActivityItem t6 = new ActivityItem("Working", 8, 26);
 		data.add(t6);
 		ActivityItem t7 = new ActivityItem("Walking", 1, 1);
 		data.add(t7);
+		ActivityItem t5 = new ActivityItem("Misc", 1, 5);
+		data.add(t5);
 		return data;
 	}
 	
