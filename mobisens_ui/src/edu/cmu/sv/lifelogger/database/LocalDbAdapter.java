@@ -243,10 +243,7 @@ public class LocalDbAdapter {
 	
 	
 	
-	public int  getActivityIDFromActivityName(String activityName){
-		
-	}
-	
+
 	
 	/**
 	 * API to fetch all the images from the local DB for the given activity ID

@@ -96,6 +96,8 @@ public class TimelineActivity extends Activity{
 			Intent intent = new Intent(TimelineActivity.this,TagActivity.class);
 			intent.putExtra("top_txt", txt);
 			intent.putExtra("bottom_txt", bottomtxt);
+
+			//@TODO Change code to forward the real activity id on wich click is done.  
 			intent.putExtra("activityID", 1);
 			
 			startActivity(intent);
