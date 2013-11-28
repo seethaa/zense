@@ -75,7 +75,8 @@ public class TagActivity extends Activity{
 	private String selectedImagePath;
 	//ADDED
 	private String filemanagerstring;
-
+	private int currentActivityID;
+	
 	public static ArrayList<CustomGallery> photos = null;
 
 
@@ -99,6 +100,7 @@ public class TagActivity extends Activity{
 		if (extras != null) {
 			topTxt = extras.getString("top_txt");
 			bottomTxt = extras.getString("bottom_txt");
+			currentActivityID = extras.getInt("activityID");
 		}
 
 		//		LinearLayout main_layout = (LinearLayout) findViewById(R.id.mainLayout);
@@ -247,6 +249,7 @@ public class TagActivity extends Activity{
 		        
 		    case R.id.attachpics:
 		    	Intent intent = new Intent(this, OpenGalleryActivity.class);
+		    	intent.putExtra("activityID",currentActivityID);
 				startActivity(intent);
 				 return true; 
 		    case R.id.profile:
@@ -320,7 +323,8 @@ public class TagActivity extends Activity{
 			for (String string : all_path) {
 				CustomGallery item = new CustomGallery();
 				item.sdcardPath = string;
-				TimelineActivity.db.createImageRow("", item.sdcardPath, 2);
+				//Store it in the database
+				TimelineActivity.db.createImageRow("", item.sdcardPath,(Integer)currentActivityID);
 				dataT.add(item);
 			}
 
@@ -352,8 +356,8 @@ public class TagActivity extends Activity{
 		public View getView(int position, View convertView, ViewGroup parent){  
 			ImageView i = new ImageView(mContext);  
 
-			
-			i.setImageURI(Uri.parse("file://" + photos.get(position).sdcardPath));  
+			i.setImageURI(Uri.parse("file://" + TimelineActivity.db.getImageAtPositionForActivity(position, currentActivityID)));
+			//i.setImageURI(Uri.parse("file://" + photos.get(position).sdcardPath));  
 			i.setScaleType(ImageView.ScaleType.FIT_XY);  
 			i.setLayoutParams(new Gallery.LayoutParams(260, 210));  
 			return i;  

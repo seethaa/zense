@@ -37,13 +37,18 @@ public class OpenGalleryActivity extends Activity {
 	String action;
 	ViewSwitcher viewSwitcher;
 	ImageLoader imageLoader;
+	
+	private int currentActivityID;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.photo_main);
-
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			currentActivityID = extras.getInt("activityID");
+		}
         initImageLoader();
         init();
 //        Intent i = new Intent(Action.ACTION_MULTIPLE_PICK);
@@ -138,7 +143,9 @@ public class OpenGalleryActivity extends Activity {
 			for (String string : all_path) {
 				CustomGallery item = new CustomGallery();
 				item.sdcardPath = string;
-				TimelineActivity.db.createImageRow("", item.sdcardPath, 2);
+//				TimelineActivity.db.createImageRow("", item.sdcardPath, 2);
+				//Store it in the database
+				TimelineActivity.db.createImageRow("", item.sdcardPath,(Integer)currentActivityID);
 				dataT.add(item);
 			}
  

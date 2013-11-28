@@ -73,8 +73,11 @@ public class TimelineActivity extends Activity{
 
 	}
 
-
+	
 	View.OnClickListener itemListener = new View.OnClickListener() {
+
+		
+		
 		public void onClick(View view) {
 
 			TextView t = (TextView) view.findViewById(R.id.name);
@@ -93,6 +96,7 @@ public class TimelineActivity extends Activity{
 			Intent intent = new Intent(TimelineActivity.this,TagActivity.class);
 			intent.putExtra("top_txt", txt);
 			intent.putExtra("bottom_txt", bottomtxt);
+			intent.putExtra("activityID", 1);
 			
 			startActivity(intent);
 

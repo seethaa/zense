@@ -3,6 +3,8 @@ package edu.cmu.sv.lifelogger.database;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -31,7 +33,8 @@ public class LocalDbAdapter {
 	private Context mCtx;
 
 	private static String imagesTableCreate = "create table Image (imageName text,  location text, activityID integer)";
-	private static String activityTableCreate = "create table ActivityTable ( activityID integer, activityName text,  description text, activityType text)";
+	private static String activityTableCreate = "create table ActivityTable ( activityID integer, activityName text,  description text, activityType text,startLocation text," +
+			"endLocation text, startTime text, endTime text)";
 	private static String userTableCreate = "create table Users( userID integer, userName text,  email text, about text, profilePictureLocation text)";
 	// 6 states supported, with type as 1= question, 2 = inform. 
 
@@ -77,12 +80,22 @@ public class LocalDbAdapter {
 			// Create User
 			createUserRow(db,1, "Frank Hsueh", "abc@gmail.com", "I am super man", "");
 			// Seed the activity table first for first activity id
-			createActivityRow(db,1, "Driving", "I was driving from home to work", "Driving");
-			createImageRow(db, "test1.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
+			createActivityRow(db,1, "Driving", "I was driving from home to work", "Driving", "Santa Clara", "Palo Alto","9:00 AM", "9:30 AM");
+			createActivityRow(db, 2, "Working", "Having a sip of coffee at my favourit place", "Working", "University Ave, Palo Alto", "University Ave, Palo Alto","9:30 AM", "11:30 AM");
+			createActivityRow(db, 3, "Dining", "Having a sip of coffee at my favourit place", "Dining", "Starbucks, Palo Alto", "Starbucks, Palo Alto","12:00 PM", "1:00 PM");
+			createActivityRow(db, 4, "Walking", "Having a sip of coffee at my favourit place", "Walking", "University Ave, Palo Alto", "University Ave, Palo Alto","1:00 PM", "1:30 PM");
+			createActivityRow(db, 5, "Work Meeting", "Having a sip of coffee at my favourit place", "Work Meeting","Moffett Field, Mountain View", "Moffett Field, Mountain View","9:30 PM", "11:30 PM");
+			
+			/* Not a good idea to seed activities with random image files
+			 * @TODO find good image files, place them in a folder, and then 
+			 * seed db with them associating with a particular activity
+			 */
+			
+			/*createImageRow(db, "test1.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
 			createImageRow(db, "test2.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
 			createImageRow(db, "1384037586887.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 2);
-			createImageRow(db, "1384026465395.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 2);
-			createActivityRow(db, 2, "Dining", "I am eating my laptop", "Dining");
+			createImageRow(db, "1384026465395.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 2);*/
+			
 		}
 
 		/**
@@ -115,13 +128,18 @@ public class LocalDbAdapter {
 		}
 
 		private long createActivityRow(SQLiteDatabase db, int activityID, String activityName,
-				String description, String activityType) {
+				String description, String activityType, String startLocation, String endLocation,
+				String startTime, String endTime) {
 
 			ContentValues initialValues = new ContentValues();
 			initialValues.put("activityID", activityID);
 			initialValues.put("activityName", activityName);
 			initialValues.put("description", description);
 			initialValues.put("activityType", activityType);
+			initialValues.put("startLocation", startLocation);
+			initialValues.put("endLocation", endLocation);
+			initialValues.put("startTime", startTime);
+			initialValues.put("endTime", endTime);
 			
 			System.out.println("HIMZ: creating values");
 			return db.insert("ActivityTable", null, initialValues);
@@ -222,6 +240,39 @@ public class LocalDbAdapter {
 
 		return labels ;
 	}
+	
+	
+	
+	public int  getActivityIDFromActivityName(String activityName){
+		
+	}
+	
+	
+	/**
+	 * API to fetch all the images from the local DB for the given activity ID
+	 * @param position
+	 * @param activityID
+	 * @return 
+	 */
+	public String getImageAtPositionForActivity(Integer position, Integer activityID){
+		Cursor c = null;
+		String imageLocation = null;		
+		c = mDb.rawQuery("select imageName,location from Image where activityID = " + "\"" + activityID +"\"", null);
+		try{			
+				if(c.moveToPosition(position)){
+					imageLocation = c.getString(1) + "/" + c.getString(0);
+				}
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return imageLocation ;
+	}
+	
 	
 	public String getNameAndDescriptionForActivity(Integer activityID){
 		Cursor c = null;
@@ -364,13 +415,18 @@ public class LocalDbAdapter {
 	 * @return
 	 */
 	public long createActivityRow(int activityID, String activityName,
-			String description, String activityType) {
+			String description, String activityType, String startLocation, String endLocation,
+			String startTime, String endTime) {
 
 		ContentValues initialValues = new ContentValues();
 		initialValues.put("activityID", activityID);
 		initialValues.put("activityName", activityName);
 		initialValues.put("description", description);
 		initialValues.put("activityType", activityType);
+		initialValues.put("startLocation", startLocation);
+		initialValues.put("endLocation", endLocation);
+		initialValues.put("startTime", startTime);
+		initialValues.put("endTime", endTime);
 		
 		System.out.println("HIMZ: creating values");
 		return mDb.insert("ActivityTable", null, initialValues);
