@@ -19,9 +19,9 @@ public class ActivityLocationManager {
 		ArrayList<LatLng> locations = new ArrayList<LatLng>();
 		LatLng newPoint = new LatLng( 37.418709,-122.057419);
 		locations.add(newPoint);
-		newPoint = new LatLng( 37.418779,-121.057419);
+		newPoint = new LatLng( 37.418709,-122.057423);
 		locations.add(newPoint);
-		newPoint = new LatLng( 37.379297,-122.060680);
+		newPoint = new LatLng( 37.418709,-122.057680);
 		locations.add(newPoint);
 
 		return locations;
@@ -48,7 +48,7 @@ public class ActivityLocationManager {
 		
 		
 		// This is the end point
-		newPoint = new LatLng( 37.379297,-122.060680);
+		newPoint = new LatLng( 37.417297,-122.060680);
 		place = new Place("End Location");
 		place.setPoint(newPoint);
 		locations.add(place);

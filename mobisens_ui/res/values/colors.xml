@@ -12,7 +12,12 @@
     <color name="light_bluish">#81DAF5</color>
     <color name="transparent">#00000000</color>
     
+   <color name="zorange">#ee7600</color>
+    
     <color name="zblue">#33B5E5</color>
+        <color name="zred">#ee3a00</color>
+    
+    <color name="zlogout">#E63453</color>
     
       <color name="holo_blue_bright">#ff00ddff</color>
     <color name="menu_bg">#101F2D</color>

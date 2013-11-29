@@ -177,7 +177,7 @@ public class TagActivity extends Activity{
 			String URL = "http://maps.googleapis.com/maps/api/staticmap?" +
 					//	              		"center=Brooklyn+Bridge,New+York,NY" +
 					//"&zoom="+zoomlvl +
-					"&size=350x200" +
+					"&size=385x240" +
 					"&maptype=roadmap" +
 					"&path=" + URLEncoder.encode("color:0x0000ff|weight:5")+
 					URLEncoder.encode(allpoints)+
