@@ -5,11 +5,11 @@ import java.util.Date;
 
 public class TimelineSegment{
 	private ArrayList<TimelineItem> data;
-	private Date d;
+	private String d;
 
-	public TimelineSegment(ArrayList<TimelineItem> data1, Date today){
+	public TimelineSegment(ArrayList<TimelineItem> data1, String todayStr){
 		data  = data1;
-		d = today;
+		d = todayStr;
 	}
 
 	public ArrayList<TimelineItem> getData() {
@@ -20,11 +20,11 @@ public class TimelineSegment{
 		this.data = data;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return d;
 	}
 
-	public void setDate(Date d) {
+	public void setDate(String d) {
 		this.d = d;
 	}
 
