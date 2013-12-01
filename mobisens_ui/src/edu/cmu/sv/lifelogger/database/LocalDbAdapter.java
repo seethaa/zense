@@ -240,8 +240,31 @@ public class LocalDbAdapter {
 
 		return labels ;
 	}
-	
-	
+	/**
+	 * 
+	 * @param description
+	 * @param activityID
+	 * @return true, if updated and false if not updated
+	 */
+	public boolean updateDescriptionOfActivity(String description, int activityID){
+		
+		
+		String strSQL = "UPDATE ActivityTable SET description = " + "\"" + description +"\"" + "WHERE activityID = " + "\"" + activityID +"\"";
+		
+		
+		if(strSQL != null){
+			try {
+				mDb.execSQL(strSQL);
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return false; 
+		
+	}
 	
 
 	
