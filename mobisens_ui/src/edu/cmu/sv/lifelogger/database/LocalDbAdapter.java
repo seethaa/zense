@@ -383,6 +383,37 @@ public class LocalDbAdapter {
 		}
 		return about ;
 	}
+
+	
+	public String getActivityID(String activityType,String startLocation, String endLocation, String startTime, 
+			String endTime ){
+		Cursor c = null;
+		String activityIDStr= new String();			
+		c = mDb.rawQuery("select activityID from ActivityTable where activityType = " + "\"" + activityType +"\""
+				 + "and startLocation="  + "\"" + startLocation +"\"" 
+				 + "and endLocation="  + "\"" + endLocation +"\""
+				 + "and startTime="  + "\"" + startTime +"\""
+				 + "and endTime="  + "\"" + endTime +"\"", null);
+		
+		try{
+			if (c.moveToFirst()) {
+				do {
+					   	
+					activityIDStr = c.getString(0);
+					
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+		return activityIDStr ;
+	}
+
+	
 	
 	/**
 	 * API to store images location in the local DB

@@ -97,8 +97,30 @@ public class TimelineActivity extends Activity{
 			intent.putExtra("top_txt", txt);
 			intent.putExtra("bottom_txt", bottomtxt);
 
-			//@TODO Change code to forward the real activity id on wich click is done.  
-			intent.putExtra("activityID", 1);
+			//@TODO Change code to forward the real activity id on wich click is done. 
+			//Find the acticity id for the item 
+			String activityType = null, startLocation = null, endLocation = null, startTime = null, endTime = null;
+			// Parse top_txt for activityType, startTime and endTime
+			String[] splitTxtStr  = txt.split("\\s+");
+			
+			activityType = splitTxtStr[0];
+			startTime = splitTxtStr[1] + " "+  splitTxtStr[2];
+			endTime = splitTxtStr[4]+  " " +  splitTxtStr[5];
+			
+			// For bottom, split after 'to'
+			String[] splitBottomTxtStr  = bottomtxt.split(" to ");
+			startLocation = splitBottomTxtStr[0] ;
+			if(splitBottomTxtStr.length == 1) {
+				endLocation = startLocation;
+			}else{
+				 
+				endLocation = splitBottomTxtStr[1] ;
+			}
+			
+			String activityIDStr = "";
+			activityIDStr = db.getActivityID(activityType, startLocation, endLocation, startTime, endTime);
+			int activityID = (int)Integer.parseInt(activityIDStr);
+			intent.putExtra("activityID", activityID);
 			
 			startActivity(intent);
 
