@@ -15,14 +15,10 @@
 
         <ImageView
             android:id="@+id/staticIV"
-            android:layout_width="350dp"
-            android:layout_height="260dp"
+            android:layout_width="385dp"
+            android:layout_height="240dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="20dp"
             android:layout_weight="4.35"
-            android:background="@drawable/border"
             android:clickable="true" />
 
         <RelativeLayout

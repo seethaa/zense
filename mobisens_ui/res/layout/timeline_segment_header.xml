@@ -14,14 +14,14 @@
         android:paddingTop="3dp"
         android:text="TODAY"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/zblue"
+        android:textColor="@color/zred"
         android:textStyle="bold" />
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="2dip"
         android:layout_alignBottom="@+id/centeredTextToShow"
-        android:background="@color/zblue"
+        android:background="@color/zred"
         android:orientation="vertical" />
 
 </RelativeLayout>

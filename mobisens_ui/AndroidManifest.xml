@@ -33,7 +33,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/pie_chart"
+        android:icon="@drawable/smartlogger_logo"
         android:label="@string/app_name"
         android:theme="@style/MyTheme" >
         <uses-library android:name="com.google.android.maps" />
@@ -131,10 +131,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.TimelineActivity"
-            android:label="@string/app_name" >
-        </activity>
+        
         <activity
             android:name="edu.cmu.sv.mobisens_ui.VerticalBarChart"
             android:label="@string/title_activity_vertical_bar_chart" >
