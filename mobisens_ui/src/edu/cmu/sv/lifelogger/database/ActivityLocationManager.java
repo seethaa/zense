@@ -13,7 +13,7 @@ import edu.cmu.sv.lifelogger.entities.TimelineSegment;
 public class ActivityLocationManager {
 
 	//TODO: Change this to get real data
-
+ 
 	public static ArrayList<LatLng> getAllLocations(){
 		
 		ArrayList<LatLng> locations = new ArrayList<LatLng>();

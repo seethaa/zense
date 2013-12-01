@@ -81,10 +81,10 @@ public class LocalDbAdapter {
 			createUserRow(db,1, "Frank Hsueh", "abc@gmail.com", "I am super man", "");
 			// Seed the activity table first for first activity id
 			createActivityRow(db,1, "Driving", "I was driving from home to work", "Driving", "Santa Clara", "Palo Alto","9:00 AM", "9:30 AM");
-			createActivityRow(db, 2, "Working", "Having a sip of coffee at my favourit place", "Working", "University Ave, Palo Alto", "University Ave, Palo Alto","9:30 AM", "11:30 AM");
-			createActivityRow(db, 3, "Dining", "Having a sip of coffee at my favourit place", "Dining", "Starbucks, Palo Alto", "Starbucks, Palo Alto","12:00 PM", "1:00 PM");
-			createActivityRow(db, 4, "Walking", "Having a sip of coffee at my favourit place", "Walking", "University Ave, Palo Alto", "University Ave, Palo Alto","1:00 PM", "1:30 PM");
-			createActivityRow(db, 5, "Work Meeting", "Having a sip of coffee at my favourit place", "Work Meeting","Moffett Field, Mountain View", "Moffett Field, Mountain View","9:30 PM", "11:30 PM");
+			createActivityRow(db, 2, "Working", "Had a bad day at work", "Working", "University Ave, Palo Alto", "University Ave, Palo Alto","9:30 AM", "11:30 AM");
+			createActivityRow(db, 3, "Dining", "Having a sip of coffee at my favorite place", "Dining", "Starbucks, Palo Alto", "Starbucks, Palo Alto","12:00 PM", "1:00 PM");
+			createActivityRow(db, 4, "Walking", "Beautiful landscape here", "Walking", "University Ave, Palo Alto", "University Ave, Palo Alto","1:00 PM", "1:30 PM");
+			createActivityRow(db, 5, "Work Meeting", "Made some important decisions", "Work Meeting","Moffett Field, Mountain View", "Moffett Field, Mountain View","9:30 PM", "11:30 PM");
 			
 			/* Not a good idea to seed activities with random image files
 			 * @TODO find good image files, place them in a folder, and then 
