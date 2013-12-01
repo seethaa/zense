@@ -9,14 +9,16 @@ public class TimelineItem {
 	private String mEnd_time;
 	private String mStart_location;
 	private String mEnd_location;
+	private int activity_id;
 
 	//to make it easier
 	private String mTopTxt;
 	private String mBottomTxt;
 
 
-	public TimelineItem(String activity_name, String start_time, String end_time,
+	public TimelineItem(int id, String activity_name, String start_time, String end_time,
 			String start_location, String end_location) {
+		this.activity_id = id;
 		this.mActivity_name = activity_name;
 		this.mStart_time = start_time;
 		this.mEnd_time = end_time;
@@ -33,6 +35,13 @@ public class TimelineItem {
 		return mActivity_icon;
 	}
 
+	public int getId() {
+		return this.activity_id;
+	}
+	
+	public void setId(int newID) {
+		this.activity_id = newID;
+	}
 
 	public void setmActivity_icon(Drawable mActivity_icon) {
 		this.mActivity_icon = mActivity_icon;
