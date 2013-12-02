@@ -127,8 +127,10 @@ public class TimelineActivity extends Activity{
 			}
 
 			String activityIDStr = "";
+			int activityID = 1;
 			activityIDStr = db.getActivityID(activityType, startLocation, endLocation, startTime, endTime);
-			int activityID = (int)Integer.parseInt(activityIDStr);
+			if(activityIDStr!=null)
+				activityID = (int)Integer.parseInt(activityIDStr);
 			intent.putExtra("activityID", activityID);
 
 			startActivity(intent);
