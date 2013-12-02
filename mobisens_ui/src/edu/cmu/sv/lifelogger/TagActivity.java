@@ -116,9 +116,10 @@ public class TagActivity extends Activity{
 			currentActivityID = extras.getInt("activityID");
 		}
 
-		
+		 String nameAndDescription = TimelineActivity.db.getNameAndDescriptionForActivity(currentActivityID);
+		 String nadSplit[] = nameAndDescription.split(":");
 		 txtDesc = (TextView)findViewById(R.id.desc);
-		 txtDesc.setText(TimelineActivity.db.getNameAndDescriptionForActivity(currentActivityID));
+		 txtDesc.setText(nadSplit[1]);
 		 
 		 txtTopTextForActivity = (TextView)findViewById(R.id.name);
 		 

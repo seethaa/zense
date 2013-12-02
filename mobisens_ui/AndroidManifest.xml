@@ -92,6 +92,7 @@
             android:name="edu.cmu.sv.lifelogger.TagActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" 
+            android:screenOrientation="portrait"
             android:parentActivityName="edu.cmu.sv.lifelogger.TimelineActivity" >
             
         <!-- Parent activity meta-data to support API level 7+ -->
@@ -113,6 +114,7 @@
             android:name="edu.cmu.sv.lifelogger.TimelineActivity"
             android:label="@string/app_name"
             android:persistent="true"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
