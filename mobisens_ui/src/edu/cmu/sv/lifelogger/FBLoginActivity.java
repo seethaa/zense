@@ -38,6 +38,8 @@ import com.facebook.model.GraphPlace;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.*;
 
+import edu.cmu.sv.lifelogger.database.LocalDbAdapter;
+import edu.cmu.sv.lifelogger.helpers.DefinitionHelper;
 import edu.cmu.sv.mobisens_ui.R;
 
 import java.util.*;
@@ -108,6 +110,8 @@ public class FBLoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
 
         loginButton = (LoginButton) findViewById(R.id.authButton);
+        // set permission list, Don't foeget to add email
+        loginButton.setReadPermissions(Arrays.asList("basic_info","email"));
         loginButton.setUserInfoChangedCallback(new LoginButton.UserInfoChangedCallback() {
             @Override
             public void onUserInfoFetched(GraphUser user) {
@@ -243,6 +247,21 @@ public class FBLoginActivity extends FragmentActivity {
         if (enableButtons && user != null) {
 //            profilePictureView.setProfileId(user.getId());
 //            greeting.setText(getString(R.string.hello_user, user.getFirstName()));
+        	/* 
+        	 * Logged in, check for the email in the db to get the user id, 
+        	 * and set the current user id as global variable. If not found
+        	 * insert a new row into the user table
+        	 */
+        	String userEmail = user.asMap().get("email").toString();
+        	DefinitionHelper.currentUserEmailID = userEmail;
+        	DefinitionHelper.currentUserName = user.getFirstName() + " " + user.getLastName();
+        	
+        	
+        	LocalDbAdapter db = new LocalDbAdapter(this);
+        	db.open();
+        	
+        	
+        	
         	Intent intent = new Intent(this, PieChartBuilderActivity.class);
         	startActivity(intent);
         	finish();

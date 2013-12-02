@@ -184,7 +184,7 @@ public class TimelineActivity extends Activity{
 			startActivity(intent);
 		}else if (item.getItemId() == R.id.settings)
 		{
-			Intent intent = new Intent(this, GoogleMapActivity.class);
+			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 		}
 

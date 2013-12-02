@@ -547,6 +547,7 @@ public class LocalDbAdapter {
 	}
 
 	
+	
 	/**
 	 * API to store activity information in our Database
 	 * @param activityID
@@ -582,6 +583,31 @@ public class LocalDbAdapter {
 		List<String> items = new ArrayList<String>(Arrays.asList(str.split("\\s*,\\s*")));
 		System.out.println("arraylist=" + items);
 		return (ArrayList<String>) items;
+	}
+
+	public int isUserExist(String userEmail) {
+		// TODO Auto-generated method stub
+		
+		Cursor c = null;
+		int count = 0;		
+		c = mDb.rawQuery("select userID from Users where email = " + "\"" + userEmail +"\"", null);
+		
+		try{
+			if (c.moveToFirst()) {
+				do {
+					   	
+					count++;
+					
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+		return count ;	
 	}
 
 

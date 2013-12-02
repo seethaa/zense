@@ -14,5 +14,11 @@ public class DefinitionHelper {
 	public final  static int SAD =-2;
 	
 	public final static int HOURS_IN_DAY = 24;
+	
+	
+	//Variables
+	public static int currentUserID;
+	public static String currentUserEmailID;
+	public static String currentUserName;
 
 }

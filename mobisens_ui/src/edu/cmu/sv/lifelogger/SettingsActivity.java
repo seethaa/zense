@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import edu.cmu.sv.lifelogger.helpers.DefinitionHelper;
 import edu.cmu.sv.mobisens_ui.R;
 
 import android.os.Bundle;
@@ -17,7 +18,8 @@ import android.widget.TextView;
 
 public class SettingsActivity extends Activity
 {
-
+	TextView txtName ;
+	TextView txtEmail ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -26,7 +28,12 @@ public class SettingsActivity extends Activity
 		setContentView(R.layout.activity_settings);
 		//    ActionBar actionBar = getActionBar();
 		//    actionBar.setDisplayShowTitleEnabled(false);
-
+		txtName = (TextView)findViewById(R.id.textView1);
+		txtEmail = (TextView) findViewById(R.id.textView2);
+		if (DefinitionHelper.currentUserName != null) {
+			txtName.setText(DefinitionHelper.currentUserName);
+			txtEmail.setText(DefinitionHelper.currentUserEmailID);
+		}
 	
  
 	}
