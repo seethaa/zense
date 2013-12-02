@@ -59,6 +59,13 @@
             android:windowSoftInputMode="adjustResize" >
 
         </activity>
+         <activity
+            android:name="edu.cmu.sv.lifelogger.TextReaderActivity"
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:windowSoftInputMode="adjustResize" >
+
+        </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.OpenGalleryActivity"
             android:label="@string/app_name"

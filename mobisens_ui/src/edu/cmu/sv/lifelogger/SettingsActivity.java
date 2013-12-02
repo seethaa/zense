@@ -9,27 +9,31 @@ import edu.cmu.sv.mobisens_ui.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
 import android.widget.TextView;
 
 
 public class SettingsActivity extends Activity
 {
 
-	private TextView mTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_text_reader);
+		setContentView(R.layout.activity_settings);
 		//    ActionBar actionBar = getActionBar();
 		//    actionBar.setDisplayShowTitleEnabled(false);
 
-		mTextView = (TextView) findViewById(R.id.reader);
-		mTextView.setMovementMethod(new ScrollingMovementMethod());
-		mTextView.setText(readTxt());
-
+	
+ 
+	}
+	
+	public void tosClicked(final View view){
+		Intent intent1 = new Intent(this, TextReaderActivity.class);
+		startActivity(intent1);
 	}
 
 	private String readTxt()
