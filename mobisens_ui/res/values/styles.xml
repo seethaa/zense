@@ -18,7 +18,7 @@
     </style>
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/zorange</item>
+        <item name="android:background">@color/zorange2</item>
     </style>
     
        <style name="btn">
