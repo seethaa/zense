@@ -14,18 +14,9 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/action_eating" />
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Himanshu Pandey"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/himz" />
 
         <TextView
             android:id="@+id/textView2"
@@ -34,6 +25,17 @@
             android:layout_alignLeft="@+id/textView1"
             android:layout_below="@+id/textView1"
             android:text="himanshubest@gmail.com" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="26dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="Himanshu Pandey"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </RelativeLayout>
 
     <RelativeLayout

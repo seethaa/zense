@@ -17,26 +17,14 @@
             android:id="@+id/staticIV"
             android:layout_width="385dp"
             android:layout_height="240dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="4.35"
             android:clickable="true" />
 
-        <Gallery
-            android:id="@+id/photoGallery"
-            android:layout_width="match_parent"
-            android:spacing="5dp"
-            android:layout_height="wrap_content" />
+        
 
         
 
-        <RelativeLayout
-            android:layout_width="349dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1.00"
-            android:orientation="horizontal" >
-        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/customButtonLayout"
@@ -107,6 +95,12 @@
                 android:textColor="@color/zdark_gray"
                 android:textSize="12dip" />
         </LinearLayout>
+        
+        <Gallery
+            android:id="@+id/photoGallery"
+            android:layout_width="match_parent"
+            android:spacing="5dp"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </ScrollView>
