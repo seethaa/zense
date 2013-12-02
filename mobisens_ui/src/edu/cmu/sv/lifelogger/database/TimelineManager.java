@@ -3,8 +3,8 @@ package edu.cmu.sv.lifelogger.database;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import edu.cmu.sv.lifelogger.TimelineActivity;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
@@ -21,44 +21,53 @@ public class TimelineManager {
 
 
 	}
-	
+
 	private static ArrayList<TimelineSegment> getAllTimelineSegments() {
 		ArrayList<TimelineSegment> ts = new ArrayList<TimelineSegment>();
 		ArrayList<TimelineItem> data1 = new ArrayList<TimelineItem>();
 		// segment 1
 		data1 = TimelineActivity.db.getAllTimelineActivity();
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("EEE, MMM dd");
 		Date today = new Date();
-		String todayStr = dateFormat.format(today);
+		Calendar cal = Calendar.getInstance();
+		String todayStr = dateFormat.format(cal.getTime());
 		
+		cal.add(Calendar.DATE, -1);    
+		String yesterdayStr = dateFormat.format(cal.getTime());
+		
+		cal.add(Calendar.DATE, -1);    
+		String dayb4yesterdayStr = dateFormat.format(cal.getTime());
+
+		
+
 		TimelineSegment ts1 = new TimelineSegment(data1, todayStr);
-		
+
 		//segment 2
 		ArrayList<TimelineItem> data2 = new ArrayList<TimelineItem>();
 		data2.add((TimelineItem)data1.get(0));
 		data2.add((TimelineItem)data1.get(3));
 		data2.add((TimelineItem)data1.get(4));
-		TimelineSegment ts2 = new TimelineSegment(data2, todayStr);
-		
+		TimelineSegment ts2 = new TimelineSegment(data2, yesterdayStr);
+
 		// segment 3
 		ArrayList<TimelineItem> data3 = new ArrayList<TimelineItem>();
 		data3.add((TimelineItem) data1.get(1));
 		data3.add((TimelineItem) data1.get(2));
 		data3.add((TimelineItem) data1.get(3));
-		TimelineSegment ts3 = new TimelineSegment(data3, todayStr);
-
+		TimelineSegment ts3 = new TimelineSegment(data3, dayb4yesterdayStr);
+ 
 		// add all segments
 		ts.add(ts1);
 		ts.add(ts2);
 		ts.add(ts3);
 
 		return ts;
-		
+
 	}
 	private static ArrayList<TimelineSegment> createDummyData() {
 		ArrayList<TimelineSegment> ts = new ArrayList<TimelineSegment>();
-		
+
 		//Segment 1
 		ArrayList<TimelineItem> data1 = new ArrayList<TimelineItem>();
 
@@ -73,24 +82,24 @@ public class TimelineManager {
 		data1.add(t3);
 		data1.add(t4);
 		data1.add(t5); 
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("EEE, MMM dd");
 		Date today = new Date();
 		String todayStr = dateFormat.format(today);
-		
+
 		TimelineSegment ts1 = new TimelineSegment(data1, todayStr);
-		
+
 
 		//segment 2   
 		ArrayList<TimelineItem> data2 = new ArrayList<TimelineItem>();
-		
+
 		data2.add(t1);
 		data2.add(t4);
 		data2.add(t5);
-		
+
 		TimelineSegment ts2 = new TimelineSegment(data2, todayStr);
 
-		
+
 		//segment 3
 		ArrayList<TimelineItem> data3 = new ArrayList<TimelineItem>();
 		data3.add(t2);
@@ -98,19 +107,19 @@ public class TimelineManager {
 		data3.add(t4);
 		TimelineSegment ts3 = new TimelineSegment(data3, todayStr);
 
-		
+
 		//add all segments
 		ts.add(ts1);
 		ts.add(ts2);
 		ts.add(ts3);
-		
+
 		return ts;
 
 
-		
+
 
 	}
 
-	
+
 
 }
