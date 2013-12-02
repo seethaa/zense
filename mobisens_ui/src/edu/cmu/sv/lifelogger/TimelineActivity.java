@@ -32,12 +32,12 @@ public class TimelineActivity extends Activity{
 	private ArrayList<TimelineSegment> timelineItemList;
 	Context cxt;
 	public static LocalDbAdapter db;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		cxt=this;
-		
+
 		ActionBar actionBar = getActionBar();
 
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -61,37 +61,37 @@ public class TimelineActivity extends Activity{
 		}
 		//		TextViewHelper ctvp = new TextViewHelper(this, "BLAHBLAH", MY_MAIN_LAYOUT);
 
-		 db = new LocalDbAdapter(this);
-	    db.open();
-	     
-	     
-	     // Fetcht the images location
-	     
-	     List <String> locations = db.getImagesForActivity(2);
-	     
-	     System.out.println("dummy");
+		db = new LocalDbAdapter(this);
+		db.open();
+
+
+		// Fetcht the images location
+
+		List <String> locations = db.getImagesForActivity(2);
+
+		System.out.println("dummy");
 
 	}
 
-	
+
 	View.OnClickListener itemListener = new View.OnClickListener() {
 
-		
-		
+
+
 		public void onClick(View view) {
 
 			TextView t = (TextView) view.findViewById(R.id.name);
 			String txt = t.getText().toString();
-			
+
 
 			TextView bottom = (TextView) view.findViewById(R.id.bottomTxt);
 			String bottomtxt = bottom.getText().toString();
 
 			System.out.println("printing name: " + bottomtxt + ", " + txt);
-			
-//			Toast.makeText(TimelineTestActivity.this, bottomtxt + " " + txt, Toast.LENGTH_SHORT).show();
 
-			
+			//			Toast.makeText(TimelineTestActivity.this, bottomtxt + " " + txt, Toast.LENGTH_SHORT).show();
+
+
 
 			Intent intent = new Intent(TimelineActivity.this,TagActivity.class);
 			intent.putExtra("top_txt", txt);
@@ -102,26 +102,26 @@ public class TimelineActivity extends Activity{
 			String activityType = null, startLocation = null, endLocation = null, startTime = null, endTime = null;
 			// Parse top_txt for activityType, startTime and endTime
 			String[] splitTxtStr  = txt.split("\\s+");
-			
+
 			activityType = splitTxtStr[0];
 			startTime = splitTxtStr[1] + " "+  splitTxtStr[2];
 			endTime = splitTxtStr[4]+  " " +  splitTxtStr[5];
-			
+
 			// For bottom, split after 'to'
 			String[] splitBottomTxtStr  = bottomtxt.split(" to ");
 			startLocation = splitBottomTxtStr[0] ;
 			if(splitBottomTxtStr.length == 1) {
 				endLocation = startLocation;
 			}else{
-				 
+
 				endLocation = splitBottomTxtStr[1] ;
 			}
-			
+
 			String activityIDStr = "";
 			activityIDStr = db.getActivityID(activityType, startLocation, endLocation, startTime, endTime);
 			int activityID = (int)Integer.parseInt(activityIDStr);
 			intent.putExtra("activityID", activityID);
-			
+
 			startActivity(intent);
 
 			/*
@@ -150,8 +150,8 @@ public class TimelineActivity extends Activity{
 
 
 	};
-	
-	
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -161,7 +161,7 @@ public class TimelineActivity extends Activity{
 
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{

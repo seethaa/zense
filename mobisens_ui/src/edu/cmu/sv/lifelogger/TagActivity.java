@@ -12,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,10 +27,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -66,6 +69,9 @@ public class TagActivity extends Activity{
 	String action;
 	ViewSwitcher viewSwitcher;
 	ImageLoader imageLoader;
+	
+	String activityType = null, startLocation = null, endLocation = null, startTime = null, endTime = null;
+	int activityID;
 
 	public static int zoomlvl = 8;
 
@@ -85,6 +91,7 @@ public class TagActivity extends Activity{
 		super.onCreate(savedInstanceState);
 
 		ActionBar actionBar = getActionBar();
+		
 
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayHomeAsUpEnabled(true);
@@ -103,18 +110,8 @@ public class TagActivity extends Activity{
 			currentActivityID = extras.getInt("activityID");
 		}
 
-		//		LinearLayout main_layout = (LinearLayout) findViewById(R.id.mainLayout);
-
 
 		Toast.makeText(TagActivity.this, bottomTxt + " " + topTxt, Toast.LENGTH_SHORT).show();
-
-		////		TimelineItem i = new TimelineItem(topTxt, bottomTxt);
-		//		
-		////		TimelineItemHelper tmh = new TimelineItemHelper(this, i, main_layout, null);
-
-		//		RelativeLayout newView0 = (RelativeLayout) View.inflate(this,
-		//				R.layout.description_page, null);
-		//		main_layout.addView(newView0);
 
 
 		TextView name = (TextView) findViewById(R.id.name); // name of activity
@@ -122,9 +119,9 @@ public class TagActivity extends Activity{
 		TextView bottom_txt = (TextView) findViewById(R.id.bottomTxt); // start time
 		bottom_txt.setText(bottomTxt);
 
-		//		ImageView activity_icon = (ImageView) findViewById(R.id.activity_icon); // start time
-		//		activity_icon.setVisibility(View.GONE);
-
+		
+		parseAllText(topTxt, bottomTxt);
+		
 		mImageView = (ImageView) findViewById(R.id.staticIV);
 
 
@@ -162,6 +159,70 @@ public class TagActivity extends Activity{
 		});
 	}
 
+	
+	private void parseAllText(String toptxt, String bottomtxt) {
+		// Parse top_txt for activityType, startTime and endTime
+		String[] splitTxtStr  = toptxt.split("\\s+");
+		
+		activityType = splitTxtStr[0];
+		startTime = splitTxtStr[1] + " "+  splitTxtStr[2];
+		endTime = splitTxtStr[4]+  " " +  splitTxtStr[5];
+		
+		// For bottom, split after 'to'
+		String[] splitBottomTxtStr  = bottomtxt.split(" to ");
+		startLocation = splitBottomTxtStr[0] ;
+		if(splitBottomTxtStr.length == 1) {
+			endLocation = startLocation;
+		}else{
+			 
+			endLocation = splitBottomTxtStr[1] ;
+		}
+		
+		String activityIDStr = "";
+		activityIDStr = TimelineActivity.db.getActivityID(activityType, startLocation, endLocation, startTime, endTime);
+		activityID = (int)Integer.parseInt(activityIDStr);
+		
+	}
+
+
+	public void changeActivityClicked(final View view){
+		Toast.makeText(TagActivity.this, "BUTTON CLICKED!", Toast.LENGTH_SHORT).show();
+
+		
+		final Dialog dialog = new Dialog(TagActivity.this);
+		dialog.setContentView(R.layout.activity_change_dialog);
+		dialog.setTitle("Please tag the location");
+
+		
+		
+
+		final EditText activityName = (EditText)dialog.findViewById(R.id.activityname);
+		activityName.setText(activityType);
+		
+		final EditText fromText = (EditText)dialog.findViewById(R.id.fromtext);
+		fromText.setText(startLocation);
+		
+		final EditText toText = (EditText)dialog.findViewById(R.id.totext);
+		toText.setText(endLocation);
+
+		Button dialogButtonOK = (Button) dialog.findViewById(R.id.dialogButtonOK);
+		// if button is clicked, close the custom dialog
+		dialogButtonOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {//change this info in db
+				String activityNameStr = activityName.getText().toString();
+				String fromTextStr = fromText.getText().toString();
+				String toTextStr = toText.getText().toString();
+				
+				//LocalDbAdapter:
+				TimelineActivity.db.updateActivity(activityID, activityNameStr, fromTextStr, toTextStr);
+				dialog.dismiss();
+				
+			}
+		});
+
+		dialog.show();
+	}
 	
 	
 	private class LongOperation extends AsyncTask<String, Void, Bitmap> {
