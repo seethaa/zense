@@ -241,7 +241,7 @@ public class LocalDbAdapter {
 		return labels ;
 	}
 	/**
-	 * 
+	 * Function to update the description of the activity
 	 * @param description
 	 * @param activityID
 	 * @return true, if updated and false if not updated
@@ -265,8 +265,35 @@ public class LocalDbAdapter {
 		return false; 
 		
 	}
-	
+	/**
+	 * Function to update the activity data. 
+	 * @param activityID - activityID for the activity
+	 * @param activityName - new activity name
+	 * @param startLocation -  new start location
+	 * @param endLocation - new end location
+	 * @return true, if updated, else false
+	 */
+	public boolean updateActivity(int activityID, String activityName,
+			String startLocation, String endLocation) {
 
+		String strSQL = "UPDATE ActivityTable SET activityName = " + "\""
+				+ activityName + "\"" + "startLocation =" + "\""
+				+ startLocation + "\"" + "endLocation =" + "\"" + endLocation
+				+ "\"" + "WHERE activityID = " + "\"" + activityID + "\"";
+
+		if (strSQL != null) {
+			try {
+				mDb.execSQL(strSQL);
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return false;
+
+	}
 	
 	/**
 	 * API to fetch all the images from the local DB for the given activity ID
