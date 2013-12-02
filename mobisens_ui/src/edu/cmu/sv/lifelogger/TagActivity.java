@@ -336,7 +336,7 @@ public class TagActivity extends Activity{
 		    case android.R.id.home:
 		        NavUtils.navigateUpFromSameTask(this);
 		        return true; 
-		        
+		         
 		    case R.id.attachpics:
 		    	Intent intent = new Intent(this, OpenGalleryActivity.class);
 		    	intent.putExtra("activityID",currentActivityID);

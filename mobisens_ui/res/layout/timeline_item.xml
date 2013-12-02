@@ -9,13 +9,7 @@
    
     android:orientation="horizontal" >
 
-    <!-- name of item -->
 
-
-    <!-- status -->
-
-
-    <!-- Rightend Duration -->
 
     <TextView
         android:id="@+id/name"
