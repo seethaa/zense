@@ -85,18 +85,12 @@ public class LocalDbAdapter {
 			createActivityRow(db, 2, "Working", "Had a bad day at work", "Working", "University Ave, Palo Alto", "University Ave, Palo Alto","9:30 AM", "11:30 AM");
 			createActivityRow(db, 3, "Dining", "Having a sip of coffee at my favorite place", "Dining", "Starbucks, Palo Alto", "Starbucks, Palo Alto","12:00 PM", "1:00 PM");
 			createActivityRow(db, 4, "Walking", "Beautiful landscape here", "Walking", "University Ave, Palo Alto", "University Ave, Palo Alto","1:00 PM", "1:30 PM");
-			createActivityRow(db, 5, "Work Meeting", "Made some important decisions", "Work Meeting","Moffett Field, Mountain View", "Moffett Field, Mountain View","9:30 PM", "11:30 PM");
+			createActivityRow(db, 5, "Meeting", "Made some important decisions", "Meeting","Moffett Field, Mountain View", "Moffett Field, Mountain View","9:30 PM", "11:30 PM");
 			
 			/* Not a good idea to seed activities with random image files
 			 * @TODO find good image files, place them in a folder, and then 
 			 * seed db with them associating with a particular activity
-			 */
-			
-			/*createImageRow(db, "test1.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
-			createImageRow(db, "test2.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 1);
-			createImageRow(db, "1384037586887.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 2);
-			createImageRow(db, "1384026465395.jpg",  Environment.getExternalStorageDirectory().getPath() +"/DCIM/Camera", 2);*/
-			
+			 */			
 		}
 
 		/**
