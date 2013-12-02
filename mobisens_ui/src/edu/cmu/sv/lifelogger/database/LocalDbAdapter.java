@@ -278,8 +278,8 @@ public class LocalDbAdapter {
 			String startLocation, String endLocation) {
 
 		String strSQL = "UPDATE ActivityTable SET activityName = " + "\""
-				+ activityName + "\"" + "startLocation =" + "\""
-				+ startLocation + "\"" + "endLocation =" + "\"" + endLocation
+				+ activityName + "\"" + ", startLocation =" + "\""
+				+ startLocation + "\"" + ", endLocation =" + "\"" + endLocation
 				+ "\"" + "WHERE activityID = " + "\"" + activityID + "\"";
 
 		if (strSQL != null) {
