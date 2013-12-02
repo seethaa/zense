@@ -369,9 +369,11 @@ public class TagActivity extends Activity{
 				startActivity(intent1);
 				 return true; 
 		    case R.id.fbshare:
-		    	Intent intent2 = new Intent(this, FacebookShare.class);
+		    	Intent intent2 = new Intent(TagActivity.this, FacebookShare.class);
 		    	intent2.putExtra("activityID", currentActivityID);
 				startActivity(intent2);
+//		    	callFBShareActivity();
+		    	
 				 return true; 
 		    }
 		    return super.onOptionsItemSelected(item);
@@ -379,6 +381,35 @@ public class TagActivity extends Activity{
 		
 	}
 
+
+
+	private void callFBShareActivity() {
+	
+		
+			final Dialog dialog = new Dialog(TagActivity.this);
+			dialog.setContentView(R.layout.fb_share_dialog);
+			dialog.setTitle("Share Activity to FB");
+			
+			
+			Button dialogButtonOK = (Button) dialog.findViewById(R.id.dialogButtonOK);
+			// if button is clicked, close the custom dialog
+			dialogButtonOK.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {//change this info in db
+					
+					Intent intent2 = new Intent(TagActivity.this, FacebookShare.class);
+			    	intent2.putExtra("activityID", currentActivityID);
+					startActivity(intent2);
+
+					dialog.dismiss();
+					
+				} 
+			});
+
+			dialog.show();
+		
+		
+	}
 
 
 	private void initImageLoader() {

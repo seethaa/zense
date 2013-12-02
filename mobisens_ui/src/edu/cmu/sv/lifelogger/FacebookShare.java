@@ -42,13 +42,11 @@ public class FacebookShare extends FragmentActivity {
 
     private final String PENDING_ACTION_BUNDLE_KEY = "com.facebook.samples.hellofacebook:PendingAction";
 
-    private Button postStatusUpdateButton;
+//    private Button postStatusUpdateButton;
     private Button postPhotoButton;
-    private Button pickFriendsButton;
-    private Button pickPlaceButton;
-    private LoginButton loginButton;
-    private ProfilePictureView profilePictureView;
-    private TextView greeting;
+    private Button cancelButton;
+//    private ProfilePictureView profilePictureView;
+//    private TextView greeting;
     private PendingAction pendingAction = PendingAction.NONE;
     private ViewGroup controlsContainer;
     private GraphUser user;
@@ -93,15 +91,25 @@ public class FacebookShare extends FragmentActivity {
             pendingAction = PendingAction.valueOf(name);
         }
 
-        setContentView(R.layout.activity_facebook_share);
+        setContentView(R.layout.fb_share_dialog);
 
-        profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
-        greeting = (TextView) findViewById(R.id.greeting);
+//        profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
+//        greeting = (TextView) findViewById(R.id.greeting);
+//        
+        postPhotoButton = (Button) findViewById(R.id.dialogButtonOK);
+        cancelButton = (Button) findViewById(R.id.dialogButtonCancel);
         
-        postPhotoButton = (Button) findViewById(R.id.postPhotoButton);
+//        postPhotoButton = (Button) findViewById(R.id.postPhotoButton);
         postPhotoButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 onClickPostPhoto();
+                finish();
+            }
+        });
+        
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -200,11 +208,11 @@ public class FacebookShare extends FragmentActivity {
         //pickPlaceButton.setEnabled(enableButtons);
 
         if (enableButtons && user != null) {
-            profilePictureView.setProfileId(user.getId());
-            greeting.setText(getString(R.string.hello_user, user.getFirstName()));
+//            profilePictureView.setProfileId(user.getId());
+//            greeting.setText(getString(R.string.hello_user, user.getFirstName()));
         } else {
-            profilePictureView.setProfileId(null);
-            greeting.setText(null);
+//            profilePictureView.setProfileId(null);
+//            greeting.setText(null);
         }
     }
 
@@ -239,13 +247,14 @@ public class FacebookShare extends FragmentActivity {
         } else {
             title = getString(R.string.error);
             alertMessage = error.getErrorMessage();
-        }
+        } 
 
-        new AlertDialog.Builder(this)
+        /*new AlertDialog.Builder(this)
                 .setTitle(title)
-                .setMessage(alertMessage)
+                .setMessage("Success!")
                 .setPositiveButton(R.string.ok, null)
-                .show();
+                .show();*/
+//        this.finish();
     }
 
     private void onClickPostStatusUpdate() {
@@ -392,15 +401,6 @@ public class FacebookShare extends FragmentActivity {
         showAlert(getString(R.string.you_picked), result);
     }
 
-    private void onClickPickPlace() {
-        final PlacePickerFragment fragment = new PlacePickerFragment();
-        fragment.setLocation(SEATTLE_LOCATION);
-        fragment.setTitleText(getString(R.string.pick_seattle_place));
-
-        setPlacePickerListeners(fragment);
-
-        showPickerFragment(fragment);
-    }
 
     private void setPlacePickerListeners(final PlacePickerFragment fragment) {
         fragment.setOnDoneButtonClickedListener(new PlacePickerFragment.OnDoneButtonClickedListener() {

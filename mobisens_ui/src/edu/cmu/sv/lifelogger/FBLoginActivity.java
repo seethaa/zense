@@ -43,7 +43,7 @@ import edu.cmu.sv.mobisens_ui.R;
 import java.util.*;
 
 public class FBLoginActivity extends FragmentActivity {
-
+ 
     private static final String PERMISSION = "publish_actions";
     private static final Location SEATTLE_LOCATION = new Location("") {
         {
