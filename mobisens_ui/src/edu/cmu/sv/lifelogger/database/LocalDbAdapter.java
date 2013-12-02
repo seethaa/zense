@@ -384,6 +384,38 @@ public class LocalDbAdapter {
 	
 	
 	
+	public TimelineItem getTimelineActivityItem(int activityID){
+		TimelineItem t1 = null;
+		
+		Cursor c = null;
+		c = mDb.rawQuery("select  * from ActivityTable where activityID = " + "\"" + activityID +"\"" , null);
+		
+		try{
+
+
+			if (c.moveToFirst()) {
+				do {
+					   	
+					 t1 = new TimelineItem((int)Integer.parseInt(c.getString(0)),c.getString(1),c.getString(2),c.getString(3),
+							c.getString(6),c.getString(7),c.getString(4),c.getString(5));
+					
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return t1;
+	}
+
+	
+	
+	
 	
 	
 	

@@ -49,6 +49,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import edu.cmu.sv.lifelogger.database.ActivityLocationManager;
+import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.mobisens_ui.R;
 
 
@@ -85,8 +86,10 @@ public class TagActivity extends Activity{
 	
 	public static ArrayList<CustomGallery> photos = null;
 	private TextView txtDesc;
-
-
+	private TextView txtTopTextForActivity;
+	private TextView txtBottomTextForActivity;
+	TimelineItem currentTimelineItem;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -114,6 +117,10 @@ public class TagActivity extends Activity{
 		
 		 txtDesc = (TextView)findViewById(R.id.desc);
 		 txtDesc.setText(TimelineActivity.db.getNameAndDescriptionForActivity(currentActivityID));
+		 
+		 txtTopTextForActivity = (TextView)findViewById(R.id.name);
+		 
+		 txtBottomTextForActivity = (TextView)findViewById(R.id.bottomTxt);
 
 //		Toast.makeText(TagActivity.this, bottomTxt + " " + topTxt, Toast.LENGTH_SHORT).show();
 
@@ -122,9 +129,16 @@ public class TagActivity extends Activity{
 		name.setText(topTxt);
 		TextView bottom_txt = (TextView) findViewById(R.id.bottomTxt); // start time
 		bottom_txt.setText(bottomTxt);
-
+		currentTimelineItem =  TimelineActivity.db.getTimelineActivityItem(currentActivityID);
 		
-		parseAllText(topTxt, bottomTxt);
+		name.setText(currentTimelineItem.getmActivity_name() + " " + currentTimelineItem.getmStart_time() + " - " + currentTimelineItem.getmEnd_time() );
+		bottom_txt.setText(currentTimelineItem.getmStart_location() + " to " + currentTimelineItem.getmEnd_location());
+		activityType = currentTimelineItem.getmActivityType();
+		startLocation = currentTimelineItem.getmStart_location();
+		endLocation = currentTimelineItem.getmEnd_location();
+		startTime = currentTimelineItem.getmStart_time();
+		endTime = currentTimelineItem.getmEnd_time();
+		//parseAllText(txtTopTextForActivity.toString(), txtBottomTextForActivity.toString());
 		
 		mImageView = (ImageView) findViewById(R.id.staticIV);
 
