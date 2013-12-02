@@ -138,7 +138,7 @@ public class TimelineActivity extends Activity{
 			intent.putExtra("activityID", activityID);
 
 			startActivity(intent);
-
+ 
 			/*
 			// custom dialog
 			final Dialog dialog = new Dialog(cxt);
