@@ -71,6 +71,8 @@ public class TagActivity extends Activity{
 	ViewSwitcher viewSwitcher;
 	ImageLoader imageLoader;
 	
+	String prevDesc;
+	
 	String activityType = null, startLocation = null, endLocation = null, startTime = null, endTime = null;
 	int activityID;
 
@@ -204,12 +206,12 @@ public class TagActivity extends Activity{
 
 
 	public void changeActivityClicked(final View view){
-		Toast.makeText(TagActivity.this, "BUTTON CLICKED!", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(TagActivity.this, "BUTTON CLICKED!", Toast.LENGTH_SHORT).show();
 
 		
 		final Dialog dialog = new Dialog(TagActivity.this);
 		dialog.setContentView(R.layout.activity_change_dialog);
-		dialog.setTitle("Please tag the location");
+		dialog.setTitle("Change Activity Info:");
 		
 
 		final EditText activityName = (EditText)dialog.findViewById(R.id.activityname);
@@ -241,17 +243,18 @@ public class TagActivity extends Activity{
 	}
 	
 	public void changeDescriptionClicked(final View view){
-		Toast.makeText(TagActivity.this, "BUTTON 2 CLICKED!", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(TagActivity.this, "BUTTON 2 CLICKED!", Toast.LENGTH_SHORT).show();
 
 		
 		final Dialog dialog = new Dialog(TagActivity.this);
 		dialog.setContentView(R.layout.description_change_dialog);
-		dialog.setTitle("Please tag the location");
+		dialog.setTitle("Change the description:");
 		
 
 		final EditText descET = (EditText)dialog.findViewById(R.id.descChange);
 		//change this.
-		descET.setText(activityType);
+		prevDesc = currentTimelineItem.getmDescription();
+		descET.setText(prevDesc);
 		
 		
 

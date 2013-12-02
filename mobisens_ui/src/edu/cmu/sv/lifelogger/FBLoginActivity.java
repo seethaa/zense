@@ -38,7 +38,6 @@ import com.facebook.model.GraphPlace;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.*;
 
-import edu.cmu.sv.lifelogger.database.DashboardActivityLevelManager;
 import edu.cmu.sv.mobisens_ui.R;
 
 import java.util.*;
@@ -202,8 +201,6 @@ public class FBLoginActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data, dialogCallback);
-    
-     
     }
 
     @Override
@@ -246,10 +243,9 @@ public class FBLoginActivity extends FragmentActivity {
         if (enableButtons && user != null) {
 //            profilePictureView.setProfileId(user.getId());
 //            greeting.setText(getString(R.string.hello_user, user.getFirstName()));
-             
-            Intent intent = new Intent(this, PieChartBuilderActivity.class);
-    		startActivity(intent);
-            
+        	Intent intent = new Intent(this, PieChartBuilderActivity.class);
+        	startActivity(intent);
+        	finish();
         } else {
 //            profilePictureView.setProfileId(null);
 //            greeting.setText(null);
