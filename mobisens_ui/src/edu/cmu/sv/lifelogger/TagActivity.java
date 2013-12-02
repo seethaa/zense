@@ -366,6 +366,7 @@ public class TagActivity extends Activity{
 				 return true; 
 		    case R.id.fbshare:
 		    	Intent intent2 = new Intent(this, FacebookShare.class);
+		    	intent2.putExtra("activityID", currentActivityID);
 				startActivity(intent2);
 				 return true; 
 		    }

@@ -6,7 +6,7 @@
     <string name="hello_world">I will track your daily activities and record in your timeline. A life pattern will assign to each activity. You can always modify the details to get  more accurate pattern tracking of your life!</string>
     <string name="app_id">559495000765187</string>
     
-    <!-- string name="app_id">186199171571927</string-->
+    <!--string name="app_id">186199171571927</string-->
     <string name="get_started">To get started, login using Facebook</string>
     <string name="skip_login">Skip Login</string>
     <string name="action_eating">What are you eating?</string>

@@ -31,6 +31,7 @@ public class FacebookShare extends FragmentActivity {
 	List<String>  imagesLocation;
 	String activityDescription;
 	int activityID;
+	
     private static final String PERMISSION = "publish_actions";
     private static final Location SEATTLE_LOCATION = new Location("") {
         {
@@ -280,8 +281,8 @@ public class FacebookShare extends FragmentActivity {
     private void onClickPostPhoto() {
     	 LocalDbAdapter  db = new LocalDbAdapter(this);
     	 db.open();
-    	 imagesLocation = (ArrayList<String>)db.getImagesForActivity(2);
-    	 activityDescription = db.getNameAndDescriptionForActivity(2);
+    	 imagesLocation = (ArrayList<String>)db.getImagesForActivity(activityID);
+    	 activityDescription = db.getNameAndDescriptionForActivity(activityID);
         performPublish(PendingAction.POST_PHOTO, false);
     }
 

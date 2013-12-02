@@ -27,12 +27,21 @@
                   android:layout_height="fill_parent"
                   android:background="#FFF"
                   android:id="@+id/main_ui_container">
+                          <com.facebook.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                facebook:confirm_logout="false"
+                facebook:fetch_user_info="true"
+                />
         <LinearLayout
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
+                
             <TextView
                     android:id="@+id/greeting"
                     android:layout_width="wrap_content"
