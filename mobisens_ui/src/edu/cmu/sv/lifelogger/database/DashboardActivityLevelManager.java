@@ -47,7 +47,8 @@ public class DashboardActivityLevelManager {
 		// Activity 2 Shopping 19.00 to 21.00  
 		dataset = RangeToSeries(dataset, 3, 19.00, 21.00);
 		
-			
+		// Activity 3 Sleping 9.45 to 10.00 am and 17.45 to 18.00 
+				dataset = RangeToSeries(dataset, 4, 1.00, 8.30);
 		
 		
 		return dataset;
