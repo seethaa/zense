@@ -234,8 +234,14 @@ public class TagActivity extends Activity{
 				String toTextStr = toText.getText().toString();
 				
 				//LocalDbAdapter:
-				TimelineActivity.db.updateActivity(currentActivityID, activityNameStr, fromTextStr, toTextStr);
+				//disale updating for now
+				//TimelineActivity.db.updateActivity(currentActivityID, activityNameStr, fromTextStr, toTextStr);
 				dialog.dismiss();
+				
+				// Reflect the changes in the tagactivity page
+
+				txtTopTextForActivity.setText(activityNameStr + " " + currentTimelineItem.getmStart_time() + " - " + currentTimelineItem.getmEnd_time() );
+				txtBottomTextForActivity.setText(fromTextStr + " to " + toTextStr);
 				
 			}
 		});
@@ -269,6 +275,9 @@ public class TagActivity extends Activity{
 				//LocalDbAdapter:
 				TimelineActivity.db.updateDescriptionOfActivity(descStr, currentActivityID);
 				dialog.dismiss();
+				
+				//Update tag activity to reflect the changes
+				txtDesc.setText(descStr);
 				
 			}
 		});
