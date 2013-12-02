@@ -7,7 +7,7 @@ import android.content.Intent;
  * Simple receiver class which can be used to receive annotation broadcasts.
  * @author seetha
  *
- */
+ */ 
 public class AnnotationReceiver extends BroadcastReceiver {
 
   @Override
