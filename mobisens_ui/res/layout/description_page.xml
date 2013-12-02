@@ -24,19 +24,10 @@
         <Gallery
             android:id="@+id/photoGallery"
             android:layout_width="match_parent"
+            android:spacing="5dp"
             android:layout_height="wrap_content" />
 
-        <GridView
-            android:id="@+id/gridGallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.00"
-            android:numColumns="3"
-            android:horizontalSpacing="5dp"
-            
-            android:stretchMode="none"
-            tools:listitem="@layout/gallery_item" >
-        </GridView>
+        
 
         <RelativeLayout
             android:layout_width="349dp"

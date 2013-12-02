@@ -44,9 +44,23 @@ public class TimelineActivity extends Activity{
 		actionBar.setDisplayShowTitleEnabled(false);
 
 		setContentView(R.layout.main_vert_lin_layout);
+		db = new LocalDbAdapter(this);
+		db.open();
+		
 		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
 
-		timelineItemList = TimelineManager.getAllTimelineItems();
+		
+
+	}
+
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    
+	    // Normal case behavior follows
+	    
+	    
+	    timelineItemList = TimelineManager.getAllTimelineItems();
 
 		for (TimelineSegment tls: timelineItemList){
 			//add timeline segment
@@ -64,14 +78,16 @@ public class TimelineActivity extends Activity{
 
 
 
+
 		// Fetcht the images location
 
 		List <String> locations = db.getImagesForActivity(2);
 
 		System.out.println("dummy");
-
 	}
-
+	
+	
+	
 
 	View.OnClickListener itemListener = new View.OnClickListener() {
 

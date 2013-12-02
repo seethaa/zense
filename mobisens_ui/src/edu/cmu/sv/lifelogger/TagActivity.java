@@ -84,6 +84,7 @@ public class TagActivity extends Activity{
 	private int currentActivityID;
 	
 	public static ArrayList<CustomGallery> photos = null;
+	private TextView txtDesc;
 
 
 	@Override
@@ -110,6 +111,9 @@ public class TagActivity extends Activity{
 			currentActivityID = extras.getInt("activityID");
 		}
 
+		
+		 txtDesc = (TextView)findViewById(R.id.desc);
+		 txtDesc.setText(TimelineActivity.db.getNameAndDescriptionForActivity(currentActivityID));
 
 //		Toast.makeText(TagActivity.this, bottomTxt + " " + topTxt, Toast.LENGTH_SHORT).show();
 
@@ -152,7 +156,7 @@ public class TagActivity extends Activity{
 				//TimelineActivity.db.close();
 				Intent intent = new Intent(TagActivity.this, FacebookShare.class);
 				// TODO Currently hardcoded activity id. Get it dynamically from current activity id
-				intent.putExtra("activityID", 2);
+				intent.putExtra("activityID", currentActivityID);
 				startActivity(intent);
 				
 			}
@@ -213,7 +217,7 @@ public class TagActivity extends Activity{
 				String toTextStr = toText.getText().toString();
 				
 				//LocalDbAdapter:
-				TimelineActivity.db.updateActivity(activityID, activityNameStr, fromTextStr, toTextStr);
+				TimelineActivity.db.updateActivity(currentActivityID, activityNameStr, fromTextStr, toTextStr);
 				dialog.dismiss();
 				
 			}
@@ -245,7 +249,7 @@ public class TagActivity extends Activity{
 				String descStr = descET.getText().toString();
 				
 				//LocalDbAdapter:
-				TimelineActivity.db.updateDescriptionOfActivity(descStr, activityID);
+				TimelineActivity.db.updateDescriptionOfActivity(descStr, currentActivityID);
 				dialog.dismiss();
 				
 			}
