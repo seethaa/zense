@@ -3,14 +3,14 @@
     
     <item android:id="@+id/attachpics"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/paperclip32" />
+          android:icon="@drawable/paperclip_white" />
     
     <item android:id="@+id/profile"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/ic_action_person" />
+          android:icon="@drawable/user_white" />
     
     <item android:id="@+id/fbshare"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/share" />
+          android:icon="@drawable/share_white" />
      
 </menu>

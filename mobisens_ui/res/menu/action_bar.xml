@@ -3,13 +3,13 @@
     
     <item android:id="@+id/timeline"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/ic_action_view_as_list" />
+          android:icon="@drawable/timeline_white" />
     
     <item android:id="@+id/profile"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/ic_action_person" />
+          android:icon="@drawable/user_white" />
     
       <item android:id="@+id/settings"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/ic_action_settings" />
+          android:icon="@drawable/settings_white" />
 </menu>

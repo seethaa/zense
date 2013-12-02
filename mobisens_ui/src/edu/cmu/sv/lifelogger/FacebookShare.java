@@ -98,7 +98,7 @@ public class FacebookShare extends FragmentActivity {
 //        
         postPhotoButton = (Button) findViewById(R.id.dialogButtonOK);
         cancelButton = (Button) findViewById(R.id.dialogButtonCancel);
-        
+         
 //        postPhotoButton = (Button) findViewById(R.id.postPhotoButton);
         postPhotoButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
