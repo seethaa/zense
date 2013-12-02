@@ -149,7 +149,7 @@ public class PieChartBuilderActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+ 
 		if (mChartView == null) {
 			LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
 			mChartView = ChartFactory.getPieChartView(this, mSeries, mRenderer);

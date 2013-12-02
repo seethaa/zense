@@ -111,7 +111,7 @@ public class TagActivity extends Activity{
 		}
 
 
-		Toast.makeText(TagActivity.this, bottomTxt + " " + topTxt, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(TagActivity.this, bottomTxt + " " + topTxt, Toast.LENGTH_SHORT).show();
 
 
 		TextView name = (TextView) findViewById(R.id.name); // name of activity
@@ -192,8 +192,6 @@ public class TagActivity extends Activity{
 		final Dialog dialog = new Dialog(TagActivity.this);
 		dialog.setContentView(R.layout.activity_change_dialog);
 		dialog.setTitle("Please tag the location");
-
-		
 		
 
 		final EditText activityName = (EditText)dialog.findViewById(R.id.activityname);
@@ -224,6 +222,37 @@ public class TagActivity extends Activity{
 		dialog.show();
 	}
 	
+	public void changeDescriptionClicked(final View view){
+		Toast.makeText(TagActivity.this, "BUTTON 2 CLICKED!", Toast.LENGTH_SHORT).show();
+
+		
+		final Dialog dialog = new Dialog(TagActivity.this);
+		dialog.setContentView(R.layout.description_change_dialog);
+		dialog.setTitle("Please tag the location");
+		
+
+		final EditText descET = (EditText)dialog.findViewById(R.id.descChange);
+		//change this.
+		descET.setText(activityType);
+		
+		
+
+		Button dialogButtonOK = (Button) dialog.findViewById(R.id.dialogButtonOK);
+		// if button is clicked, close the custom dialog
+		dialogButtonOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {//change this info in db
+				String descStr = descET.getText().toString();
+				
+				//LocalDbAdapter:
+				TimelineActivity.db.updateDescriptionOfActivity(descStr, activityID);
+				dialog.dismiss();
+				
+			}
+		});
+
+		dialog.show();
+	}
 	
 	private class LongOperation extends AsyncTask<String, Void, Bitmap> {
 
