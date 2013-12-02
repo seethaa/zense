@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
+import edu.cmu.sv.lifelogger.entities.TimelineSegment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -349,6 +350,42 @@ public class LocalDbAdapter {
 		return nameAndDescription ;
 	}
 
+	
+	
+	public ArrayList<TimelineItem> getAllTimelineActivity(){
+		ArrayList<TimelineItem> data1 = new ArrayList<TimelineItem>();
+		
+		Cursor c = null;
+		c = mDb.rawQuery("select  * from ActivityTable" , null);
+		
+		try{
+
+
+			if (c.moveToFirst()) {
+				do {
+					   	
+					TimelineItem t1 = new TimelineItem((int)Integer.parseInt(c.getString(0)),c.getString(1),c.getString(2),c.getString(3),
+							c.getString(6),c.getString(7),c.getString(4),c.getString(5));
+					data1.add(t1);
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return data1;
+	}
+
+	
+	
+	
+	
+	
 	
 
 	public String getUserName(Integer userID){

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import edu.cmu.sv.lifelogger.TimelineActivity;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.entities.TimelineSegment;
 
@@ -14,13 +15,47 @@ public class TimelineManager {
 	//TODO: Change this to get real data
 	public static ArrayList<TimelineSegment> getAllTimelineItems() {
 
-		ArrayList<TimelineSegment> ts = createDummyData();
+		ArrayList<TimelineSegment> ts = getAllTimelineSegments();
 
 		return ts;
 
 
 	}
+	
+	private static ArrayList<TimelineSegment> getAllTimelineSegments() {
+		ArrayList<TimelineSegment> ts = new ArrayList<TimelineSegment>();
+		ArrayList<TimelineItem> data1 = new ArrayList<TimelineItem>();
+		// segment 1
+		data1 = TimelineActivity.db.getAllTimelineActivity();
+		
+		DateFormat dateFormat = new SimpleDateFormat("EEE, MMM dd");
+		Date today = new Date();
+		String todayStr = dateFormat.format(today);
+		
+		TimelineSegment ts1 = new TimelineSegment(data1, todayStr);
+		
+		//segment 2
+		ArrayList<TimelineItem> data2 = new ArrayList<TimelineItem>();
+		data2.add((TimelineItem)data1.get(0));
+		data2.add((TimelineItem)data1.get(3));
+		data2.add((TimelineItem)data1.get(4));
+		TimelineSegment ts2 = new TimelineSegment(data2, todayStr);
+		
+		// segment 3
+		ArrayList<TimelineItem> data3 = new ArrayList<TimelineItem>();
+		data3.add((TimelineItem) data1.get(1));
+		data3.add((TimelineItem) data1.get(2));
+		data3.add((TimelineItem) data1.get(3));
+		TimelineSegment ts3 = new TimelineSegment(data3, todayStr);
 
+		// add all segments
+		ts.add(ts1);
+		ts.add(ts2);
+		ts.add(ts3);
+
+		return ts;
+		
+	}
 	private static ArrayList<TimelineSegment> createDummyData() {
 		ArrayList<TimelineSegment> ts = new ArrayList<TimelineSegment>();
 		

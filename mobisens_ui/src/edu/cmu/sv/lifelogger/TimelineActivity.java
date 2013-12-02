@@ -37,7 +37,8 @@ public class TimelineActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		cxt=this;
-
+		db = new LocalDbAdapter(this);
+		db.open();
 		ActionBar actionBar = getActionBar();
 
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -61,8 +62,6 @@ public class TimelineActivity extends Activity{
 		}
 		//		TextViewHelper ctvp = new TextViewHelper(this, "BLAHBLAH", MY_MAIN_LAYOUT);
 
-		db = new LocalDbAdapter(this);
-		db.open();
 
 
 		// Fetcht the images location

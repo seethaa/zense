@@ -10,6 +10,16 @@ public class TimelineItem {
 	private String mStart_location;
 	private String mEnd_location;
 	private int activity_id;
+	private String mActivityType;
+	private String mDescription;
+
+	public String getmActivityType() {
+		return mActivityType;
+	}
+
+	public void setmActivityType(String mActivityType) {
+		this.mActivityType = mActivityType;
+	}
 
 	//to make it easier
 	private String mTopTxt;
@@ -24,6 +34,26 @@ public class TimelineItem {
 		this.mEnd_time = end_time;
 		this.mStart_location = start_location;
 		this.mEnd_location = end_location;
+	}
+
+	public TimelineItem(int id, String activity_name, String description, String activityType,String start_time, String end_time,
+			String start_location, String end_location) {
+		this.activity_id = id;
+		this.mActivity_name = activity_name;
+		this.mDescription = description;
+		this.mActivityType = activityType;
+		this.mStart_time = start_time;
+		this.mEnd_time = end_time;
+		this.mStart_location = start_location;
+		this.mEnd_location = end_location;
+	}
+	
+	public String getmDescription() {
+		return mDescription;
+	}
+
+	public void setmDescription(String mDescription) {
+		this.mDescription = mDescription;
 	}
 
 	public TimelineItem(String toptxt, String bottomtxt) {
