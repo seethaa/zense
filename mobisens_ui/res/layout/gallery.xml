@@ -47,12 +47,12 @@
         <Button
             android:id="@+id/btnGalleryOk"
             style="@style/btn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+
+            android:layout_weight="0.28"
             android:background="@color/zorange2"
-            android:text="OK" 
-            />
+            android:text="OK" />
     </LinearLayout>
 
 </LinearLayout>

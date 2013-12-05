@@ -149,9 +149,8 @@
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity
             android:name="edu.cmu.sv.lifelogger.BarChartActivityLevel"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
         </activity>
 
         <!-- Goolge Maps API Key -->
