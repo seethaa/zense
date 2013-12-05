@@ -35,7 +35,8 @@
         android:allowBackup="true"
         android:icon="@drawable/smartlogger_white"
         android:label="@string/app_name"
-        android:theme="@style/MyTheme" >
+        android:theme="@style/MyTheme" 
+        android:largeHeap="true">
         <uses-library android:name="com.google.android.maps" />
 
         <meta-data
@@ -148,7 +149,9 @@
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity
             android:name="edu.cmu.sv.lifelogger.BarChartActivityLevel"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        
         </activity>
 
         <!-- Goolge Maps API Key -->
