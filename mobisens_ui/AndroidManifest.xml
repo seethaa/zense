@@ -35,41 +35,35 @@
         android:allowBackup="true"
         android:icon="@drawable/smartlogger_white"
         android:label="@string/app_name"
-        android:theme="@style/MyTheme" 
-        android:largeHeap="true">
+        android:largeHeap="true"
+        android:theme="@style/MyTheme" >
         <uses-library android:name="com.google.android.maps" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
-        <receiver
-            android:name="edu.cmu.sv.lifelogger.AnnotationReceiver"
-            android:enabled="true" >
+        <receiver android:name="edu.cmu.sv.lifelogger.AnnotationReceiver" >
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-                <action android:name="my.action.string" />
-                <!-- and some more actions if you want -->
+                <action android:name="edu.cmu.sv.mobisens.content.ActivityWidget.INTENT_RECEIVED" />
             </intent-filter>
         </receiver>
 
         <activity
             android:name="edu.cmu.sv.lifelogger.FBLoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" 
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
-              <intent-filter>
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-         <activity
+        <activity
             android:name="edu.cmu.sv.lifelogger.TextReaderActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
-
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.OpenGalleryActivity"
@@ -93,14 +87,14 @@
         <activity
             android:name="edu.cmu.sv.lifelogger.TagActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" 
+            android:parentActivityName="edu.cmu.sv.lifelogger.TimelineActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName="edu.cmu.sv.lifelogger.TimelineActivity" >
-            
-        <!-- Parent activity meta-data to support API level 7+ -->
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="edu.cmu.sv.lifelogger.TimelineActivity" />
+            android:windowSoftInputMode="adjustResize" >
+
+            <!-- Parent activity meta-data to support API level 7+ -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.cmu.sv.lifelogger.TimelineActivity" />
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.ProfileActivity"
@@ -139,9 +133,7 @@
             android:name="edu.cmu.sv.lifelogger.PieChartBuilderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-                  
         </activity>
-        
         <activity
             android:name="edu.cmu.sv.mobisens_ui.VerticalBarChart"
             android:label="@string/title_activity_vertical_bar_chart" >
@@ -149,8 +141,8 @@
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity
             android:name="edu.cmu.sv.lifelogger.BarChartActivityLevel"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
 
         <!-- Goolge Maps API Key -->
@@ -167,8 +159,8 @@
         </activity>
         <activity
             android:name="edu.cmu.sv.lifelogger.FacebookShare"
-            android:label="@string/title_activity_facebook_share" 
-             android:theme="@android:style/Theme.Holo.Dialog" >
+            android:label="@string/title_activity_facebook_share"
+            android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
     </application>
 
