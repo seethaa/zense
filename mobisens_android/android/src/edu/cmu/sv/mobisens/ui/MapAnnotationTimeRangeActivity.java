@@ -183,23 +183,18 @@ public class MapAnnotationTimeRangeActivity extends MapAnnotationActivity {
 		if(this.getSelectedAnnotation() == null)
 			return true;
 		
-	    switch (item.getItemId()) {
-		    case R.id.reset_changes:
-		    	this.resetChangedAnno();
-		    	break;
-		    case R.id.save_changes:
-		    	this.boradcastActivitySegmentNameChanged(this.copyOfSelectedAnno.getName(), 
-		    			this.getSelectedAnnotation());
-		    	this.shouldNotifySave = false;
-		    	break;
-		    case android.R.id.home:
-		    	
-	    		this.checkSaveAndExit();
-		    	
-		    	break;
-		    default:
-		        return super.onOptionsItemSelected(item);
-	    }
+	    int itemId = item.getItemId();
+		if (itemId == R.id.reset_changes) {
+			this.resetChangedAnno();
+		} else if (itemId == R.id.save_changes) {
+			this.boradcastActivitySegmentNameChanged(this.copyOfSelectedAnno.getName(), 
+					this.getSelectedAnnotation());
+			this.shouldNotifySave = false;
+		} else if (itemId == android.R.id.home) {
+			this.checkSaveAndExit();
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
 	    
 	    return true;
 	}

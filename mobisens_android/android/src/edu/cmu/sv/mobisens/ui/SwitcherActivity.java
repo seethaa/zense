@@ -198,11 +198,10 @@ public class SwitcherActivity extends ActivityGroup {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(item.getTitle());
     	
-	    switch (item.getItemId()) {
-	    case R.id.reset_training_menu:
-
-	    	builder.setMessage("You need to retrain the phone to recognize activities after reset the training data.\r\nAre you sure to continue?");
-	    	builder.setPositiveButton("Yes", new OnClickListener(){
+	    int itemId = item.getItemId();
+		if (itemId == R.id.reset_training_menu) {
+			builder.setMessage("You need to retrain the phone to recognize activities after reset the training data.\r\nAre you sure to continue?");
+			builder.setPositiveButton("Yes", new OnClickListener(){
 
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -213,15 +212,14 @@ public class SwitcherActivity extends ActivityGroup {
 				}
 	    		
 	    	});
-	    	builder.setNegativeButton("No", new OnClickListener(){
+			builder.setNegativeButton("No", new OnClickListener(){
 				public void onClick(DialogInterface dialog, int which) { }	
 	    	});
-	    	builder.show();
-	        return true;
-	    case R.id.clear_annolist_menu:
-
-	    	builder.setMessage("All the annotations will be deleted and can not recover, are you sure to continue?");
-	    	builder.setPositiveButton("Yes", new OnClickListener(){
+			builder.show();
+			return true;
+		} else if (itemId == R.id.clear_annolist_menu) {
+			builder.setMessage("All the annotations will be deleted and can not recover, are you sure to continue?");
+			builder.setPositiveButton("Yes", new OnClickListener(){
 
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -232,21 +230,17 @@ public class SwitcherActivity extends ActivityGroup {
 				}
 	    		
 	    	});
-	    	builder.setNegativeButton("No", new OnClickListener(){
+			builder.setNegativeButton("No", new OnClickListener(){
 				public void onClick(DialogInterface dialog, int which) { }	
 	    	});
-	    	
-	    	builder.show();
-	        return true;
-	    
-	    case android.R.id.home:
-	    	this.onBackPressed();
-            return true;
-
-	    		
-	    default:
-	        return super.onOptionsItemSelected(item);
-	    }
+			builder.show();
+			return true;
+		} else if (itemId == android.R.id.home) {
+			this.onBackPressed();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
 	}
 	
 	

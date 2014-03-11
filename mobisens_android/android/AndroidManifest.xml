@@ -50,6 +50,7 @@
         <meta-data android:name="com.google.android.maps.v2.API_KEY.debug_mac" android:value="AIzaSyDHyvH_VsKf1cYYahl_a4EICk5TmKBOG0M"/>
         <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBKxiPk4sxJ5ktFkhh5xqXElU-S25HIz10"/>
         
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
         
         <activity
             android:name="edu.cmu.sv.mobisens.MobiSensLauncher"
@@ -68,6 +69,12 @@
         <activity android:name="edu.cmu.sv.mobisens.MobiSensMessageBox" >
         </activity>
 
+         <receiver android:name="edu.cmu.sv.mobisens.content.ReceiverService" >
+            <intent-filter>
+                <action android:name="edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg" />
+            </intent-filter>
+        </receiver>
+        
         <receiver android:name="edu.cmu.sv.mobisens.content.StartupIntentReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

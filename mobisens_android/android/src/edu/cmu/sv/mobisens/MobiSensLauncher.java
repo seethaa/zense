@@ -793,21 +793,20 @@ public class MobiSensLauncher extends ListActivity implements Eula.OnEulaAgreedT
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
 		Intent intent = new Intent(this, MobiSensInformation.class);
-	    switch (item.getItemId()) {
-	    case R.id.about_menu:
-	        //newGame();
+	    int itemId = item.getItemId();
+		if (itemId == R.id.about_menu) {
+			//newGame();
 	    	intent.putExtra(MobiSensInformation.EXTRA_TYPE, MobiSensInformation.TYPE_ABOUT);
-	    	this.startActivity(intent);
-	        return true;
-	    case R.id.eula_menu:
-	        //showHelp();
+			this.startActivity(intent);
+			return true;
+		} else if (itemId == R.id.eula_menu) {
+			//showHelp();
 	    	intent.putExtra(MobiSensInformation.EXTRA_TYPE, MobiSensInformation.TYPE_EULA);
-	    	
-	    	this.startActivity(intent);
-	        return true;
-	    default:
-	        return super.onOptionsItemSelected(item);
-	    }
+			this.startActivity(intent);
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
 	}
 	
 	@Override
