@@ -13,7 +13,7 @@ public class AnnotationReceiver extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
   String inty = intent.getAction();
-
+	  
 	  System.out.println("MOBI " + inty);
 	  //Todo:Ming- Change according to need. 
 //    Intent service = new Intent(context, SomeService.class);
