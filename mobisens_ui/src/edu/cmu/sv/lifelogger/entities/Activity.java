@@ -1,16 +1,34 @@
 package edu.cmu.sv.lifelogger.entities;
 
-import android.graphics.drawable.Drawable;
+import java.util.Date;
 
-public class TimelineItem {
+import edu.cmu.sv.lifelogger.util.DataCollector;
+import android.graphics.drawable.Drawable;
+/**
+ * Creating this Activity Class, as a perfect copy of TimelineItem. 
+ * Purpose of this class is to match perfectly with how activity is declared,
+ * in mobisens originally, with all the data. When this class is perfect and 
+ * general enough, TimelineItem and ActivityItem classes should become redundant
+ * and in future versions, they should be deprecated
+ *  
+ * @author himanshu
+ *
+ */
+public class Activity {
 	private Drawable mActivity_icon;
 	private String mActivity_name;
-	private String mStart_time;
-	private String mEnd_time;
+	private Date mStart_time;
+	private Date mEnd_time;
+	
 	private String mStart_location;
 	private String mEnd_location;
-	private int mactivity_id;
+	private DataCollector<double[]> locations = new DataCollector<double[]>(-1);
 	
+
+	private String mActivityType;
+	private String mDescription;
+	private int mactivity_id;
+
 	public int getmActivity_id() {
 		return mactivity_id;
 	}
@@ -18,10 +36,7 @@ public class TimelineItem {
 	public void setmActivity_id(int activity_id) {
 		this.mactivity_id = activity_id;
 	}
-
-	private String mActivityType;
-	private String mDescription;
-
+	
 	public String getmActivityType() {
 		return mActivityType;
 	}
@@ -29,16 +44,17 @@ public class TimelineItem {
 	public void setmActivityType(String mActivityType) {
 		this.mActivityType = mActivityType;
 	}
+	
 
 	//to make it easier
 	private String mTopTxt;
 	private String mBottomTxt;
 
-	public TimelineItem(){
+	public Activity(){
 		super();
 	}
 
-	public TimelineItem(int id, String activity_name, String start_time, String end_time,
+	public Activity(int id, String activity_name, Date start_time, Date end_time,
 			String start_location, String end_location) {
 		this.mactivity_id = id;
 		this.mActivity_name = activity_name;
@@ -48,7 +64,7 @@ public class TimelineItem {
 		this.mEnd_location = end_location;
 	}
 
-	public TimelineItem(int id, String activity_name, String description, String activityType,String start_time, String end_time,
+	public Activity(int id, String activity_name, String description, String activityType,Date start_time, Date end_time,
 			String start_location, String end_location) {
 		this.mactivity_id = id;
 		this.mActivity_name = activity_name;
@@ -68,7 +84,7 @@ public class TimelineItem {
 		this.mDescription = mDescription;
 	}
 
-	public TimelineItem(String toptxt, String bottomtxt) {
+	public Activity(String toptxt, String bottomtxt) {
 		this.mTopTxt = toptxt;
 		this.mBottomTxt = bottomtxt;
 	}
@@ -100,26 +116,26 @@ public class TimelineItem {
 	}
 
 
-	public String getmStart_time() {
+	public Date getmStart_time() {
 		return mStart_time;
 	}
 
-
-	public void setmStart_time(String mStart_time) {
+	
+	public void setmStart_time(Date mStart_time) {
 		this.mStart_time = mStart_time;
 	}
 
-
-	public String getmEnd_time() {
+	
+	public Date getmEnd_time() {
 		return mEnd_time;
 	}
 
 
-	public void setmEnd_time(String mEnd_time) {
+	public void setmEnd_time(Date mEnd_time) {
 		this.mEnd_time = mEnd_time;
 	}
-
-
+	
+	
 	public String getmStart_location() {
 		return mStart_location;
 	}
@@ -139,30 +155,13 @@ public class TimelineItem {
 		this.mEnd_location = mEnd_location;
 	}
 
-
-	public String getTimelineTopText(){
-
-//		if (mTopTxt==null){
-			return this.mActivity_name + " " + this.mStart_time + " - " + this.mEnd_time;
-//		}
-
-//		return mTopTxt;
+	
+	public DataCollector<double[]> getLocations() {
+		return locations;
 	}
 
-	public String getTimelineSubText(){
-//		if (mBottomTxt==null){
-
-			String subtext = "";
-			if (this.mStart_location.equalsIgnoreCase(this.mEnd_location)){
-				subtext = mStart_location; 
-			}
-			else{
-				subtext = this.mStart_location + " to " + this.mEnd_location;
-			}
-			return subtext;
-
-//		}
-//		return mBottomTxt;
+	public void setLocations(DataCollector<double[]> locations) {
+		this.locations = locations;
 	}
 
 

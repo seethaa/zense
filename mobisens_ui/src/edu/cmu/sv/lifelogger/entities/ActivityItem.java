@@ -1,5 +1,10 @@
 package edu.cmu.sv.lifelogger.entities;
-
+/**
+ * This file is just for the dashboard purposes, as it is supposed to store 
+ * aggregated data. 
+ * @author himanshu
+ *
+ */
 public class ActivityItem {
 	private String mActivity_icon;
 	private String mActivity_name;

@@ -1,26 +1,133 @@
 package edu.cmu.sv.lifelogger.service;
 
+import com.google.android.gms.internal.db;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import edu.cmu.sv.lifelogger.database.LocalDbAdapter;
+import edu.cmu.sv.lifelogger.entities.Activity;
+import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.mobisens.content.AnnotationWidget;
 import edu.cmu.sv.mobisens.util.Annotation;
 
 public class ReceiverService extends BroadcastReceiver {
 
+	private static final String UNKNOWN = "Unknown";
+	private static final String UNKNOWN_ANNOTATION_NAME = "Unknown Activity";
+	LocalDbAdapter db ;
+	
+	/* Some Variables to store activity data, current and previous */
+	/*Timeline Item basically can be regarded as an activity. So I have decided
+	to use it as activities class, and pass the item to be stored in the db*/
+
+	Activity prevActivity = null;
+	Activity currActivity = new Activity();
+	
+	int lastActivityId = 0;
+	
+	public ReceiverService(){
+		/* Open the db adapter -- @ToDO when change to service, add the context
+		 * of service and uncomment the following lines */
+		// @TODO Uncomment the following lines 
+		/*db = new LocalDbAdapter();
+		db.open();
+		db.fetchRowCountActivityTable();//Row count of activity table = last activity id
+*/
+	}
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 
-		
+
 		Bundle extras = intent.getExtras();
 		String annotationString = (String) extras.get(Annotation.EXTRA_ANNO_STRING);
 		Annotation anno = Annotation.fromString(annotationString);
 		Boolean mergeWithLastAnno = extras.getBoolean(AnnotationWidget.EXTRA_MERGE_WITH_LAST_ANNO);
+
+		/* Fetch the Activity data from the anno into the currActivity */
+		createCurrActivityFromAnno(anno, currActivity);
 		
-		
-		
+		/* If it is first receive, create a new activity */
+		if(prevActivity == null ) {
+			prevActivity = new Activity();
+		}
+
+		if(mergeWithLastAnno){
+			/* We have to just merge the activity with previous activity 
+			 * 1) Copy all the data of currActivity to prevActivity
+			 * 2) Except Start time 
+			 * 3) Keep adding the time until, you get into else loop
+			 * */
+			mergeCurrToPrevActivity(currActivity, prevActivity);
+		} else {
+			/* It is a new Activity - no merging
+			 * 1) Save the prevActivity to database
+			 * 2) Flush prevActivity Data, store currActivity in prevActivity
+			 * */
+			//db.createActivityRow(prevActivity);
+			lastActivityId++;
+			prevActivity = currActivity;
+		}
+		/* 
+		 * We have the activity data here. We need to create a activity item
+		 * which we can use directly to store data in the activity table
+		 * */
+
+
+
 		System.out.println("Here" + intent.getAction());
 
 	}
+
+	private void createCurrActivityFromAnno(Annotation anno,
+			Activity currActivity2) {
+		
+		currActivity2.setmActivity_name(anno.getActivityName());
+		currActivity2.setmStart_time(anno.getStart());
+		currActivity2.setmEnd_time(anno.getEnd());
+		/* Handle activityType value 
+		 * If activity has unknown name, then put type as "unknown"
+		 * else activity type = activity name*/
+		
+		if(UNKNOWN_ANNOTATION_NAME.equals(anno.getName().toString())){
+			currActivity2.setmActivityType(UNKNOWN);
+		} else {
+			currActivity2.setmActivityType(anno.getName());
+		}
+		
+		/* By default there is no description for the activity. Setting, 
+		 * escaped name as description by default */
+		currActivity2.setmDescription(anno.getEscapedName());
+		
+		/* Handle activityID case*/
+		currActivity2.setmActivity_id(lastActivityId+1);
+		
+		/* @ToDo Handle Start and end location cases here */
+	}
+
+	private void mergeCurrToPrevActivity(Activity currActivity2,
+			Activity prevActivity2) {
+		/*
+		 * As the activity is in progress, keep updating the end location, 
+		 * and end time of preActivity - do not change start time and 
+		 * start location
+		 */
+		prevActivity2.setmEnd_location(currActivity2.getmEnd_location());
+		prevActivity2.setmEnd_time(currActivity2.getmEnd_time());
+		
+		//Rest of the things, are not changing, so no need to actually copy(do it for fun)
+		prevActivity2.setmActivity_name(currActivity2.getmActivity_name());
+		prevActivity2.setmDescription(currActivity2.getmDescription());
+		prevActivity2.setmActivity_id(currActivity2.getmActivity_id());
+
+	}
 }
+
+
+
+
+
+
+

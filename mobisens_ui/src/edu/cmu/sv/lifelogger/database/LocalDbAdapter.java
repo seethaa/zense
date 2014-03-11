@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
@@ -32,9 +33,11 @@ public class LocalDbAdapter {
 	 */
 
 	private Context mCtx;
-
+	
 	private static String imagesTableCreate = "create table Image (imageName text,  location text, activityID integer)";
-	private static String activityTableCreate = "create table ActivityTable ( activityID integer, activityName text,  description text, activityType text,startLocation text," +
+	private static String activityTableCreate = "create table ActivityTable "
+			+ "(activityID integer, activityName text,  description text, "
+			+ "activityType text,startLocation text," +
 			"endLocation text, startTime text, endTime text)";
 	private static String userTableCreate = "create table Users( userID integer, userName text,  email text, about text, profilePictureLocation text)";
 	// 6 states supported, with type as 1= question, 2 = inform. 
@@ -69,14 +72,14 @@ public class LocalDbAdapter {
 			db.execSQL(userTableCreate);
 			/* Also seed data for default values */
 			seedData(db);
-			
+
 			/*Toast.makeText(context, "4 table created", Toast.LENGTH_LONG).show();*/
 
 		}
 
 		public void seedData(SQLiteDatabase db){
 			//@ToDo add Seed data here
-			
+
 
 			// Create User
 			createUserRow(db,1, "Frank Hsueh", "abc@gmail.com", "I am super man", "");
@@ -86,7 +89,7 @@ public class LocalDbAdapter {
 			createActivityRow(db, 3, "Dining", "Having a sip of coffee at my favorite place", "Dining", "Starbucks, Palo Alto", "Starbucks, Palo Alto","12:00 PM", "1:00 PM");
 			createActivityRow(db, 4, "Walking", "Beautiful landscape here", "Walking", "University Ave, Palo Alto", "University Ave, Palo Alto","1:00 PM", "1:30 PM");
 			createActivityRow(db, 5, "Meeting", "Made some important decisions", "Meeting","Moffett Field, Mountain View", "Moffett Field, Mountain View","9:30 PM", "11:30 PM");
-			
+
 			/* Not a good idea to seed activities with random image files
 			 * @TODO find good image files, place them in a folder, and then 
 			 * seed db with them associating with a particular activity
@@ -116,10 +119,10 @@ public class LocalDbAdapter {
 			initialValues.put("email", email);
 			initialValues.put("about", about);
 			initialValues.put("profilePictureLocation", profilePictureLocation);
-			
+
 			System.out.println("HIMZ: creating values");
 			return db.insert("ActivityTable", null, initialValues);
-			
+
 		}
 
 		private long createActivityRow(SQLiteDatabase db, int activityID, String activityName,
@@ -135,10 +138,10 @@ public class LocalDbAdapter {
 			initialValues.put("endLocation", endLocation);
 			initialValues.put("startTime", startTime);
 			initialValues.put("endTime", endTime);
-			
+
 			System.out.println("HIMZ: creating values");
 			return db.insert("ActivityTable", null, initialValues);
-			
+
 		}
 
 		private long createImageRow(SQLiteDatabase db,String imageName, String location, Integer activityID)
@@ -147,12 +150,12 @@ public class LocalDbAdapter {
 			initialValues.put("imageName", imageName);
 			initialValues.put("location", location);
 			initialValues.put("activityID", activityID);
-			
+
 			System.out.println("HIMZ: creating values");
 			return db.insert("Image", null, initialValues);
 		}
-		
-		
+
+
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -213,15 +216,15 @@ public class LocalDbAdapter {
 		int grpNo=0;
 		List<String> labels = new ArrayList<String>();			
 		c = mDb.rawQuery("select imageName,location from Image where activityID = " + "\"" + activityID +"\"", null);
-		
+
 		try{
 
 
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					labels.add(c.getString(1) + "/" + c.getString(0));
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -242,11 +245,11 @@ public class LocalDbAdapter {
 	 * @return true, if updated and false if not updated
 	 */
 	public boolean updateDescriptionOfActivity(String description, int activityID){
-		
-		
+
+
 		String strSQL = "UPDATE ActivityTable SET description = " + "\"" + description +"\"" + "WHERE activityID = " + "\"" + activityID +"\"";
-		
-		
+
+
 		if(strSQL != null){
 			try {
 				mDb.execSQL(strSQL);
@@ -258,7 +261,7 @@ public class LocalDbAdapter {
 			}
 		}
 		return false; 
-		
+
 	}
 	/**
 	 * Function to update the activity data. 
@@ -289,7 +292,7 @@ public class LocalDbAdapter {
 		return false;
 
 	}
-	
+
 	/**
 	 * API to fetch all the images from the local DB for the given activity ID
 	 * @param position
@@ -301,9 +304,9 @@ public class LocalDbAdapter {
 		String imageLocation = null;		
 		c = mDb.rawQuery("select imageName,location from Image where activityID = " + "\"" + activityID +"\"", null);
 		try{			
-				if(c.moveToPosition(position)){
-					imageLocation = c.getString(1) + "/" + c.getString(0);
-				}
+			if(c.moveToPosition(position)){
+				imageLocation = c.getString(1) + "/" + c.getString(0);
+			}
 			// closing connection
 			c.close();
 		}
@@ -314,6 +317,19 @@ public class LocalDbAdapter {
 
 		return imageLocation ;
 	}
+
+	/**
+	 * Function to return the last activityID from the table
+	 * @return 
+	 */
+	public int fetchRowCountActivityTable() {
+		// TODO Auto-generated method stub
+		Cursor c = null;
+		c = mDb.rawQuery("select count(*) from ActivityTable", null);
+		c.moveToFirst();
+		int rowCount = c.getInt(0);
+		return rowCount;
+	}
 	
 	
 	public String getNameAndDescriptionForActivity(Integer activityID){
@@ -321,15 +337,15 @@ public class LocalDbAdapter {
 		int grpNo=0;
 		String nameAndDescription= new String();			
 		c = mDb.rawQuery("select activityName,description from ActivityTable where activityID = " + "\"" + activityID +"\"", null);
-		
+
 		try{
 
 
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					nameAndDescription = c.getString(0) + ": " + c.getString(1);
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -344,20 +360,20 @@ public class LocalDbAdapter {
 		return nameAndDescription ;
 	}
 
-	
-	
+
+
 	public ArrayList<TimelineItem> getAllTimelineActivity(){
 		ArrayList<TimelineItem> data1 = new ArrayList<TimelineItem>();
-		
+
 		Cursor c = null;
 		c = mDb.rawQuery("select  * from ActivityTable" , null);
-		
+
 		try{
 
 
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					TimelineItem t1 = new TimelineItem((int)Integer.parseInt(c.getString(0)),c.getString(1),c.getString(2),c.getString(3),
 							c.getString(6),c.getString(7),c.getString(4),c.getString(5));
 					data1.add(t1);
@@ -375,24 +391,24 @@ public class LocalDbAdapter {
 		return data1;
 	}
 
-	
-	
-	
+
+
+
 	public TimelineItem getTimelineActivityItem(int activityID){
 		TimelineItem t1 = null;
-		
+
 		Cursor c = null;
 		c = mDb.rawQuery("select  * from ActivityTable where activityID = " + "\"" + activityID +"\"" , null);
-		
+
 		try{
 
 
 			if (c.moveToFirst()) {
 				do {
-					   	
-					 t1 = new TimelineItem((int)Integer.parseInt(c.getString(0)),c.getString(1),c.getString(2),c.getString(3),
+
+					t1 = new TimelineItem((int)Integer.parseInt(c.getString(0)),c.getString(1),c.getString(2),c.getString(3),
 							c.getString(6),c.getString(7),c.getString(4),c.getString(5));
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -407,26 +423,26 @@ public class LocalDbAdapter {
 		return t1;
 	}
 
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 
 	public String getUserName(Integer userID){
 		Cursor c = null;
 		String name= new String();			
 		c = mDb.rawQuery("select userName from Users where userID = " + "\"" + userID +"\"", null);
-		
+
 		try{
 
 
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					name = c.getString(0) + ": " + c.getString(1);
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -440,21 +456,21 @@ public class LocalDbAdapter {
 
 		return name ;
 	}
-	
-	
+
+
 	public String getUserEmail(Integer userID){
 		Cursor c = null;
 		String email= new String();			
 		c = mDb.rawQuery("select email from Users where userID = " + "\"" + userID +"\"", null);
-		
+
 		try{
 
 
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					email = c.getString(0) + ": " + c.getString(1);
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -478,13 +494,13 @@ public class LocalDbAdapter {
 		Cursor c = null;
 		String about= new String();			
 		c = mDb.rawQuery("select about from Users where userID = " + "\"" + userID +"\"", null);
-		
+
 		try{
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					about = c.getString(0) + ": " + c.getString(1);
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -497,23 +513,23 @@ public class LocalDbAdapter {
 		return about ;
 	}
 
-	
+
 	public String getActivityID(String activityType,String startLocation, String endLocation, String startTime, 
 			String endTime ){
 		Cursor c = null;
 		String activityIDStr= new String();			
 		c = mDb.rawQuery("select activityID from ActivityTable where activityType = " + "\"" + activityType +"\""
-				 + "and startLocation="  + "\"" + startLocation +"\"" 
-				 + "and endLocation="  + "\"" + endLocation +"\""
-				 + "and startTime="  + "\"" + startTime +"\""
-				 + "and endTime="  + "\"" + endTime +"\"", null);
-		
+				+ "and startLocation="  + "\"" + startLocation +"\"" 
+				+ "and endLocation="  + "\"" + endLocation +"\""
+				+ "and startTime="  + "\"" + startTime +"\""
+				+ "and endTime="  + "\"" + endTime +"\"", null);
+
 		try{
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					activityIDStr = c.getString(0);
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -526,8 +542,8 @@ public class LocalDbAdapter {
 		return activityIDStr ;
 	}
 
-	
-	
+
+
 	/**
 	 * API to store images location in the local DB
 	 * @param imageName
@@ -541,13 +557,13 @@ public class LocalDbAdapter {
 		initialValues.put("imageName", imageName);
 		initialValues.put("location", location);
 		initialValues.put("activityID", activityID);
-		
+
 		System.out.println("HIMZ: creating values");
 		return mDb.insert("Image", null, initialValues);
 	}
 
-	
-	
+
+
 	/**
 	 * API to store activity information in our Database
 	 * @param activityID
@@ -569,12 +585,23 @@ public class LocalDbAdapter {
 		initialValues.put("endLocation", endLocation);
 		initialValues.put("startTime", startTime);
 		initialValues.put("endTime", endTime);
-		
+
 		System.out.println("HIMZ: creating values");
 		return mDb.insert("ActivityTable", null, initialValues);
-		
+
 	}
-	
+	/**
+	 * Wrapper funtion to create an activity row, just from the TimelineItem
+	 * @param activity
+	 */
+	public void createActivityRow(TimelineItem activity) {
+		// TODO Auto-generated method stub
+		createActivityRow(activity.getmActivity_id(), activity.getmActivity_name(),
+				 activity.getmDescription(),  activity.getmActivityType(), 
+				 activity.getmStart_location(), activity.getmEnd_location(),
+				 activity.getmStart_time(), activity.getmEnd_time());
+	}
+
 
 
 
@@ -587,17 +614,17 @@ public class LocalDbAdapter {
 
 	public int isUserExist(String userEmail) {
 		// TODO Auto-generated method stub
-		
+
 		Cursor c = null;
 		int count = 0;		
 		c = mDb.rawQuery("select userID from Users where email = " + "\"" + userEmail +"\"", null);
-		
+
 		try{
 			if (c.moveToFirst()) {
 				do {
-					   	
+
 					count++;
-					
+
 				} while (c.moveToNext());
 			}
 
@@ -609,6 +636,7 @@ public class LocalDbAdapter {
 		}
 		return count ;	
 	}
+
 
 
 
