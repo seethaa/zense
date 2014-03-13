@@ -129,7 +129,7 @@ public class TimelineActivity extends Activity{
 			String activityIDStr = "";
 			int activityID = 1;
 			activityIDStr = db.getActivityID(activityType, startLocation, endLocation, startTime, endTime);
-			if(activityIDStr!=null)
+			if(activityIDStr!=null && !activityIDStr.equals(""))
 				activityID = (int)Integer.parseInt(activityIDStr);
 			intent.putExtra("activityID", activityID);
 

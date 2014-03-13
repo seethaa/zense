@@ -372,6 +372,9 @@ public class ActivityWidget extends Widget {
 	private void broadcastNewActivity(Annotation anno, boolean mergeWithLastAnno){
 		Intent appendAnnoIntent = new Intent(AnnotationWidget.ACTION_APPEND_ANNO);
 		appendAnnoIntent.putExtra(Annotation.EXTRA_ANNO_STRING, anno.toString());
+		/*@TODO Changing mergeWithLastAnno to be always false for testing
+		 *  purposes. Remove the following line after testing */ 
+		mergeWithLastAnno = false;
 		appendAnnoIntent.putExtra(AnnotationWidget.EXTRA_MERGE_WITH_LAST_ANNO, mergeWithLastAnno);
 		appendAnnoIntent.setAction("edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg");
 		// Log.i(TAG, anno.toString());

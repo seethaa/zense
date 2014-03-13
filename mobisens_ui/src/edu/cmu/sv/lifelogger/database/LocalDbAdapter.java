@@ -1,9 +1,12 @@
 package edu.cmu.sv.lifelogger.database;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.cmu.sv.lifelogger.entities.Activity;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.entities.TimelineSegment;
 import android.content.ContentValues;
@@ -602,7 +605,26 @@ public class LocalDbAdapter {
 				 activity.getmStart_time(), activity.getmEnd_time());
 	}
 
+	/**
+	 * Wrapper function to create an activity row, just from the TimelineItem
+	 * @param activity
+	 */
+	public void createActivityRow(Activity activity) {
+		/* 
+		 * Take care of converting all non-string values to string for now. 
+		 * Have to change the activity table later to match activity.java exactly
+		 * */
 
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		String startTime = df.format(activity.getmStart_time());
+		String endTime = df.format(activity.getmEnd_time());
+		
+		
+		createActivityRow(activity.getmActivity_id(), activity.getmActivity_name(),
+				 activity.getmDescription(),  activity.getmActivityType(), 
+				 activity.getmStart_location(), activity.getmEnd_location(),
+				 startTime, endTime);
+	}
 
 
 	private static ArrayList<String> convertStringToArray(String str)

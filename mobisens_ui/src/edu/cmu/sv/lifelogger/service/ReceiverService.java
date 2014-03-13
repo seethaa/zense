@@ -17,29 +17,27 @@ public class ReceiverService extends BroadcastReceiver {
 	private static final String UNKNOWN = "Unknown";
 	private static final String UNKNOWN_ANNOTATION_NAME = "Unknown Activity";
 	LocalDbAdapter db ;
+	private static int instanceCount = 0;
 	
 	/* Some Variables to store activity data, current and previous */
-	/*Timeline Item basically can be regarded as an activity. So I have decided
-	to use it as activities class, and pass the item to be stored in the db*/
-
+	
 	Activity prevActivity = null;
-	Activity currActivity = new Activity();
+	Activity currActivity = null;
 	
-	int lastActivityId = 0;
+	private static int lastActivityId = 0;
 	
-	public ReceiverService(){
-		/* Open the db adapter -- @ToDO when change to service, add the context
-		 * of service and uncomment the following lines */
-		// @TODO Uncomment the following lines 
-		/*db = new LocalDbAdapter();
-		db.open();
-		db.fetchRowCountActivityTable();//Row count of activity table = last activity id
-*/
-	}
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-
+		
+		/* Open the db adapter -- @ToDO when change to service, add the context
+		 * of service and uncomment the following lines */
+		instanceCount++;
+		db = new LocalDbAdapter(context);
+		db.open();
+		if(instanceCount == 1) {
+			lastActivityId = db.fetchRowCountActivityTable();//Row count of activity table = last activity id
+		}
 
 		Bundle extras = intent.getExtras();
 		String annotationString = (String) extras.get(Annotation.EXTRA_ANNO_STRING);
@@ -47,11 +45,12 @@ public class ReceiverService extends BroadcastReceiver {
 		Boolean mergeWithLastAnno = extras.getBoolean(AnnotationWidget.EXTRA_MERGE_WITH_LAST_ANNO);
 
 		/* Fetch the Activity data from the anno into the currActivity */
+		currActivity =  new Activity();
 		createCurrActivityFromAnno(anno, currActivity);
 		
 		/* If it is first receive, create a new activity */
 		if(prevActivity == null ) {
-			prevActivity = new Activity();
+			prevActivity = currActivity;
 		}
 
 		if(mergeWithLastAnno){
@@ -66,7 +65,7 @@ public class ReceiverService extends BroadcastReceiver {
 			 * 1) Save the prevActivity to database
 			 * 2) Flush prevActivity Data, store currActivity in prevActivity
 			 * */
-			//db.createActivityRow(prevActivity);
+			db.createActivityRow(prevActivity);
 			lastActivityId++;
 			prevActivity = currActivity;
 		}
@@ -74,9 +73,7 @@ public class ReceiverService extends BroadcastReceiver {
 		 * We have the activity data here. We need to create a activity item
 		 * which we can use directly to store data in the activity table
 		 * */
-
-
-
+		db.close();
 		System.out.println("Here" + intent.getAction());
 
 	}
@@ -103,7 +100,11 @@ public class ReceiverService extends BroadcastReceiver {
 		
 		/* Handle activityID case*/
 		currActivity2.setmActivity_id(lastActivityId+1);
-		
+		/*@TODO Hack again, for timeline acctivity to work correctly, there 
+		should be no spaces in activity name -- fix it soooooon. Uncomment the 
+		next line and delete the line after it when fixed*/
+		//currActivity2.setmActivity_name(anno.getEscapedName());
+		currActivity2.setmActivity_name(UNKNOWN);
 		/* @ToDo Handle Start and end location cases here */
 	}
 
@@ -111,7 +112,7 @@ public class ReceiverService extends BroadcastReceiver {
 			Activity prevActivity2) {
 		/*
 		 * As the activity is in progress, keep updating the end location, 
-		 * and end time of preActivity - do not change start time and 
+		 * and end time of prevActivity - do not change start time and 
 		 * start location
 		 */
 		prevActivity2.setmEnd_location(currActivity2.getmEnd_location());

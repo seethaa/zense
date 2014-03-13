@@ -104,6 +104,12 @@
             android:persistent="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
+                        <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" >
+                </category>
+                <action android:name="android.intent.action.MAIN" >
+                </action>
+            </intent-filter>
         </activity>
         <activity
             android:name="com.facebook.LoginActivity"

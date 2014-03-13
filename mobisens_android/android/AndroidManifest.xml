@@ -68,12 +68,6 @@
         </activity>
         <activity android:name="edu.cmu.sv.mobisens.MobiSensMessageBox" >
         </activity>
-
-         <receiver android:name="edu.cmu.sv.mobisens.content.ReceiverService" >
-            <intent-filter>
-                <action android:name="edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg" />
-            </intent-filter>
-        </receiver>
         
         <receiver android:name="edu.cmu.sv.mobisens.content.StartupIntentReceiver" >
             <intent-filter>
