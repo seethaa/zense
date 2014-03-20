@@ -32,6 +32,7 @@ public class TimelineActivity extends Activity{
 	private ArrayList<TimelineSegment> timelineItemList;
 	Context cxt;
 	public static LocalDbAdapter db;
+	public static int maxActivityId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,23 +47,19 @@ public class TimelineActivity extends Activity{
 		setContentView(R.layout.main_vert_lin_layout);
 		db = new LocalDbAdapter(this);
 		db.open();
-		
+
 		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
-
 		
-
-	}
-
-	@Override
-	protected void onResume() {
-	    super.onResume();
-	    
-	    // Normal case behavior follows
-	    
-	    
-	    timelineItemList = TimelineManager.getAllTimelineItems();
-
+/*		Populate the timeline with data
+		timelineItemList = TimelineManager.getAllTimelineItems();
+		
+		 @issue: Store the latest activity. Solutions:
+		 * 1) store the max activityID. This will be an issue, if we permit deletion of activities later
+		 * 2) Store the last time stamp of the latest activity
+		 * 
+		// Store the max activity id .
 		for (TimelineSegment tls: timelineItemList){
+			
 			//add timeline segment
 			TimelineSegmentHeader tsh = new TimelineSegmentHeader(this, tls.getDate().toString(), MY_MAIN_LAYOUT);
 
@@ -73,15 +70,54 @@ public class TimelineActivity extends Activity{
 
 			}
 
+		}*/
+
+	}
+
+	
+	public void refreshTimelineSegments(){
+		//Clear the Main Layout
+		MY_MAIN_LAYOUT.removeAllViews();
+		
+		/*Re-Populate the timeline with data*/
+		timelineItemList = TimelineManager.getAllTimelineItems();
+		for (TimelineSegment tls: timelineItemList){
+			
+			//add timeline segment
+			TimelineSegmentHeader tsh = new TimelineSegmentHeader(this, tls.getDate().toString(), MY_MAIN_LAYOUT);
+
+			ArrayList<TimelineItem> tlItems= tls.getData();
+			for (TimelineItem item: tlItems){
+				//add its items
+				if(item.getmActivity_id() > maxActivityId){
+					maxActivityId = item.getmActivity_id(); // maxActivityId is the latest activity
+				}
+				TimelineItemHelper tmh = new TimelineItemHelper(this, item, MY_MAIN_LAYOUT, itemListener);
+
+			}
+
 		}
 		
+		
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Normal case behavior follows
+
+		refreshTimelineSegments();
+
+		// @TODO Hardcoded stuf .. correct it soon
 		List <String> locations = db.getImagesForActivity(2);
 
 		System.out.println("dummy");
 	}
-	
-	
-	
+
+
+
 
 	View.OnClickListener itemListener = new View.OnClickListener() {
 
@@ -134,7 +170,7 @@ public class TimelineActivity extends Activity{
 			intent.putExtra("activityID", activityID);
 
 			startActivity(intent);
- 
+
 			/*
 			// custom dialog
 			final Dialog dialog = new Dialog(cxt);
@@ -168,7 +204,7 @@ public class TimelineActivity extends Activity{
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		// getMenuInflater().inflate(R.menu.login, menu);
-		getMenuInflater().inflate(R.menu.action_bar, menu);
+		getMenuInflater().inflate(R.menu.action_bar_timeline, menu);
 
 		return true;
 	}

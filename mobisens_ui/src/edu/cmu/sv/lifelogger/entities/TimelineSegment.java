@@ -38,9 +38,13 @@ public class TimelineSegment{
 	public String getDate() {
 		return d;
 	}
-
+	/**
+	 * Set date for the segment
+	 * @param strDate
+	 */
 	public void setDate(String strDate) {
-		/*Date is in the format MM/dd/yyyy*/
+		/*Date is in the format MM/dd/yyyy, change it to save in format to be 
+		 * displayed on the timeline segment*/
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
 		Date date;
 		String segmentDate = strDate;

@@ -8,12 +8,16 @@ package edu.cmu.sv.lifelogger.helpers;
  * @author himanshu
  * 
  */
+import java.util.Date;
+
 import edu.cmu.sv.lifelogger.database.LocalDbAdapter;
 import android.app.Application;
 import android.content.Context;
 
 public class App extends Application {
     public LocalDbAdapter db;
+    // Store the latest activity shown in timeline here(Data Sharing)
+    public Date lastTimelineActivityDate;
 
     @Override
     public void onCreate() {

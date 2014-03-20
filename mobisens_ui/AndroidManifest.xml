@@ -103,6 +103,7 @@
             android:name="edu.cmu.sv.lifelogger.TimelineActivity"
             android:label="@string/app_name"
             android:persistent="true"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
                         <intent-filter>
@@ -131,6 +132,7 @@
         <activity
             android:name="edu.cmu.sv.lifelogger.PieChartBuilderActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
                   
         </activity>
@@ -143,6 +145,7 @@
         <activity
             android:name="edu.cmu.sv.lifelogger.BarChartActivityLevel"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
 
