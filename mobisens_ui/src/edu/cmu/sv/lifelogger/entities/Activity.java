@@ -57,6 +57,15 @@ public class Activity {
 	public Activity(){
 		super();
 	}
+	
+	public Activity(Activity origActivity){
+		this.mactivity_id = origActivity.getmActivity_id();
+		this.mActivity_name = origActivity.getmActivity_name();
+		this.mStart_time = origActivity.getmStart_time();
+		this.mEnd_time = origActivity.getmEnd_time();
+		this.mStart_location = origActivity.getmStart_location();
+		this.mEnd_location = origActivity.getmEnd_location();
+	}
 
 	public Activity(int id, String activity_name, Date start_time, Date end_time,
 			String start_location, String end_location) {

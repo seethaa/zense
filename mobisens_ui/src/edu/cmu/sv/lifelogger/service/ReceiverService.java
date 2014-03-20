@@ -1,4 +1,13 @@
 package edu.cmu.sv.lifelogger.service;
+/**
+ * Receiver Class for broadcast intents from mobisens app. This also takes care
+ * of properly storing the activities in local database.
+ * @author himanshu
+ */
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.google.android.gms.internal.db;
 
@@ -6,9 +15,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import edu.cmu.sv.lifelogger.database.LocalDbAdapter;
 import edu.cmu.sv.lifelogger.entities.Activity;
-import edu.cmu.sv.lifelogger.entities.TimelineItem;
+import edu.cmu.sv.lifelogger.helpers.App;
 import edu.cmu.sv.mobisens.content.AnnotationWidget;
 import edu.cmu.sv.mobisens.util.Annotation;
 
@@ -16,7 +24,7 @@ public class ReceiverService extends BroadcastReceiver {
 
 	private static final String UNKNOWN = "Unknown";
 	private static final String UNKNOWN_ANNOTATION_NAME = "Unknown Activity";
-	LocalDbAdapter db ;
+	App app ;
 	private static int instanceCount = 0;
 	
 	/* Some Variables to store activity data, current and previous */
@@ -33,10 +41,10 @@ public class ReceiverService extends BroadcastReceiver {
 		/* Open the db adapter -- @ToDO when change to service, add the context
 		 * of service and uncomment the following lines */
 		instanceCount++;
-		db = new LocalDbAdapter(context);
-		db.open();
+		this.app = ((App)context.getApplicationContext());
+		
 		if(instanceCount == 1) {
-			lastActivityId = db.fetchRowCountActivityTable();//Row count of activity table = last activity id
+			lastActivityId = app.db.fetchRowCountActivityTable();//Row count of activity table = last activity id
 		}
 
 		Bundle extras = intent.getExtras();
@@ -60,20 +68,42 @@ public class ReceiverService extends BroadcastReceiver {
 			 * 3) Keep adding the time until, you get into else loop
 			 * */
 			mergeCurrToPrevActivity(currActivity, prevActivity);
+			
+			
+			
 		} else {
 			/* It is a new Activity - no merging
 			 * 1) Save the prevActivity to database
 			 * 2) Flush prevActivity Data, store currActivity in prevActivity
 			 * */
-			db.createActivityRow(prevActivity);
+			app.db.createActivityRow(prevActivity);
 			lastActivityId++;
+			
 			prevActivity = currActivity;
+			
+			/* TESTING PURPOSE ONLY. REMOVE ASAP*/
+			/* Adding following activities for testing dynamicSegment*/
+	/*		Activity dummyActivity =  new Activity();
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
+			Date startTime = null;
+			
+			Date endTime = null ;
+			try {
+				startTime = df.parse("03/19/2014 01:01:01");
+				endTime = df.parse("03/19/2014 01:05:01"); 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			dummyActivity.setmStart_time(startTime);
+			dummyActivity.setmEnd_time(endTime);
+			dummyActivity.setmActivity_id(lastActivityId+1);
+			lastActivityId++;*/
+			
 		}
 		/* 
 		 * We have the activity data here. We need to create a activity item
 		 * which we can use directly to store data in the activity table
 		 * */
-		db.close();
 		System.out.println("Here" + intent.getAction());
 
 	}
