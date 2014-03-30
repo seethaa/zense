@@ -1,13 +1,10 @@
 package edu.cmu.sv.lifelogger.entities;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
-import edu.cmu.sv.lifelogger.util.DataCollector;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
+import edu.cmu.sv.lifelogger.helpers.Coordinates;
+import edu.cmu.sv.lifelogger.util.DataCollector;
 /**
  * Creating this Activity Class, as a perfect copy of TimelineItem. 
  * Purpose of this class is to match perfectly with how activity is declared,
@@ -26,6 +23,27 @@ public class Activity {
 	
 	private String mStart_location;
 	private String mEnd_location;
+	// Wrapper start/end co-ordinates. 
+	private Coordinates startCoordinates;
+	private Coordinates endCoordinates;
+		
+	public Coordinates getStartCoordinates() {
+		return startCoordinates;
+	}
+
+	public void setStartCoordinates(Coordinates startCoordinates) {
+		this.startCoordinates = startCoordinates;
+	}
+
+	public Coordinates getEndCoordinates() {
+		return endCoordinates;
+	}
+
+	public void setEndCoordinates(Coordinates endCoordinates) {
+		this.endCoordinates = endCoordinates;
+	}
+
+
 	private DataCollector<double[]> locations = new DataCollector<double[]>(-1);
 	
 
@@ -152,14 +170,6 @@ public class Activity {
 	public String getmStart_location() {
 		/* @TODO Use GoogleApi to get Area/City Name for the start location*/
 		if(mStart_location == null) {
-			/*Geocoder geocoder;
-			List<Address> addresses;
-			geocoder =new Geocoder(this,Locale.getDefault());
-			addresses = geocoder.getFromLocation(latitude, longitude,1);
-			String address = addresses.get(0).getAddressLine(0);
-			String city = addresses.get(0).getAddressLine(1);
-			String country = addresses.get(0).getAddressLine(2);*/
-			/*For now add dummy value*/
 			mStart_location = "Sunnyvale";
 		}
 		return mStart_location;

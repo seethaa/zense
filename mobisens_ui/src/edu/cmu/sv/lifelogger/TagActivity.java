@@ -41,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.google.android.gms.internal.cu;
 import com.google.android.gms.maps.model.LatLng;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -73,7 +74,8 @@ public class TagActivity extends Activity{
 	
 	String prevDesc;
 	
-	String activityType = null, startLocation = null, endLocation = null, startTime = null, endTime = null;
+	String activityName = null, activityType = null, startLocation = null, endLocation = null, startTime = null, endTime = null;
+	
 	int activityID;
 
 	public static int zoomlvl = 8;
@@ -134,8 +136,10 @@ public class TagActivity extends Activity{
 		bottom_txt.setText(bottomTxt);
 		currentTimelineItem =  TimelineActivity.db.getTimelineActivityItem(currentActivityID);
 		
-		name.setText(currentTimelineItem.getmActivity_name() + " " + currentTimelineItem.getmStart_time() + " - " + currentTimelineItem.getmEnd_time() );
+		name.setText(currentTimelineItem.getmActivity_name() + " " + currentTimelineItem.getmStartTimeFormatted() + " - " + currentTimelineItem.getmEndTimeFormatted());
 		bottom_txt.setText(currentTimelineItem.getmStart_location() + " to " + currentTimelineItem.getmEnd_location());
+		// FOllowing are the parameters of the activity, to be used later
+		activityName = currentTimelineItem.getmActivity_name();
 		activityType = currentTimelineItem.getmActivityType();
 		startLocation = currentTimelineItem.getmStart_location();
 		endLocation = currentTimelineItem.getmEnd_location();
@@ -215,8 +219,8 @@ public class TagActivity extends Activity{
 		dialog.setTitle("Change Activity Info:");
 		
 
-		final EditText activityName = (EditText)dialog.findViewById(R.id.activityname);
-		activityName.setText(activityType);
+		final EditText txtActivityName = (EditText)dialog.findViewById(R.id.activityname);
+		txtActivityName.setText(activityName);
 		
 		final EditText fromText = (EditText)dialog.findViewById(R.id.fromtext);
 		fromText.setText(startLocation);
@@ -229,18 +233,18 @@ public class TagActivity extends Activity{
 		dialogButtonOK.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {//change this info in db
-				String activityNameStr = activityName.getText().toString();
+				String activityNameStr = txtActivityName.getText().toString();
 				String fromTextStr = fromText.getText().toString();
 				String toTextStr = toText.getText().toString();
 				
 				//LocalDbAdapter:
-				//disale updating for now
-				//TimelineActivity.db.updateActivity(currentActivityID, activityNameStr, fromTextStr, toTextStr);
+				/*Update activityType as activityName as for now*/
+				TimelineActivity.db.updateActivity(currentActivityID, activityNameStr,activityNameStr, fromTextStr, toTextStr);
 				dialog.dismiss();
 				
 				// Reflect the changes in the tagactivity page
 
-				txtTopTextForActivity.setText(activityNameStr + " " + currentTimelineItem.getmStart_time() + " - " + currentTimelineItem.getmEnd_time() );
+				txtTopTextForActivity.setText(activityNameStr + " " + currentTimelineItem.getmStartTimeFormatted()+ " - " + currentTimelineItem.getmEndTimeFormatted());
 				txtBottomTextForActivity.setText(fromTextStr + " to " + toTextStr);
 				
 			}

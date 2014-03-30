@@ -81,6 +81,8 @@ public class TimelineActivity extends Activity{
 		
 		/*Re-Populate the timeline with data*/
 		timelineItemList = TimelineManager.getAllTimelineItems();
+		if (timelineItemList == null)
+			return;
 		for (TimelineSegment tls: timelineItemList){
 			
 			//add timeline segment
@@ -127,7 +129,8 @@ public class TimelineActivity extends Activity{
 
 			TextView t = (TextView) view.findViewById(R.id.name);
 			String txt = t.getText().toString();
-
+			
+			int activityIDTag = (Integer) t.getTag();
 
 			TextView bottom = (TextView) view.findViewById(R.id.bottomTxt);
 			String bottomtxt = bottom.getText().toString();
@@ -162,11 +165,12 @@ public class TimelineActivity extends Activity{
 				endLocation = splitBottomTxtStr[1] ;
 			}
 
-			String activityIDStr = "";
+//			String activityIDStr = "";
 			int activityID = 1;
-			activityIDStr = db.getActivityID(activityType, startLocation, endLocation, startTime, endTime);
+			/*activityIDStr = db.getActivityID(activityType, startLocation, endLocation, startTime, endTime);
 			if(activityIDStr!=null && !activityIDStr.equals(""))
-				activityID = (int)Integer.parseInt(activityIDStr);
+				activityID = (int)Integer.parseInt(activityIDStr);*/
+			activityID = activityIDTag;
 			intent.putExtra("activityID", activityID);
 
 			startActivity(intent);

@@ -29,12 +29,17 @@ public class TimelineManager {
 		ArrayList<TimelineItem> data1 = new ArrayList<TimelineItem>();
 		data1 = TimelineActivity.db.getAllTimelineActivity();
 		/*data1 is timeline item, sorted by activities time(desc)*/
+		
+		/* Handle empty case */
+		if(data1.size() == 0)
+			return null;
+		
 		/* Algorithm to create dynamic segments
 		 * 1) Loop through the itemlist
 		 * 2) Keep on adding the items to a dummy timelineItem arraylist
 		 * 3) Whenever new date is encountered, make a new segment for the previous date
 		 * 4) Create a new dummy itemlist, and continue the same process */
-
+		
 		int counter = 0;
 		String curDate = null;
 		String prevDate = null;

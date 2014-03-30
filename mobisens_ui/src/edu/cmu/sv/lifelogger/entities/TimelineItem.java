@@ -144,6 +144,36 @@ public class TimelineItem {
 	}
 
 
+	public String getmStartTimeFormatted() {
+		String startTime = this.mStart_time;
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
+		Date date;
+		try {
+			date = df.parse(startTime);
+			df = new SimpleDateFormat("hh:mm a");
+			startTime = df.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return startTime;
+	}
+
+	public String getmEndTimeFormatted() {
+		String endTime = this.mEnd_time;
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
+		Date date;
+		try {
+			date = df.parse(endTime);
+			df = new SimpleDateFormat("hh:mm a");
+			endTime = df.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return endTime;
+	}
+
 	public String getTimelineTopText(){	
 
 		
@@ -151,21 +181,8 @@ public class TimelineItem {
 		String endTime = this.mEnd_time;
 
 		/* Date is returned in String form of Date. Convert it to date, to extract Time in correct format*/
-
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
-		Date date;
-		try {
-			date = df.parse(startTime);
-			df = new SimpleDateFormat("hh:mm a");
-			startTime = df.format(date);
-			
-			df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-			date = df.parse(endTime);
-			df = new SimpleDateFormat("hh:mm a");
-			endTime = df.format(date);	        
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		startTime = this.getmStartTimeFormatted();
+		endTime = this.getmEndTimeFormatted();
 		return this.mActivity_name + " " + startTime + " - " + endTime;
 	}
 

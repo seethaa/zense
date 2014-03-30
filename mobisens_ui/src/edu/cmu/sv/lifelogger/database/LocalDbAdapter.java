@@ -6,20 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.cmu.sv.lifelogger.entities.Activity;
-import edu.cmu.sv.lifelogger.entities.TimelineItem;
-import edu.cmu.sv.lifelogger.entities.TimelineSegment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
+import edu.cmu.sv.lifelogger.entities.Activity;
+import edu.cmu.sv.lifelogger.entities.TimelineItem;
+import edu.cmu.sv.lifelogger.helpers.Coordinates;
 
 /**
  * Simple ERC database access helper class. Defines the basic 
@@ -36,14 +32,23 @@ public class LocalDbAdapter {
 	 */
 
 	private Context mCtx;
-	
+
 	private static String imagesTableCreate = "create table Image (imageName text,  location text, activityID integer)";
 	private static String activityTableCreate = "create table ActivityTable "
 			+ "(activityID integer, activityName text,  description text, "
 			+ "activityType text,startLocation text," +
 			"endLocation text, startTime text, endTime text)";
+	private static String Activity_TABLE_NAME = "ActivityTable";
 	private static String userTableCreate = "create table Users( userID integer, userName text,  email text, about text, profilePictureLocation text)";
-	// 6 states supported, with type as 1= question, 2 = inform. 
+	private static String USERS_TABLE_NAME = "Users";
+	
+	/*
+	 * Huge locations table to store all the locations associated with all the ID's
+	 * It is a weak entity totally depending on activityid
+	 * */	
+	private static String locationsTableCreate = "create table locations( activityID integer, String latitude, String longitude, String timestamp)";
+	private static String LOCATIONS_TABLE_NAME = "Locations";
+	 
 
 	private static final String TAG = "DBHelper";
 	private static final String DATABASE_NAME = "MobisensDB";
@@ -73,6 +78,8 @@ public class LocalDbAdapter {
 			db.execSQL(imagesTableCreate);
 			db.execSQL(activityTableCreate);
 			db.execSQL(userTableCreate);
+			db.execSQL(locationsTableCreate);
+			
 			/* Also seed data for default values */
 			seedData(db);
 
@@ -93,7 +100,7 @@ public class LocalDbAdapter {
 			createActivityRow(db, 3, "Dining", "Having a sip of coffee at my favorite place", "Dining", "Starbucks, Palo Alto", "Starbucks, Palo Alto","12:00 PM", "1:00 PM");
 			createActivityRow(db, 4, "Walking", "Beautiful landscape here", "Walking", "University Ave, Palo Alto", "University Ave, Palo Alto","1:00 PM", "1:30 PM");
 			createActivityRow(db, 5, "Meeting", "Made some important decisions", "Meeting","Moffett Field, Mountain View", "Moffett Field, Mountain View","9:30 PM", "11:30 PM");
-*/
+			 */
 			/* Not a good idea to seed activities with random image files
 			 * @TODO find good image files, place them in a folder, and then 
 			 * seed db with them associating with a particular activity
@@ -297,6 +304,41 @@ public class LocalDbAdapter {
 
 	}
 
+
+
+	/**
+	 * Function to update the activity data. 
+	 * Adding this overloaded function for updating activityType also, as we 
+	 * are supporting it as of now
+	 * @param activityID - activityID for the activity
+	 * @param activityName - new activity name
+	 * @param startLocation -  new start location
+	 * @param endLocation - new end location
+	 * @return true, if updated, else false
+	 */
+	public boolean updateActivity(int activityID, String activityName, 
+			String activityType, String startLocation, String endLocation) {
+
+		String strSQL = "UPDATE ActivityTable SET activityName = " + "\""
+				+ activityName  + "\"" + ", activityType =" + "\""
+						+ activityType + "\"" + ", startLocation =" + "\""
+				+ startLocation + "\"" + ", endLocation =" + "\"" + endLocation
+				+ "\"" + "WHERE activityID = " + "\"" + activityID + "\"";
+
+		if (strSQL != null) {
+			try {
+				mDb.execSQL(strSQL);
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return false;
+
+	}
+
 	/**
 	 * API to fetch all the images from the local DB for the given activity ID
 	 * @param position
@@ -334,8 +376,8 @@ public class LocalDbAdapter {
 		int rowCount = c.getInt(0);
 		return rowCount;
 	}
-	
-	
+
+
 	public String getNameAndDescriptionForActivity(Integer activityID){
 		Cursor c = null;
 		int grpNo=0;
@@ -571,6 +613,51 @@ public class LocalDbAdapter {
 
 
 
+	public long storeLocation(int activityID, String latitude, String longitude)
+	{
+		ContentValues initialValues = new ContentValues();
+		
+		initialValues.put("activityID", activityID);
+		initialValues.put("latitude", latitude);
+		initialValues.put("longitude", longitude);
+		initialValues.put("timestamp", "0");
+		System.out.println("HIMZ: creating locations rows");
+		return mDb.insert(LOCATIONS_TABLE_NAME, null, initialValues);
+	}
+
+	
+	public long storeLocation(int activityID, String latitude, String longitude, String timestamp)
+	{
+		ContentValues initialValues = new ContentValues();
+		
+		initialValues.put("activityID", activityID);
+		initialValues.put("latitude", latitude);
+		initialValues.put("longitude", longitude);
+		initialValues.put("timestamp", "0");
+		System.out.println("HIMZ: creating locations rows");
+		return mDb.insert(LOCATIONS_TABLE_NAME, null, initialValues);
+	}
+
+	public void storeLocation(int activityID,ArrayList<Coordinates> coordinates)
+	{
+		ContentValues initialValues;
+		
+		for (Coordinates coordinates2 : coordinates) {
+			if(coordinates2.timestamp == 0){
+				storeLocation(activityID,Double.toString(coordinates2.latitude),
+						Double.toHexString(coordinates2.longitude));
+			} else {
+				storeLocation(activityID,Double.toString(coordinates2.latitude),
+						Double.toHexString(coordinates2.longitude),Long.toString(coordinates2.timestamp));
+			}
+		}
+
+		return ;
+	}
+
+		
+	
+	
 	/**
 	 * API to store activity information in our Database
 	 * @param activityID
@@ -604,9 +691,9 @@ public class LocalDbAdapter {
 	public void createActivityRow(TimelineItem activity) {
 		// TODO Auto-generated method stub
 		createActivityRow(activity.getmActivity_id(), activity.getmActivity_name(),
-				 activity.getmDescription(),  activity.getmActivityType(), 
-				 activity.getmStart_location(), activity.getmEnd_location(),
-				 activity.getmStart_time(), activity.getmEnd_time());
+				activity.getmDescription(),  activity.getmActivityType(), 
+				activity.getmStart_location(), activity.getmEnd_location(),
+				activity.getmStart_time(), activity.getmEnd_time());
 	}
 
 	/**
@@ -622,12 +709,12 @@ public class LocalDbAdapter {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		String startTime = df.format(activity.getmStart_time());
 		String endTime = df.format(activity.getmEnd_time());
-		
-		
+
+
 		createActivityRow(activity.getmActivity_id(), activity.getmActivity_name(),
-				 activity.getmDescription(),  activity.getmActivityType(), 
-				 activity.getmStart_location(), activity.getmEnd_location(),
-				 startTime, endTime);
+				activity.getmDescription(),  activity.getmActivityType(), 
+				activity.getmStart_location(), activity.getmEnd_location(),
+				startTime, endTime);
 	}
 
 

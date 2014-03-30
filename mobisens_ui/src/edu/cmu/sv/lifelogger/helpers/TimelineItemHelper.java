@@ -42,6 +42,11 @@ public class TimelineItemHelper {
 		//		tv1.setText(text);
 
 		TextView name = (TextView) newView0.findViewById(R.id.name); // name of activity
+		//Using Name textview to transfer the acitivityID
+		name.setTag(item.getmActivity_id());
+		
+		/*TextView activityID = (TextView) newView0.findViewById(R.id.activityID); // name of activity
+		activityID.setText(item.getmActivity_id());*/
 		Typeface typeface = Typeface.createFromAsset(cxt.getAssets(), "fonts/Roboto-Regular.ttf" );
 		name.setTypeface(typeface);
 		//		 name.setTextSize(14);
