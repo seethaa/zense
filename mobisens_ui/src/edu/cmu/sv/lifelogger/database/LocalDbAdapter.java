@@ -34,7 +34,7 @@ public class LocalDbAdapter {
 	 */
 
 	private Context mCtx;
-
+	/* @TODO another decision to add  */
 	private static String imagesTableCreate = "create table Image (imageName text,  location text, activityID integer)";
 	private static String activityTableCreate = "create table ActivityTable "
 			+ "(activityID integer, activityName text,  description text, "
@@ -51,7 +51,9 @@ public class LocalDbAdapter {
 	private static String locationsTableCreate = "create table locations( activityID integer, latitude text , longitude text ,timestamp text )";
 	private static String LOCATIONS_TABLE_NAME = "Locations";
 	 
-
+	private static String taggedLocationsTableCreate = "create table locations( activityID integer, latitude text , longitude text)";
+	private static String TAGGED_LOCATIONS_TABLE_NAME = "TaggedLocations";
+	
 	private static final String TAG = "DBHelper";
 	private static final String DATABASE_NAME = "MobisensDB";
 	private static final String DATABASE_TABLE1 = "Image";
@@ -153,7 +155,7 @@ public class LocalDbAdapter {
 			initialValues.put("endTime", endTime);
 
 			System.out.println("HIMZ: creating values");
-			return db.insert("ActivityTable", null, initialValues);
+			return db.insert(Activity_TABLE_NAME, null, initialValues);
 
 		}
 
@@ -644,6 +646,17 @@ public class LocalDbAdapter {
 		return mDb.insert("Image", null, initialValues);
 	}
 
+	
+	public long storeTaggedLocation(int activityID, String latitude, String longitude)
+	{
+		ContentValues initialValues = new ContentValues();
+		
+		initialValues.put("activityID", activityID);
+		initialValues.put("latitude", latitude);
+		initialValues.put("longitude", longitude);
+		System.out.println("HIMZ: creating tagged locations rows");
+		return mDb.insert(TAGGED_LOCATIONS_TABLE_NAME, null, initialValues);
+	}
 
 
 	public long storeLocation(int activityID, String latitude, String longitude)
@@ -714,7 +727,7 @@ public class LocalDbAdapter {
 		initialValues.put("endTime", endTime);
 
 		System.out.println("HIMZ: creating values");
-		return mDb.insert("ActivityTable", null, initialValues);
+		return mDb.insert(Activity_TABLE_NAME, null, initialValues);
 
 	}
 	/**

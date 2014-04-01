@@ -16,12 +16,15 @@ import edu.cmu.sv.lifelogger.helpers.App;
 public class ActivityLocationManager {
 
 	
-	//TODO: Change this to get real data
 	static App app;
 	public ActivityLocationManager() {
-		// TODO Auto-generated constructor stub
 
 	}
+	/**
+	 * Hardcoded funtion to test the functionality of google maps. 
+	 * Kept it just for future testing. Remove when ever you want 
+	 * @return
+	 */
 	public static ArrayList<LatLng> getAllLocations(){
 		
 		ArrayList<LatLng> locations = new ArrayList<LatLng>();
@@ -87,7 +90,12 @@ public class ActivityLocationManager {
 		
 	}
 
-	
+	/**
+	 * Hardcoded function to return list of all tagged locations. 
+	 * Code for storing tagged locations and then remove this function all 
+	 * together
+	 * @return
+	 */
 	public static ArrayList<Place> getTaggedLocations(){
 		
 		ArrayList<Place> locations = new ArrayList<Place>();
@@ -100,101 +108,6 @@ public class ActivityLocationManager {
 		place.setName("CMU School");
 		locations.add(place);
 		
-		newPoint = new LatLng(37.417709,-122.056419);
-		place = new Place("Practicum Meeting");
-		place.setPoint(newPoint);
-		locations.add(place);
-		
-		// Locations for final demo
-		newPoint = new LatLng(37.417243,-122.057569);
-		place = new Place("Walking...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.417584,-122.059028);
-		place = new Place("Walking...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.419049,-122.05905);
-		place = new Place("Walking...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.419101,-122.061903);
-		place = new Place("Walking...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.41928,-122.062408);
-		place = new Place("Mobile HW Meeting");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.419373,-122.06318);
-		place = new Place("Machine Learning Workshop");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.417447,-122.063963);
-		place = new Place("GA Meeting");
-		place.setPoint(newPoint);
-		locations.add(place);
-		
-		newPoint = new LatLng(37.417575,-122.061893);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.416161,-122.061882);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.413792,-122.061914);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.412531,-122.062215);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.411883,-122.063137);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.411346,-122.062526);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.410119,-122.062751);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.408943,-122.065734);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.404614,-122.067933);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.400369,-122.073061);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.397676,-122.076473);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.393823,-122.078984);
-		place = new Place("Driving...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.393601,-122.078394);
-		place = new Place("Parking...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.392843,-122.078855);
-		place = new Place("Walking...");
-		place.setPoint(newPoint);
-		locations.add(place);
-		newPoint = new LatLng(37.392383,-122.078984);
-		place = new Place("Lunch at Castro St....");
-		place.setPoint(newPoint);
-		locations.add(place);
 		
 		
 		// This is the end point
@@ -207,7 +120,11 @@ public class ActivityLocationManager {
 	}
 
 	
-	
+	/**
+	 * Pre-determined location type. To make things easy for the user
+	 * to select the location type
+	 * @return
+	 */
 	public static String[] getLocationType(){
 		
 		ArrayList<String> types = new ArrayList<String>();
@@ -230,7 +147,7 @@ public class ActivityLocationManager {
 	}
 
 	/**
-	 * Method to return arraylist of all the locations 
+	 * Main method to return arraylist of all the locations 
 	 * @param activityID
 	 * @return
 	 */
