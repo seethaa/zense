@@ -110,12 +110,18 @@ class LocationMetaData {
 
 public class GoogleMapActivity extends FragmentActivity {
  
+	/* Global Constants */
+	private final String APIKEY = "AIzaSyCmMzMZYdOFYbOImgEpYPVMaRzQIW6otm4"; //REPLACE WITH YOUR OWN GOOGLE PLACES API KEY
+	
+	
+	/* Global Variables */
     GoogleMap map;
+    int activityID;
     ArrayList<LatLng> markerPoints;
     //TextView tvDistanceDuration;
     private String latitude;
     private String longitude;
-    private final String APIKEY = "AIzaSyBOxUejYHOuGv9CvEVIeDcc-fA3hiwW0hQ"; //REPLACE WITH YOUR OWN GOOGLE PLACES API KEY
+    
     private final int radius = 100;
     private String type = "food";
     private StringBuilder query = new StringBuilder();
@@ -132,6 +138,11 @@ public class GoogleMapActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googlemap);
+        
+        Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			activityID = extras.getInt("activityID");
+		}
          final Context context = this;
         //tvDistanceDuration = (TextView) findViewById(R.id.tv_distance_time);
             
@@ -146,7 +157,7 @@ public class GoogleMapActivity extends FragmentActivity {
         // Enable MyLocation Button in the Map
         map.setMyLocationEnabled(true);
         
-        ArrayList<LatLng> locations  = ActivityLocationManager.getAllLocations();
+        ArrayList<LatLng> locations  = ActivityLocationManager.getAllLocations(activityID,this);
         
         zoomInBounds(locations);
         

@@ -11,6 +11,14 @@ package edu.cmu.sv.lifelogger.helpers;
  * 
  */
 public class Coordinates {
+	public Coordinates(double latitude, double longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	public Coordinates() {
+		
+		super();
+	}
 	public double latitude;
 	public double longitude;
 	public long timestamp;

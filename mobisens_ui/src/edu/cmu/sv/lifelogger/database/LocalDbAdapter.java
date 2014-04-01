@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -46,7 +48,7 @@ public class LocalDbAdapter {
 	 * Huge locations table to store all the locations associated with all the ID's
 	 * It is a weak entity totally depending on activityid
 	 * */	
-	private static String locationsTableCreate = "create table locations( activityID integer, String latitude, String longitude, String timestamp)";
+	private static String locationsTableCreate = "create table locations( activityID integer, latitude text , longitude text ,timestamp text )";
 	private static String LOCATIONS_TABLE_NAME = "Locations";
 	 
 
@@ -132,7 +134,7 @@ public class LocalDbAdapter {
 			initialValues.put("profilePictureLocation", profilePictureLocation);
 
 			System.out.println("HIMZ: creating values");
-			return db.insert("ActivityTable", null, initialValues);
+			return db.insert(USERS_TABLE_NAME, null, initialValues);
 
 		}
 
@@ -475,8 +477,39 @@ public class LocalDbAdapter {
 
 
 
+	public ArrayList<LatLng> getAllLocationsForActivityID(int activityID){
+		ArrayList<LatLng> data1 = new ArrayList<LatLng>();
+
+		Cursor c = null;
+		c = mDb.rawQuery("select  * from " + LOCATIONS_TABLE_NAME + " where activityID = " + "\"" + activityID +"\""  , null);
+
+		try{
 
 
+			if (c.moveToFirst()) {
+				do {
+					int ativityIDTemp = c.getInt(0);
+					String timeStampTemp = c.getString(3);
+					LatLng cc = new LatLng(c.getDouble(1), c.getDouble(2));
+					data1.add(cc);
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return data1;
+	}
+
+
+
+	
+	
 
 
 	public String getUserName(Integer userID){
@@ -645,10 +678,10 @@ public class LocalDbAdapter {
 		for (Coordinates coordinates2 : coordinates) {
 			if(coordinates2.timestamp == 0){
 				storeLocation(activityID,Double.toString(coordinates2.latitude),
-						Double.toHexString(coordinates2.longitude));
+						Double.toString(coordinates2.longitude));
 			} else {
 				storeLocation(activityID,Double.toString(coordinates2.latitude),
-						Double.toHexString(coordinates2.longitude),Long.toString(coordinates2.timestamp));
+						Double.toString(coordinates2.longitude),Long.toString(coordinates2.timestamp));
 			}
 		}
 

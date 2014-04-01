@@ -155,6 +155,7 @@ public class TagActivity extends Activity{
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(TagActivity.this, GoogleMapActivity.class);
+				intent.putExtra("activityID",currentActivityID);
 				startActivity(intent);
 			}
 

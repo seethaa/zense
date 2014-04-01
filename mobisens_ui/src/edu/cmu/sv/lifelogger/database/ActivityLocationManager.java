@@ -5,15 +5,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.entities.TimelineSegment;
+import edu.cmu.sv.lifelogger.helpers.App;
 
 public class ActivityLocationManager {
 
+	
 	//TODO: Change this to get real data
- 
+	static App app;
+	public ActivityLocationManager() {
+		// TODO Auto-generated constructor stub
+
+	}
 	public static ArrayList<LatLng> getAllLocations(){
 		
 		ArrayList<LatLng> locations = new ArrayList<LatLng>();
@@ -219,6 +227,16 @@ public class ActivityLocationManager {
 
 		return typesStringArray;
 		
+	}
+
+	/**
+	 * Method to return arraylist of all the locations 
+	 * @param activityID
+	 * @return
+	 */
+	public static ArrayList<LatLng> getAllLocations(int activityID,Context ctx) {
+		app = ((App)ctx.getApplicationContext());
+		return app.db.getAllLocationsForActivityID(activityID);
 	}
 		
 
