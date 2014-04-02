@@ -178,6 +178,9 @@ public class GoogleMapActivity extends FragmentActivity {
             
 		}*/
         
+        /* Tag Start and  End Locations */
+        
+        
         ArrayList<Place>  taggedPlaces = new ArrayList<Place>();
         taggedPlaces  =  ActivityLocationManager.getTaggedLocations();
 		

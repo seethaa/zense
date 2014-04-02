@@ -20,7 +20,7 @@ import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.helpers.Coordinates;
 
 /**
- * Simple ERC database access helper class. Defines the basic 
+ * Simple database access helper class. Defines the basic 
  */
 public class LocalDbAdapter {
 
@@ -39,7 +39,8 @@ public class LocalDbAdapter {
 	private static String activityTableCreate = "create table ActivityTable "
 			+ "(activityID integer, activityName text,  description text, "
 			+ "activityType text,startLocation text," +
-			"endLocation text, startTime text, endTime text)";
+			"endLocation text, startTime text, endTime text, startLocationLat text, startLocationLng text, "
+			+ "endLocationLat text, endLocationLng text)";
 	private static String Activity_TABLE_NAME = "ActivityTable";
 	private static String userTableCreate = "create table Users( userID integer, userName text,  email text, about text, profilePictureLocation text)";
 	private static String USERS_TABLE_NAME = "Users";
@@ -714,7 +715,9 @@ public class LocalDbAdapter {
 	 */
 	public long createActivityRow(int activityID, String activityName,
 			String description, String activityType, String startLocation, String endLocation,
-			String startTime, String endTime) {
+			String startTime, String endTime, String startLocationLat, 
+			String startLocationLng, String endLocationLat, 
+			String endLocationLng) {
 
 		ContentValues initialValues = new ContentValues();
 		initialValues.put("activityID", activityID);
@@ -725,7 +728,11 @@ public class LocalDbAdapter {
 		initialValues.put("endLocation", endLocation);
 		initialValues.put("startTime", startTime);
 		initialValues.put("endTime", endTime);
-
+		initialValues.put("startLocationLat", startLocationLat);
+		initialValues.put("startLocationLng", startLocationLng);
+		initialValues.put("endLocationLat", endLocationLat);
+		initialValues.put("endLocationLng", endLocationLng);
+		
 		System.out.println("HIMZ: creating values");
 		return mDb.insert(Activity_TABLE_NAME, null, initialValues);
 
@@ -734,14 +741,14 @@ public class LocalDbAdapter {
 	 * Wrapper funtion to create an activity row, just from the TimelineItem
 	 * @param activity
 	 */
-	public void createActivityRow(TimelineItem activity) {
+	/*public void createActivityRow(TimelineItem activity) {
 		// TODO Auto-generated method stub
 		createActivityRow(activity.getmActivity_id(), activity.getmActivity_name(),
 				activity.getmDescription(),  activity.getmActivityType(), 
 				activity.getmStart_location(), activity.getmEnd_location(),
 				activity.getmStart_time(), activity.getmEnd_time());
 	}
-
+*/
 	/**
 	 * Wrapper function to create an activity row, just from the Activity
 	 * @param activity
@@ -755,12 +762,17 @@ public class LocalDbAdapter {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		String startTime = df.format(activity.getmStart_time());
 		String endTime = df.format(activity.getmEnd_time());
-
+		
+		String startLatitude = Double.toString(activity.getStartCoordinates().latitude);
+		String startLongitude = Double.toString(activity.getStartCoordinates().longitude);
+		String endLatitude = Double.toString(activity.getEndCoordinates().latitude);
+		String endLongitude = Double.toString(activity.getEndCoordinates().longitude);
+		
 
 		createActivityRow(activity.getmActivity_id(), activity.getmActivity_name(),
 				activity.getmDescription(),  activity.getmActivityType(), 
 				activity.getmStart_location(), activity.getmEnd_location(),
-				startTime, endTime);
+				startTime, endTime, startLatitude, startLongitude, endLatitude, endLongitude);
 	}
 
 

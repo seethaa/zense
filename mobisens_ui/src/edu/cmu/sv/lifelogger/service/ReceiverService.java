@@ -103,6 +103,10 @@ public class ReceiverService extends BroadcastReceiver {
 				} catch(Exception e) {
 					System.out.println("Cannot fetch the address");
 				}
+			} else {
+				/* If no gps coordinate in the activity, then save null for the points */
+				prevActivity.setStartCoordinates(new Coordinates(0, 0));
+				prevActivity.setEndCoordinates(new Coordinates(0, 0));
 			}
 			
 			/*Create the activity*/
