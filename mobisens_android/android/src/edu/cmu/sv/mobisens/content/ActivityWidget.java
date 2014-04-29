@@ -37,7 +37,7 @@ public class ActivityWidget extends Widget {
 	public static final String ACTION_ANNO_COMPLETED = CLASS_PREFIX + ".action_anno_completed";
 	public static final String ACTION_REFRESH_ANNO = CLASS_PREFIX + ".action_refresh_anno";
 	public static final String ACTION_ABNORMAL_DETECTED = CLASS_PREFIX + ".action_abnormal_detected";
-	
+	static int counter =0;
 	private int dataProcessingThreadCount = 0;
 	private final static int MAX_PROCESSING_THREAD = 3;
 	
@@ -370,11 +370,13 @@ public class ActivityWidget extends Widget {
 	}
 	
 	private void broadcastNewActivity(Annotation anno, boolean mergeWithLastAnno){
-		Intent appendAnnoIntent = new Intent(AnnotationWidget.ACTION_APPEND_ANNO);
+ 		Intent appendAnnoIntent = new Intent(AnnotationWidget.ACTION_APPEND_ANNO);
 		appendAnnoIntent.putExtra(Annotation.EXTRA_ANNO_STRING, anno.toString());
 		/*@TODO Changing mergeWithLastAnno to be always false for testing
 		 *  purposes. Remove the following line after testing */ 
-		mergeWithLastAnno = false;
+		if(counter++ %4 == 0){
+			mergeWithLastAnno = false;
+		}
 		appendAnnoIntent.putExtra(AnnotationWidget.EXTRA_MERGE_WITH_LAST_ANNO, mergeWithLastAnno);
 		appendAnnoIntent.setAction("edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg");
 		// Log.i(TAG, anno.toString());
