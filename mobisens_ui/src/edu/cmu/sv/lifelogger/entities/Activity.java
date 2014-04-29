@@ -1,5 +1,7 @@
 package edu.cmu.sv.lifelogger.entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.graphics.drawable.Drawable;
@@ -16,17 +18,60 @@ import edu.cmu.sv.lifelogger.util.DataCollector;
  *
  */
 public class Activity {
+
+	private String mActivityType;
+	private String mDescription;
+	private int mactivity_id;
 	private Drawable mActivity_icon;
 	private String mActivity_name;
 	private Date mStart_time;
 	private Date mEnd_time;
-	
+
 	private String mStart_location;
 	private String mEnd_location;
 	// Wrapper start/end co-ordinates. 
 	private Coordinates startCoordinates;
 	private Coordinates endCoordinates;
-		
+
+	public Activity(int activityID, String activityName, String description,
+			String activityType, String startLocation, String endLocation, String startTime,
+			String endTime, String startLocationLat, String startLocationLng, String endLocationLat,
+			String endLocationLng) {
+		this.mactivity_id = activityID;
+		this.mActivity_name = activityName;
+		this.mDescription = description;
+		this.mActivityType = activityType;
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
+		Date startDateTmp=null;
+		Date endDateTmp=null;
+		try {
+			startDateTmp = df.parse(startTime);
+			endDateTmp = df.parse(endTime);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.mStart_time = startDateTmp;
+		this.mEnd_time = endDateTmp;
+		this.mStart_location = startLocation;
+		this.mEnd_location = endLocation;
+		this.startCoordinates = new Coordinates();
+		this.endCoordinates = new Coordinates();
+		try {
+			double startLocationLatitude = Double.parseDouble(startLocationLat);
+			this.startCoordinates.setLatitude(startLocationLatitude);
+			this.startCoordinates.longitude= Double.parseDouble(startLocationLng);
+			this.endCoordinates.latitude = Double.parseDouble(endLocationLat);
+			this.endCoordinates.longitude= Double.parseDouble(endLocationLng);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	//to make it easier
+	private String mTopTxt;
+	private String mBottomTxt;
+
 	public Coordinates getStartCoordinates() {
 		return startCoordinates;
 	}
@@ -45,11 +90,8 @@ public class Activity {
 
 
 	private DataCollector<double[]> locations = new DataCollector<double[]>(-1);
-	
 
-	private String mActivityType;
-	private String mDescription;
-	private int mactivity_id;
+
 
 	public int getmActivity_id() {
 		return mactivity_id;
@@ -58,7 +100,7 @@ public class Activity {
 	public void setmActivity_id(int activity_id) {
 		this.mactivity_id = activity_id;
 	}
-	
+
 	public String getmActivityType() {
 		return mActivityType;
 	}
@@ -66,16 +108,13 @@ public class Activity {
 	public void setmActivityType(String mActivityType) {
 		this.mActivityType = mActivityType;
 	}
-	
 
-	//to make it easier
-	private String mTopTxt;
-	private String mBottomTxt;
+
 
 	public Activity(){
 		super();
 	}
-	
+
 	public Activity(Activity origActivity){
 		this.mactivity_id = origActivity.getmActivity_id();
 		this.mActivity_name = origActivity.getmActivity_name();
@@ -106,7 +145,7 @@ public class Activity {
 		this.mStart_location = start_location;
 		this.mEnd_location = end_location;
 	}
-	
+
 	public String getmDescription() {
 		return mDescription;
 	}
@@ -120,6 +159,7 @@ public class Activity {
 		this.mBottomTxt = bottomtxt;
 	}
 
+
 	public Drawable getmActivity_icon() {
 		return mActivity_icon;
 	}
@@ -127,7 +167,7 @@ public class Activity {
 	public int getId() {
 		return this.mactivity_id;
 	}
-	
+
 	public void setId(int newID) {
 		this.mactivity_id = newID;
 	}
@@ -151,12 +191,12 @@ public class Activity {
 		return mStart_time;
 	}
 
-	
+
 	public void setmStart_time(Date mStart_time) {
 		this.mStart_time = mStart_time;
 	}
 
-	
+
 	public Date getmEnd_time() {
 		return mEnd_time;
 	}
@@ -165,8 +205,8 @@ public class Activity {
 	public void setmEnd_time(Date mEnd_time) {
 		this.mEnd_time = mEnd_time;
 	}
-	
-	
+
+
 	public String getmStart_location() {
 		/* @TODO Use GoogleApi to get Area/City Name for the start location*/
 		if(mStart_location == null) {
@@ -194,13 +234,45 @@ public class Activity {
 		this.mEnd_location = mEnd_location;
 	}
 
-	
+
 	public DataCollector<double[]> getLocations() {
 		return locations;
 	}
 
 	public void setLocations(DataCollector<double[]> locations) {
 		this.locations = locations;
+	}
+
+
+	public String getmStartTimeFormatted() {
+
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
+		Date date;
+		String startDateStrFormatted = null;
+		try {
+			date = this.mStart_time;
+			df = new SimpleDateFormat("hh:mm a");
+			startDateStrFormatted = df.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return startDateStrFormatted;
+	}
+
+	public String getmEndTimeFormatted() {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); 
+		Date date;
+		String endDateStrFormatted = null;
+		try {
+			date = this.mEnd_time;
+			df = new SimpleDateFormat("hh:mm a");
+			endDateStrFormatted = df.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return endDateStrFormatted;
 	}
 
 

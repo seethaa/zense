@@ -16,6 +16,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
  
+
 import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -26,6 +27,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
  
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
@@ -64,6 +66,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
  
+
 import com.google.android.gms.maps.CameraUpdate;
 //import com.frank.gmap.demo.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -78,13 +81,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import edu.cmu.sv.lifelogger.database.ActivityLocationManager;
 import edu.cmu.sv.lifelogger.database.Place;
+import edu.cmu.sv.lifelogger.entities.Activity;
 import edu.cmu.sv.lifelogger.entities.ActivityItem;
 import edu.cmu.sv.mobisens_ui.R;
  
@@ -117,6 +120,7 @@ public class GoogleMapActivity extends FragmentActivity {
 	/* Global Variables */
     GoogleMap map;
     int activityID;
+    Activity currActivity;
     ArrayList<LatLng> markerPoints;
     //TextView tvDistanceDuration;
     private String latitude;
@@ -179,19 +183,27 @@ public class GoogleMapActivity extends FragmentActivity {
 		}*/
         
         /* Tag Start and  End Locations */
-        
-        
-        ArrayList<Place>  taggedPlaces = new ArrayList<Place>();
+        currActivity = ActivityLocationManager.getActivity(activityID, this);
+		MarkerOptions taggedMarkerOptions = new MarkerOptions();
+		LatLng startPoint = new LatLng(currActivity.getStartCoordinates().latitude,currActivity.getStartCoordinates().longitude);
+		LatLng endPoint = new LatLng(currActivity.getEndCoordinates().latitude,currActivity.getEndCoordinates().longitude);
+		taggedMarkerOptions.position(startPoint).title(currActivity.getmStart_location());
+		map.addMarker(taggedMarkerOptions);
+		taggedMarkerOptions.position(endPoint).title(currActivity.getmEnd_location());
+		map.addMarker(taggedMarkerOptions);
+		
+        /* @TODO Tagged places to be shown with this. When backend ready, uncomment it.
+         * ArrayList<Place>  taggedPlaces = new ArrayList<Place>();
         taggedPlaces  =  ActivityLocationManager.getTaggedLocations();
 		
         if (taggedPlaces != null) {
-			MarkerOptions taggedMarkerOptions = new MarkerOptions();
+
 			for (Place a : taggedPlaces) {
 				taggedMarkerOptions.position(a.getPoint()).title(a.getName());
 				map.addMarker(taggedMarkerOptions);
 
 			}
-		}
+		}*/
    
         
         final ArrayList <LocationMetaData> locData = new ArrayList <LocationMetaData>();

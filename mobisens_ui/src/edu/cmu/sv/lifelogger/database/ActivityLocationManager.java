@@ -9,6 +9,7 @@ import android.content.Context;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import edu.cmu.sv.lifelogger.entities.Activity;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.entities.TimelineSegment;
 import edu.cmu.sv.lifelogger.helpers.App;
@@ -154,6 +155,11 @@ public class ActivityLocationManager {
 	public static ArrayList<LatLng> getAllLocations(int activityID,Context ctx) {
 		app = ((App)ctx.getApplicationContext());
 		return app.db.getAllLocationsForActivityID(activityID);
+	}
+	public static Activity getActivity(int activityID,
+			Context ctx) {
+		app = ((App)ctx.getApplicationContext());
+		return app.db.getActivity(activityID);
 	}
 		
 

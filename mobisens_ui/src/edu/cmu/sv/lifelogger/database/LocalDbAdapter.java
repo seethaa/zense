@@ -476,6 +476,35 @@ public class LocalDbAdapter {
 
 		return t1;
 	}
+	
+	public Activity getActivity(int activityID){
+		Activity t1 = null;
+
+		Cursor c = null;
+		c = mDb.rawQuery("select  * from ActivityTable where activityID = " + "\"" + activityID +"\"" , null);
+
+		try{
+
+
+			if (c.moveToFirst()) {
+				do {
+
+					t1 = new Activity((int)Integer.parseInt(c.getString(0)),c.getString(1),c.getString(2),c.getString(3),
+							c.getString(4),c.getString(5),c.getString(6),c.getString(7),c.getString(8),c.getString(9),c.getString(10),c.getString(11));
+
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return t1;
+	}
 
 
 
