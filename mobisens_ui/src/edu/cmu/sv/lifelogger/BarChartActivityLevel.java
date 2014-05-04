@@ -42,10 +42,10 @@ public class BarChartActivityLevel extends Activity {
 	private LinearLayout activitySummaryLayout;
 	ListView activitySummaryListView;
 
-	ArrayList<ActivityItem> dataList  = DashboardManager.getAllPieChartData();
-	int[] activitySummarySeriesPoints = getSeriesPoints();
-	int[][] activitySummarySeriesDataset = DashboardActivityLevelManager.getSeriesDataset();
-	int[] activitySummaryActivityArray = activitySummarySeriesDataset[0];
+	ArrayList<ActivityItem> dataList  ;
+	int[] activitySummarySeriesPoints;
+	int[][] activitySummarySeriesDataset ;
+	int[] activitySummaryActivityArray ;
 	
 	public int[] getSeriesPoints () {
 		int seriesLength = dataList.size() ;
@@ -60,9 +60,9 @@ public class BarChartActivityLevel extends Activity {
 	private LinearLayout activityLevelLayout;
 	HorizontalListView activityLevelListView;
 	
-	int[] seriesPoints = DashboardActivityLevelManager.getSeriesPoints();
-	int[][] seriesDataset = DashboardActivityLevelManager.getSeriesDataset();
-	int[] activityArray = seriesDataset[0];
+	int[] seriesPoints ;
+	int[][] seriesDataset ;
+	int[] activityArray ;
 
 	// Array to support 11 different activities, including null activity(0)
 	int colorArray[] = { Color.TRANSPARENT, Color.rgb(71,60,139), //purple
@@ -80,12 +80,26 @@ public class BarChartActivityLevel extends Activity {
 	public void onCreate(Bundle savedInstance) {
 
 		super.onCreate(savedInstance);
+		/* Generate the data */
+		dataList  = DashboardManager.getAllPieChartData(getApplicationContext());
+		activitySummarySeriesPoints = getSeriesPoints();
+
+		activitySummarySeriesDataset = DashboardActivityLevelManager.getSeriesDataset();
+		activitySummaryActivityArray = activitySummarySeriesDataset[0];
+		
+		seriesPoints = DashboardActivityLevelManager.getSeriesPoints();
+		seriesDataset = DashboardActivityLevelManager.getSeriesDataset();
+		activityArray = seriesDataset[0];
+		
 		
 		ActionBar actionBar = getActionBar();
 
 		actionBar.setDisplayShowTitleEnabled(true);
 		
 		setContentView(R.layout.activity_bar_chart_activity_level);
+		
+		
+		
 		activityLevelLayout = (LinearLayout) findViewById(R.id.linearlay);
 		
 		activitySummaryListView = (ListView) findViewById(R.id.activitySummaryBarChart);
