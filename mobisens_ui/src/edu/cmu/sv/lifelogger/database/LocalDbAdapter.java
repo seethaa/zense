@@ -52,8 +52,10 @@ public class LocalDbAdapter {
 	private static String locationsTableCreate = "create table locations( activityID integer, latitude text , longitude text ,timestamp text )";
 	private static String LOCATIONS_TABLE_NAME = "Locations";
 	 
-	private static String taggedLocationsTableCreate = "create table locations( activityID integer, latitude text , longitude text)";
+	private static String taggedLocationsTableCreate = "create table TaggedLocations( activityID integer, latitude text , longitude text, title text)";
 	private static String TAGGED_LOCATIONS_TABLE_NAME = "TaggedLocations";
+
+
 	
 	private static final String TAG = "DBHelper";
 	private static final String DATABASE_NAME = "MobisensDB";
@@ -84,6 +86,7 @@ public class LocalDbAdapter {
 			db.execSQL(activityTableCreate);
 			db.execSQL(userTableCreate);
 			db.execSQL(locationsTableCreate);
+			db.execSQL(taggedLocationsTableCreate);
 			
 			/* Also seed data for default values */
 			seedData(db);
@@ -538,7 +541,37 @@ public class LocalDbAdapter {
 		return data1;
 	}
 
+	public ArrayList<Place> getAllTaggedLocationsForActivityID(int activityID){
+		ArrayList<Place> data1 = new ArrayList<Place>();
 
+		Cursor c = null;
+		c = mDb.rawQuery("select  * from " + TAGGED_LOCATIONS_TABLE_NAME + " where activityID = " + "\"" + activityID +"\""  , null);
+
+		try{
+
+
+			if (c.moveToFirst()) {
+				LatLng newPoint;
+				Place place = new Place();
+				do {
+					String title = c.getString(3);
+					newPoint = new LatLng( c.getDouble(1), c.getDouble(2));
+					place.setPoint(newPoint);
+					place.setName(title);
+					data1.add(place);
+				} while (c.moveToNext());
+			}
+
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+
+
+		return data1;
+	}
 
 	
 	
@@ -677,13 +710,14 @@ public class LocalDbAdapter {
 	}
 
 	
-	public long storeTaggedLocation(int activityID, String latitude, String longitude)
+	public long storeTaggedLocation(int activityID, String latitude, String longitude, String title)
 	{
 		ContentValues initialValues = new ContentValues();
 		
 		initialValues.put("activityID", activityID);
 		initialValues.put("latitude", latitude);
 		initialValues.put("longitude", longitude);
+		initialValues.put("title", title);
 		System.out.println("HIMZ: creating tagged locations rows");
 		return mDb.insert(TAGGED_LOCATIONS_TABLE_NAME, null, initialValues);
 	}

@@ -16,7 +16,7 @@ import edu.cmu.sv.lifelogger.helpers.App;
 
 public class ActivityLocationManager {
 
-	
+
 	static App app;
 	public ActivityLocationManager() {
 
@@ -27,7 +27,7 @@ public class ActivityLocationManager {
 	 * @return
 	 */
 	public static ArrayList<LatLng> getAllLocations(){
-		
+
 		ArrayList<LatLng> locations = new ArrayList<LatLng>();
 		LatLng newPoint = new LatLng( 37.418709,-122.057419);// CMU School
 		locations.add(newPoint);
@@ -35,7 +35,7 @@ public class ActivityLocationManager {
 		locations.add(newPoint);
 		newPoint = new LatLng( 37.418709,-122.057680);
 		locations.add(newPoint);
-		
+
 		// Locations for final demo
 		newPoint = new LatLng(37.417709,-122.056419);// Practicum Meeting
 		locations.add(newPoint);
@@ -53,7 +53,7 @@ public class ActivityLocationManager {
 		locations.add(newPoint);
 		newPoint = new LatLng(37.417447,-122.063963);// GA Meeting
 		locations.add(newPoint);
-		
+
 		newPoint = new LatLng(37.417575,-122.061893);// Driving...
 		locations.add(newPoint);
 		newPoint = new LatLng(37.416161,-122.061882);// Driving...
@@ -84,11 +84,11 @@ public class ActivityLocationManager {
 		locations.add(newPoint);
 		newPoint = new LatLng(37.392383,-122.078984);// Lunch at Castro St.
 		locations.add(newPoint);
-		
+
 		//
 
 		return locations;
-		
+
 	}
 
 	/**
@@ -98,41 +98,41 @@ public class ActivityLocationManager {
 	 * @return
 	 */
 	public static ArrayList<Place> getTaggedLocations(){
-		
+
 		ArrayList<Place> locations = new ArrayList<Place>();
 		// Name = address, Geometry for latitude and longitude
-		
+
 		// THis is the start position of the path
 		LatLng newPoint = new LatLng( 37.418709,-122.057419);
 		Place place = new Place();
 		place.setPoint(newPoint);
 		place.setName("CMU School");
 		locations.add(place);
-		
-		
-		
+
+
+
 		// This is the end point
 		newPoint = new LatLng( 37.417297,-122.060680);
 		place = new Place("End Location");
 		place.setPoint(newPoint);
 		locations.add(place);
 		return locations;
-		
+
 	}
 
-	
+
 	/**
 	 * Pre-determined location type. To make things easy for the user
 	 * to select the location type
 	 * @return
 	 */
 	public static String[] getLocationType(){
-		
+
 		ArrayList<String> types = new ArrayList<String>();
-		
-		
+
+
 		types.add("Home");
-		
+
 		types.add("Work");
 		types.add("Shop");
 		types.add("Restaurant");
@@ -140,11 +140,11 @@ public class ActivityLocationManager {
 		types.add("Motel");
 		types.add("Grocery Store");
 		types.add("Other");
-		
+
 		String[] typesStringArray =(String[]) types.toArray(new String[types.size()]); 
 
 		return typesStringArray;
-		
+
 	}
 
 	/**
@@ -161,6 +161,38 @@ public class ActivityLocationManager {
 		app = ((App)ctx.getApplicationContext());
 		return app.db.getActivity(activityID);
 	}
+
+	public static long storeTaggedLocatoin(int activityID, double latitude, double longitude, String title ,Context ctx) {
+		app = ((App)ctx.getApplicationContext());
+		return app.db.storeTaggedLocation(activityID, String.valueOf(latitude), String.valueOf(longitude), title);
+	}
+	
+	public static ArrayList<Place> getTaggedLocations(int activityID, Context ctx){
+
 		
+		app = ((App)ctx.getApplicationContext());
+		return app.db.getAllTaggedLocationsForActivityID(activityID);
+		
+		/*ArrayList<Place> locations = new ArrayList<Place>();
+		// Name = address, Geometry for latitude and longitude
+
+		// THis is the start position of the path
+		LatLng newPoint = new LatLng( 37.418709,-122.057419);
+		Place place = new Place();
+		place.setPoint(newPoint);
+		place.setName("CMU School");
+		locations.add(place);
+
+
+
+		// This is the end point
+		newPoint = new LatLng( 37.417297,-122.060680);
+		place = new Place("End Location");
+		place.setPoint(newPoint);
+		locations.add(place);
+		return locations;
+*/
+	}
+
 
 }

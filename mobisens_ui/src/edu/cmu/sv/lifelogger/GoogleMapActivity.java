@@ -192,9 +192,8 @@ public class GoogleMapActivity extends FragmentActivity {
 		taggedMarkerOptions.position(endPoint).title(currActivity.getmEnd_location());
 		map.addMarker(taggedMarkerOptions);
 		
-        /* @TODO Tagged places to be shown with this. When backend ready, uncomment it.
-         * ArrayList<Place>  taggedPlaces = new ArrayList<Place>();
-        taggedPlaces  =  ActivityLocationManager.getTaggedLocations();
+        ArrayList<Place>  taggedPlaces = new ArrayList<Place>();
+        taggedPlaces  =  ActivityLocationManager.getTaggedLocations(activityID,this);
 		
         if (taggedPlaces != null) {
 
@@ -203,7 +202,7 @@ public class GoogleMapActivity extends FragmentActivity {
 				map.addMarker(taggedMarkerOptions);
 
 			}
-		}*/
+		}
    
         
         final ArrayList <LocationMetaData> locData = new ArrayList <LocationMetaData>();
@@ -357,13 +356,13 @@ public class GoogleMapActivity extends FragmentActivity {
 							locData.add(locDataTemp);
 							MarkerOptions markerOptionsNew = new MarkerOptions();
 							markerOptionsNew.position(m1).title(locDataTemp.getAnnotation().toString());
+							ActivityLocationManager.storeTaggedLocatoin(activityID, m1.latitude,
+									m1.longitude, locDataTemp.getAnnotation().toString(),GoogleMapActivity.this.getApplicationContext());
 							map.addMarker(markerOptionsNew);
 							//m1.setTitle(locDataTemp.getAnnotation().toString());
 							placeAdapter = null;
 							tmpList.setAdapter(null);
 						} else {
-
-							
 							final Dialog dialog = new Dialog(GoogleMapActivity.this);
 							dialog.setContentView(R.layout.usertag_dialog);
 							dialog.setTitle("Please tag the location");
@@ -383,6 +382,8 @@ public class GoogleMapActivity extends FragmentActivity {
 									locData.add(locDataTemp);
 									MarkerOptions markerOptionsNew = new MarkerOptions();
 									markerOptionsNew.position(m1).title(locDataTemp.getAnnotation().toString());
+									ActivityLocationManager.storeTaggedLocatoin(activityID, m1.latitude,
+											m1.longitude, locDataTemp.getAnnotation().toString(),GoogleMapActivity.this.getApplicationContext());
 									map.addMarker(markerOptionsNew);
 									dialog.dismiss();
 									
