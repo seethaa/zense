@@ -303,9 +303,9 @@ public class BarChartActivityLevel extends Activity {
 			return row;
 		}
 		
-		public int calculateWidthOfBar(int percentage){
+		public int calculateWidthOfBar(double percentage){
 			/* Find the maximum value of all the percentages for the activities */
-			int maxVal = 0;
+			double maxVal = 0;
 			for (ActivityItem a: dataList){
 				if(a.getmPercentage() > maxVal)
 					maxVal = a.getmPercentage();
@@ -314,7 +314,7 @@ public class BarChartActivityLevel extends Activity {
 			/* Extrapolate the percentage to fit maximum width */
 			
 			
-			return 200*percentage/maxVal ;
+			return (int) ((int) 200*percentage/maxVal) ;
 			
 			
 		}

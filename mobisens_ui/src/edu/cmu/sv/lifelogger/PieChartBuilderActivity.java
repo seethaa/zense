@@ -115,7 +115,8 @@ public class PieChartBuilderActivity extends Activity {
 
 	public void createPieChart() {
 		ArrayList<ActivityItem> dataList = new ArrayList<ActivityItem>();
-		dataList = DashboardManager.getAllPieChartData();
+		//dataList = DashboardManager.getAllPieChartData();
+		dataList = DashboardManager.getAllPieChartData(this.getApplicationContext());
 		double value = 0;
 		int i = 0;
 		isFirstRun++;
@@ -200,6 +201,8 @@ public class PieChartBuilderActivity extends Activity {
 			Intent intent = new Intent(this, TimelineActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.profile) {
+			//Put code for refresh data analysis
+			DashboardManager.doDashboardSummaryAnalysis(this.getApplicationContext());
 			Intent intent = new Intent(this, PieChartBuilderActivity.class);
 			startActivity(intent);
 		} else if (item.getItemId() == R.id.settings) {

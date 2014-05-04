@@ -1,10 +1,14 @@
 package edu.cmu.sv.lifelogger.database;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -16,6 +20,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import edu.cmu.sv.lifelogger.entities.Activity;
+import edu.cmu.sv.lifelogger.entities.ActivityItem;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 import edu.cmu.sv.lifelogger.helpers.Coordinates;
 
@@ -44,19 +49,20 @@ public class LocalDbAdapter {
 	private static String Activity_TABLE_NAME = "ActivityTable";
 	private static String userTableCreate = "create table Users( userID integer, userName text,  email text, about text, profilePictureLocation text)";
 	private static String USERS_TABLE_NAME = "Users";
-	
+
 	/*
 	 * Huge locations table to store all the locations associated with all the ID's
 	 * It is a weak entity totally depending on activityid
 	 * */	
 	private static String locationsTableCreate = "create table locations( activityID integer, latitude text , longitude text ,timestamp text )";
 	private static String LOCATIONS_TABLE_NAME = "Locations";
-	 
+
 	private static String taggedLocationsTableCreate = "create table TaggedLocations( activityID integer, latitude text , longitude text, title text)";
 	private static String TAGGED_LOCATIONS_TABLE_NAME = "TaggedLocations";
 
+	private static String dashboardSummaryTable = "create table DashboardSummary( activityType text, percentage real)";
+	private static String DASHBOARD_SUMMARY_TABLE_NAME = "DashboardSummary";
 
-	
 	private static final String TAG = "DBHelper";
 	private static final String DATABASE_NAME = "MobisensDB";
 	private static final String DATABASE_TABLE1 = "Image";
@@ -87,7 +93,8 @@ public class LocalDbAdapter {
 			db.execSQL(userTableCreate);
 			db.execSQL(locationsTableCreate);
 			db.execSQL(taggedLocationsTableCreate);
-			
+			db.execSQL(dashboardSummaryTable);
+
 			/* Also seed data for default values */
 			seedData(db);
 
@@ -257,6 +264,109 @@ public class LocalDbAdapter {
 
 		return labels ;
 	}
+
+
+	public void doDashboardSummaryAnalysis(){
+		// Get All the rows from activityTable
+		// Create hashmap for each activityType and update the total time taken there.
+		HashMap<String, Long> map = new HashMap();
+		Cursor c = null;
+		c = mDb.rawQuery("select  activityType, startTime, endTime from ActivityTable" , null);
+		String activityType = "";String strStartTime = ""; String strEndTime = "";
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		Date startDate, endDate;
+		long diffTime;
+		try{
+			if (c.moveToFirst()) {
+				do {
+					startDate = format.parse(c.getString(1));
+					endDate = format.parse(c.getString(2));
+					diffTime = endDate.getTime() -startDate.getTime();
+					//Change minimum precision to seconds from microseconds
+					diffTime = diffTime/1000;
+					activityType = c.getString(0);
+					if(map.containsKey(activityType)){
+						// Edit the key
+						long prevTime = (Long) map.get(activityType);
+						map.put(activityType,  prevTime + diffTime);
+					} else {
+						// Add the time difference to the map
+						map.put(activityType, diffTime);
+					}
+				} while (c.moveToNext());
+			}
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+		/* Create the percentages and store them */
+
+		// Find the total time taken in seconds
+		Long totalTime = 0L;
+		for (Map.Entry entry : map.entrySet()) {
+			totalTime = totalTime + (Long) entry.getValue();
+		}
+		
+		
+		// Clear the existing DashboardSummaryTable.
+		deleteAllRowsFromTable(DASHBOARD_SUMMARY_TABLE_NAME);
+		
+		//Create percentage and store in the db
+		HashMap<String, Long> hm = new HashMap();
+		Long tempValue;
+		Double percentage = 0.0;
+		for (Map.Entry entry : map.entrySet()) {
+			tempValue = (Long)entry.getValue();
+			percentage = (double) (( (double) tempValue/ (double)totalTime) * 100);
+			// Round off the value of the percentage
+			percentage = Double.valueOf(new DecimalFormat("#.##").format(percentage)); 
+			createDashboardSummaryRow((String) entry.getKey(), percentage);
+		}
+	}
+
+
+	/**
+	 * Remove all users and groups from database.
+	 */
+	public void deleteAllRowsFromTable(String tableName)
+	{
+		// db.delete(String tableName, String whereClause, String[] whereArgs);
+		// If whereClause is null, it will delete all rows.
+		/*SQLiteDatabase mDb = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper */
+		mDb.delete(tableName, null, null);
+	}
+
+	public long createDashboardSummaryRow(String activityType, Double percentage ) {
+		ContentValues initialValues = new ContentValues();
+		initialValues.put("activityType", activityType);
+		initialValues.put("percentage", percentage);
+		return mDb.insert(DASHBOARD_SUMMARY_TABLE_NAME, null, initialValues);
+	}
+
+
+	public ArrayList<ActivityItem> getAllDashboardSummary(){
+		ArrayList<ActivityItem> data1 = new ArrayList<ActivityItem>();
+		Cursor c = null;
+		c = mDb.rawQuery("select  * from "+ DASHBOARD_SUMMARY_TABLE_NAME , null);
+		try{
+			if (c.moveToFirst()) {
+				do {
+					ActivityItem t1 = new ActivityItem(c.getString(0), c.getDouble(1));
+					data1.add(t1);
+				} while (c.moveToNext());
+			}
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			System.out.println("asdf");
+		}
+		return data1;
+	}
+
+
 	/**
 	 * Function to update the description of the activity
 	 * @param description
@@ -329,7 +439,7 @@ public class LocalDbAdapter {
 
 		String strSQL = "UPDATE ActivityTable SET activityName = " + "\""
 				+ activityName  + "\"" + ", activityType =" + "\""
-						+ activityType + "\"" + ", startLocation =" + "\""
+				+ activityType + "\"" + ", startLocation =" + "\""
 				+ startLocation + "\"" + ", endLocation =" + "\"" + endLocation
 				+ "\"" + "WHERE activityID = " + "\"" + activityID + "\"";
 
@@ -479,7 +589,7 @@ public class LocalDbAdapter {
 
 		return t1;
 	}
-	
+
 	public Activity getActivity(int activityID){
 		Activity t1 = null;
 
@@ -573,8 +683,8 @@ public class LocalDbAdapter {
 		return data1;
 	}
 
-	
-	
+
+
 
 
 	public String getUserName(Integer userID){
@@ -709,11 +819,11 @@ public class LocalDbAdapter {
 		return mDb.insert("Image", null, initialValues);
 	}
 
-	
+
 	public long storeTaggedLocation(int activityID, String latitude, String longitude, String title)
 	{
 		ContentValues initialValues = new ContentValues();
-		
+
 		initialValues.put("activityID", activityID);
 		initialValues.put("latitude", latitude);
 		initialValues.put("longitude", longitude);
@@ -726,7 +836,7 @@ public class LocalDbAdapter {
 	public long storeLocation(int activityID, String latitude, String longitude)
 	{
 		ContentValues initialValues = new ContentValues();
-		
+
 		initialValues.put("activityID", activityID);
 		initialValues.put("latitude", latitude);
 		initialValues.put("longitude", longitude);
@@ -735,11 +845,11 @@ public class LocalDbAdapter {
 		return mDb.insert(LOCATIONS_TABLE_NAME, null, initialValues);
 	}
 
-	
+
 	public long storeLocation(int activityID, String latitude, String longitude, String timestamp)
 	{
 		ContentValues initialValues = new ContentValues();
-		
+
 		initialValues.put("activityID", activityID);
 		initialValues.put("latitude", latitude);
 		initialValues.put("longitude", longitude);
@@ -751,7 +861,7 @@ public class LocalDbAdapter {
 	public void storeLocation(int activityID,ArrayList<Coordinates> coordinates)
 	{
 		ContentValues initialValues;
-		
+
 		for (Coordinates coordinates2 : coordinates) {
 			if(coordinates2.timestamp == 0){
 				storeLocation(activityID,Double.toString(coordinates2.latitude),
@@ -765,9 +875,9 @@ public class LocalDbAdapter {
 		return ;
 	}
 
-		
-	
-	
+
+
+
 	/**
 	 * API to store activity information in our Database
 	 * @param activityID
@@ -795,7 +905,7 @@ public class LocalDbAdapter {
 		initialValues.put("startLocationLng", startLocationLng);
 		initialValues.put("endLocationLat", endLocationLat);
 		initialValues.put("endLocationLng", endLocationLng);
-		
+
 		System.out.println("HIMZ: creating values");
 		return mDb.insert(Activity_TABLE_NAME, null, initialValues);
 
@@ -811,7 +921,7 @@ public class LocalDbAdapter {
 				activity.getmStart_location(), activity.getmEnd_location(),
 				activity.getmStart_time(), activity.getmEnd_time());
 	}
-*/
+	 */
 	/**
 	 * Wrapper function to create an activity row, just from the Activity
 	 * @param activity
@@ -825,12 +935,12 @@ public class LocalDbAdapter {
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		String startTime = df.format(activity.getmStart_time());
 		String endTime = df.format(activity.getmEnd_time());
-		
+
 		String startLatitude = Double.toString(activity.getStartCoordinates().latitude);
 		String startLongitude = Double.toString(activity.getStartCoordinates().longitude);
 		String endLatitude = Double.toString(activity.getEndCoordinates().latitude);
 		String endLongitude = Double.toString(activity.getEndCoordinates().longitude);
-		
+
 
 		createActivityRow(activity.getmActivity_id(), activity.getmActivity_name(),
 				activity.getmDescription(),  activity.getmActivityType(), 

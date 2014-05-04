@@ -9,15 +9,20 @@ public class ActivityItem {
 	private String mActivity_icon;
 	private String mActivity_name;
 	private int mTime;
-	private int mPercentage;
+	private double mPercentage;
 	
 
-	public ActivityItem(String activity_name, int time, int percentage) {
+	public ActivityItem(String activity_name, int time, double percentage) {
 		this.mActivity_name = activity_name;
 		this.mTime = time;
 		this.mPercentage = percentage;
 	}
-
+	
+	public ActivityItem(String activity_name,  double percentage) {
+		this.mActivity_name = activity_name;
+		this.mTime = 0;
+		this.mPercentage = percentage;
+	}
 	public String getmActivity_icon() {
 		return mActivity_icon;
 	}
@@ -45,11 +50,11 @@ public class ActivityItem {
 		this.mTime = mTime;
 	}
 
-	public int getmPercentage() {
+	public double getmPercentage() {
 		return mPercentage;
 	}
 
-	public void setmPercentage(int mPercentage) {
+	public void setmPercentage(double mPercentage) {
 		this.mPercentage = mPercentage;
 	}
 

@@ -1,14 +1,17 @@
 package edu.cmu.sv.lifelogger.database;
 
+import edu.cmu.sv.lifelogger.helpers.App;
 import edu.cmu.sv.lifelogger.helpers.DefinitionHelper;
+
 import java.util.ArrayList;
 
+import android.content.Context;
 import edu.cmu.sv.lifelogger.entities.ActivityItem;
 import edu.cmu.sv.lifelogger.entities.MoodItem;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
 
 public class DashboardManager {
-
+	static App app;
 	//TODO: Change this to get real data
 	//TODO: Add variable for icon location
 	public static ArrayList<ActivityItem> getAllPieChartData() {
@@ -17,7 +20,7 @@ public class DashboardManager {
 		/* Care should be taken to add correct percentage for each value. 
 		 * @ToDo write a function to convert a value into percentage
 		 * */
-		
+		// Iterate through the db and get all the rows
 		ActivityItem t1 = new ActivityItem("Dining", 2, 22);
 		data.add(t1);
 		ActivityItem t2 = new ActivityItem("Driving", 1, 15);
@@ -36,6 +39,16 @@ public class DashboardManager {
 		return data;
 	}
 	
+	public static ArrayList<ActivityItem> getAllPieChartData( Context ctx) {
+		app = ((App)ctx.getApplicationContext());
+		return app.db.getAllDashboardSummary();
+	}
+	
+	public static void doDashboardSummaryAnalysis( Context ctx ){
+		app = ((App)ctx.getApplicationContext());
+		app.db.doDashboardSummaryAnalysis();
+		return;
+	}
 	
 	
 	
