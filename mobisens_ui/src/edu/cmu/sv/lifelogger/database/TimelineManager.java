@@ -47,8 +47,9 @@ public class TimelineManager {
 		for(TimelineItem t1 : data1) //use for-each loop
 		{
 			counter++;
-			tempData1.add(t1);
+			//tempData1.add(t1);
 			prevDate = curDate;
+			
 			/* Get date out of current timeline item*/
 			curDate = getStrDateFromString(t1.getmEnd_time());
 
@@ -64,6 +65,7 @@ public class TimelineManager {
 				// Flush out the old tempData1
 				tempData1 = new ArrayList<TimelineItem>();
 			}
+			tempData1.add(t1);
 		}
 
 		//Handle the last segment here, as it would not have been written till now

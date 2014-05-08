@@ -166,7 +166,7 @@ public class GoogleMapActivity extends FragmentActivity {
         zoomInBounds(locations);
         
         PolylineOptions pol = new PolylineOptions();
-        pol.color(Color.BLUE);
+        pol.color(Color.BLACK);
         pol.width((float) 5.1);
         pol.addAll(locations);
         
