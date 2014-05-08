@@ -31,7 +31,7 @@ public class ReceiverService extends BroadcastReceiver {
 
 	/* Some Variables to store activity data, current and previous */
 
-	Activity prevActivity = null;
+	static Activity prevActivity = null;
 	Activity currActivity = null;
 
 	private static int lastActivityId = 0;

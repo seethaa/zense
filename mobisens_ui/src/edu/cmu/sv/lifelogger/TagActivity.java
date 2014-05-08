@@ -297,7 +297,7 @@ public class TagActivity extends Activity{
 			//	        	String URL = "http://maps.google.com/maps/api/staticmap?center=" +latitude + "," + longitude + "&zoom=15&size=200x200&sensor=false";
 
 			//get all points first
-			ArrayList<LatLng> locations  = ActivityLocationManager.getAllLocations();
+			ArrayList<LatLng> locations  = ActivityLocationManager.getAllLocations(currentActivityID,getApplicationContext());
 			String allpoints = getStringLocs(locations);
 
 			String URL = "http://maps.googleapis.com/maps/api/staticmap?" +
