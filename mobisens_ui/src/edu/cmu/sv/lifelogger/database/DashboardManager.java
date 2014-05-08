@@ -12,14 +12,13 @@ import edu.cmu.sv.lifelogger.entities.TimelineItem;
 
 public class DashboardManager {
 	static App app;
-	//TODO: Change this to get real data
-	//TODO: Add variable for icon location
-	public static ArrayList<ActivityItem> getAllPieChartData() {
+
+/*	public static ArrayList<ActivityItem> getAllPieChartData() {
 		ArrayList<ActivityItem> data  = new ArrayList<ActivityItem>();
 		
-		/* Care should be taken to add correct percentage for each value. 
+		 Care should be taken to add correct percentage for each value. 
 		 * @ToDo write a function to convert a value into percentage
-		 * */
+		 * 
 		// Iterate through the db and get all the rows
 		ActivityItem t1 = new ActivityItem("Dining", 2, 22);
 		data.add(t1);
@@ -37,8 +36,10 @@ public class DashboardManager {
 		ActivityItem t5 = new ActivityItem("Misc", 1, 5);
 		data.add(t5);
 		return data;
-	}
+	}*/
 	
+	
+	//TODO: Add variable for icon location
 	public static ArrayList<ActivityItem> getAllPieChartData( Context ctx) {
 		app = ((App)ctx.getApplicationContext());
 		return app.db.getAllDashboardSummary();

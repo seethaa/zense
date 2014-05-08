@@ -19,6 +19,34 @@ public class DashboardActivityLevelManager {
 	final private static int TIME_GRANULARITY = 20; // in minutes
 	final private static int NO_OF_SERIES = 1; //Currently supported by achartEngine
 	// TODO: Change this to get real data
+	
+	public static int[][] getLast24HourDataset(){
+		int seriesLength = DefinitionHelper.HOURS_IN_DAY * 60 /TIME_GRANULARITY;
+		int dataset[][] = new int [NO_OF_SERIES][seriesLength];
+		//Initialize the dataset
+		clearCompleteDataset(dataset);
+		
+		/** Seed the dataset **/
+		// Activity 0 Dining 9 to 9.30 am 
+		dataset = RangeToSeries(dataset, 1, 9.00, 9.30);
+		dataset = RangeToSeries(dataset, 1, 13.00, 14.00);
+		dataset = RangeToSeries(dataset, 1, 20.00, 21.00);
+		
+		// Activity 1 Driving 9.45 to 10.00 am and 17.45 to 18.00 
+		dataset = RangeToSeries(dataset, 2, 9.45, 10.00);
+		dataset = RangeToSeries(dataset, 2, 17.45, 18.00);
+		
+		// Activity 2 Shopping 19.00 to 21.00  
+		dataset = RangeToSeries(dataset, 3, 19.00, 21.00);
+		
+		// Activity 3 Sleeping 19.00 to 21.00  
+		dataset = RangeToSeries(dataset, 4, 1.00, 8.00);
+		
+			
+		
+		
+		return dataset;
+	}
 
 	public static int[][] getSeriesDataset(){
 /**
