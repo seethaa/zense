@@ -381,7 +381,7 @@ public class ActivityWidget extends Widget {
 		}
 		System.out.println("Here Sending");
 		appendAnnoIntent.putExtra(AnnotationWidget.EXTRA_MERGE_WITH_LAST_ANNO, mergeWithLastAnno);
-		appendAnnoIntent.setAction("edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg");
+		//appendAnnoIntent.setAction("edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg");
 		// Log.i(TAG, anno.toString());
 		this.getContext().sendBroadcast(appendAnnoIntent);
 	}

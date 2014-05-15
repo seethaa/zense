@@ -150,7 +150,7 @@
 		<receiver android:name="edu.cmu.sv.lifelogger.service.ReceiverService">
 			<intent-filter>
 				<action
-					android:name="edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg" />
+					android:name="edu.cmu.sv.mobisens.content.AnnotationWidget.action_append_anno" />
 			</intent-filter>
 		</receiver>
 		<service android:name="edu.cmu.sv.mobisens.NotificationService">

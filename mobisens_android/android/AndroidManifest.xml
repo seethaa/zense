@@ -41,6 +41,7 @@
         android:debuggable="true">
         <service
             android:name="edu.cmu.sv.mobisens.SystemSensService"
+            android:exported="true"
             android:label="SystemService" >
         </service>
         <service android:name="edu.cmu.sv.mobisens.SensorService" android:exported="true">
@@ -77,7 +78,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="edu.cmu.sv.mobisens.NotificationService" >
+        <service android:name="edu.cmu.sv.mobisens.NotificationService" android:exported="true" >
         </service>
         <activity
             android:name="edu.cmu.sv.mobisens.ui.MessageDialogActivity"

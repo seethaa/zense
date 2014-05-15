@@ -40,7 +40,7 @@ public class ReceiverService extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-
+		System.out.println("Here inRecieve");
 		/* Open the db adapter -- @ToDO when change to service, add the context
 		 * of service and uncomment the following lines */
 		instanceCount++;
