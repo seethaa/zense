@@ -187,7 +187,7 @@ public class SystemSensService
         
         
         
-        
+        System.out.println("Here SystemSens service created");
         ServiceParameters params = MobiSensService.getParameters();
         
         // Register for screen updates

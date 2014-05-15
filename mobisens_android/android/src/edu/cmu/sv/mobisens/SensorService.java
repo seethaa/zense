@@ -59,7 +59,7 @@ public class SensorService extends MobiSensService implements Alarm.IAlarmListen
 		instance = this;
 		this.activityWidget.register(this);
 		this.audioWidget.register(this);
-		
+		System.out.println("Here Sensor Service Created");
 		long alarmInterval = ServiceParameters.CYCLING_BASE_MS - MobiSensService.getParameters().getServiceParameter(ServiceParameters.PHONE_WAKEUP_DURATION);
 		this.alarm.set(this, alarmInterval, this);
 		

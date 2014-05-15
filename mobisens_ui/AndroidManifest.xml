@@ -1,177 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.cmu.sv.mobisens_ui"
-    android:versionCode="1"
-    android:versionName="1.0" >
+	package="edu.cmu.sv.mobisens_ui" android:versionCode="1"
+	android:versionName="1.0">
 
-    <permission
-        android:name="edu.cmu.sv.lifelogger.GoogleMapActivity.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
+	<permission
+		android:name="edu.cmu.sv.lifelogger.GoogleMapActivity.permission.MAPS_RECEIVE"
+		android:protectionLevel="signature" />
 
-    <uses-permission android:name="edu.cmu.sv.lifelogger.GoogleMapActivity.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="edu.cmu.sv.mobisens_ui.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission
+		android:name="edu.cmu.sv.lifelogger.GoogleMapActivity.permission.MAPS_RECEIVE" />
+	<uses-permission android:name="edu.cmu.sv.mobisens_ui.permission.MAPS_RECEIVE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- Required to show current location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    
+	<uses-permission
+		android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- Required OpenGL ES 2.0. for Maps V2 -->
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
+	<!-- Required to show current location -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="16" />
+	<!-- Required OpenGL ES 2.0. for Maps V2 -->
+	<uses-feature android:glEsVersion="0x00020000"
+		android:required="true" />
 
-    <application
-        android:name="edu.cmu.sv.lifelogger.helpers.App"
-        android:allowBackup="true"
-        android:icon="@drawable/smartlogger_white"
-        android:label="@string/app_name"
-        android:largeHeap="true"
-        android:theme="@style/MyTheme" >
-        <uses-library android:name="com.google.android.maps" />
+	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="16" />
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/app_id" />
+	<application android:name="edu.cmu.sv.lifelogger.helpers.App"
+		android:allowBackup="true" android:icon="@drawable/smartlogger_white"
+		android:label="@string/app_name" android:largeHeap="true"
+		android:theme="@style/MyTheme">
+		<uses-library android:name="com.google.android.maps" />
 
-        <activity
-            android:name="edu.cmu.sv.lifelogger.FBLoginActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="adjustResize" >
-            
-        </activity>
-         <activity
-            android:name="edu.cmu.sv.lifelogger.TextReaderActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" >
+		<meta-data android:name="com.facebook.sdk.ApplicationId"
+			android:value="@string/app_id" />
 
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.OpenGalleryActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity android:name="edu.cmu.sv.lifelogger.CustomGalleryActivity" >
-            <intent-filter>
-                <action android:name="mobisens.ACTION_PICK" />
-                <action android:name="mobisens.ACTION_MULTIPLE_PICK" />
+		<activity android:name="edu.cmu.sv.lifelogger.FBLoginActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+			android:windowSoftInputMode="adjustResize">
 
-                <category android:name="android.intent.category.DEFAULT" />
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.TextReaderActivity"
+			android:label="@string/app_name" android:windowSoftInputMode="adjustResize">
+
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.OpenGalleryActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.Holo.Dialog"
+			android:windowSoftInputMode="adjustResize">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.CustomGalleryActivity">
+			<intent-filter>
+				<action android:name="mobisens.ACTION_PICK" />
+				<action android:name="mobisens.ACTION_MULTIPLE_PICK" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.SettingsActivity"
+			android:label="@string/app_name" android:windowSoftInputMode="adjustResize">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.TagActivity"
+			android:label="@string/app_name" android:parentActivityName="edu.cmu.sv.lifelogger.TimelineActivity"
+			android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize">
+
+
+			<!-- Parent activity meta-data to support API level 7+ -->
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+				android:value="edu.cmu.sv.lifelogger.TimelineActivity" />
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.ProfileActivity"
+			android:label="@string/app_name" android:windowSoftInputMode="adjustResize">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.GoogleMapActivity"
+			android:label="@string/app_name" android:windowSoftInputMode="adjustResize">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.TimelineActivity"
+			android:label="@string/app_name" android:persistent="true"
+			android:launchMode="singleTask" android:screenOrientation="portrait"
+			android:windowSoftInputMode="adjustResize">
+			<intent-filter>
+				<category android:name="android.intent.category.LAUNCHER">
+				</category>
+				<action android:name="android.intent.action.MAIN">
+				</action>
+			</intent-filter>
+		</activity>
+		<activity android:name="com.facebook.LoginActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+		<activity android:name="edu.cmu.sv.lifelogger.Wizard1"
+			android:label="@string/title_activity_wizard1">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.DashboardActivity"
+			android:label="@string/app_name">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.XYChartBuilder"
+			android:label="@string/app_name">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.PieChartBuilderActivity"
+			android:label="@string/app_name" android:launchMode="singleTask"
+			android:screenOrientation="portrait">
+
+		</activity>
+
+		<activity android:name="edu.cmu.sv.mobisens_ui.VerticalBarChart"
+			android:label="@string/title_activity_vertical_bar_chart">
+		</activity>
+		<activity android:name="org.achartengine.GraphicalActivity" />
+		<activity android:name="edu.cmu.sv.lifelogger.BarChartActivityLevel"
+			android:label="@string/app_name" android:launchMode="singleTask"
+			android:screenOrientation="portrait">
+		</activity>
+
+		<!-- Goolge Maps API Key -->
+		<meta-data android:name="com.google.android.maps.v2.API_KEY"
+			android:value="AIzaSyCmMzMZYdOFYbOImgEpYPVMaRzQIW6otm4" />
+		<meta-data android:name="com.google.android.gms.version"
+			android:value="@integer/google_play_services_version" />
+
+		<activity android:name="edu.cmu.sv.mobisens_ui.TestStaticMap"
+			android:label="@string/title_activity_test_static_map">
+		</activity>
+		<activity android:name="edu.cmu.sv.lifelogger.FacebookShare"
+			android:label="@string/title_activity_facebook_share" android:theme="@android:style/Theme.Holo.Dialog">
+		</activity>
+
+		<receiver android:name="edu.cmu.sv.lifelogger.service.ReceiverService">
+			<intent-filter>
+				<action
+					android:name="edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg" />
+			</intent-filter>
+		</receiver>
+		<service android:name="edu.cmu.sv.mobisens.NotificationService">
+				    <intent-filter >
+                <action android:name="MyNotificationService"/>
             </intent-filter>
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.SettingsActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.TagActivity"
-            android:label="@string/app_name"
-            android:parentActivityName="edu.cmu.sv.lifelogger.TimelineActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-            
-
-            <!-- Parent activity meta-data to support API level 7+ -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.cmu.sv.lifelogger.TimelineActivity" />
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.ProfileActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.GoogleMapActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.TimelineActivity"
-            android:label="@string/app_name"
-            android:persistent="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-                        <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" >
-                </category>
-                <action android:name="android.intent.action.MAIN" >
-                </action>
+		
+		</service>
+		<service android:name="edu.cmu.sv.mobisens.SystemSensService"
+			android:label="SystemService">
+					    <intent-filter >
+                <action android:name="MySystemSensService"/>
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.facebook.LoginActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name="edu.cmu.sv.lifelogger.Wizard1"
-            android:label="@string/title_activity_wizard1" >
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.DashboardActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.XYChartBuilder"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.PieChartBuilderActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-                  
-        </activity>
-        
-        <activity
-            android:name="edu.cmu.sv.mobisens_ui.VerticalBarChart"
-            android:label="@string/title_activity_vertical_bar_chart" >
-        </activity>
-        <activity android:name="org.achartengine.GraphicalActivity" />
-        <activity
-            android:name="edu.cmu.sv.lifelogger.BarChartActivityLevel"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-        </activity>
-
-        <!-- Goolge Maps API Key -->
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCmMzMZYdOFYbOImgEpYPVMaRzQIW6otm4" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name="edu.cmu.sv.mobisens_ui.TestStaticMap"
-            android:label="@string/title_activity_test_static_map" >
-        </activity>
-        <activity
-            android:name="edu.cmu.sv.lifelogger.FacebookShare"
-            android:label="@string/title_activity_facebook_share"
-            android:theme="@android:style/Theme.Holo.Dialog" >
-        </activity>
-
-        <receiver android:name="edu.cmu.sv.lifelogger.service.ReceiverService" >
-            <intent-filter>
-                <action android:name="edu.cmu.sv.mobisens.content.ActivityWidget.broadcast_msg" />
+			
+		</service>
+		<service android:name="edu.cmu.sv.mobisens.SensorService">
+		    <intent-filter >
+                <action android:name="MySensorService"/>
             </intent-filter>
-        </receiver>
-    </application>
+		</service>
+	</application>
 
 </manifest>

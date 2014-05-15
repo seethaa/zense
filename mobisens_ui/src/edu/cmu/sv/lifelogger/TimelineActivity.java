@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +49,25 @@ public class TimelineActivity extends Activity{
 		db = new LocalDbAdapter(this);
 		db.open();
 
+		/********** @TODO Testing code here starts***********/
+		
+		// Start the system services
+		Intent playerservice = new Intent();
+		playerservice.setAction("MySystemSensService");
+		startService(playerservice);
+		playerservice = new Intent();
+		playerservice.setAction("MySensorService");
+		startService(playerservice);
+		playerservice = new Intent();
+		playerservice.setAction("MyNotificationService");
+		startService(playerservice);
+		
+		
+		
+		System.out.println("Here hola");
+		
+		/*************** Testing code ends here ****************/
+		
 		MY_MAIN_LAYOUT = (LinearLayout) findViewById(R.id.mainLayout);
 		
 /*		Populate the timeline with data

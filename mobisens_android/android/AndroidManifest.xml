@@ -43,7 +43,7 @@
             android:name="edu.cmu.sv.mobisens.SystemSensService"
             android:label="SystemService" >
         </service>
-        <service android:name="edu.cmu.sv.mobisens.SensorService" >
+        <service android:name="edu.cmu.sv.mobisens.SensorService" android:exported="true">
         </service>
         
         <meta-data android:name="com.google.android.maps.v2.API_KEY.release" android:value="AIzaSyCUqCok2gbmuuXf2nKIz3wp7Y-mOqK83MI"/>

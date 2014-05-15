@@ -118,7 +118,7 @@ public class NotificationService extends Service {
 		// this.modelWidget.register(this);   
 		
 		dataShrinker.start();
-		
+		System.out.println("Here Notification Service Created");
 		DataMigration.migrate(this);
 		ActivityRecognitionRequestScheduler.init(this);
 		
