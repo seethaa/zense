@@ -52,7 +52,7 @@ public class TimelineActivity extends Activity{
 		/********** @TODO Testing code here starts***********/
 		
 		// Start the system services
-		Intent playerservice = new Intent();
+/*		Intent playerservice = new Intent();
 		playerservice.setAction("MySystemSensService");
 		startService(playerservice);
 		playerservice = new Intent();
@@ -62,7 +62,7 @@ public class TimelineActivity extends Activity{
 		playerservice.setAction("MyNotificationService");
 		startService(playerservice);
 		
-		
+		*/
 		
 		System.out.println("Here hola");
 		

@@ -79,6 +79,7 @@ public class SensorService extends MobiSensService implements Alarm.IAlarmListen
 		this.audioWidget.unregister();
 
 		Log.d( "UsageSignatureSensor", "Sensor Service stopped" );
+		System.out.println("Here Sensor Service stopped");
 
 		super.onDestroy();
 		instance = null;

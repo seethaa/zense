@@ -28,6 +28,8 @@ public class Network {
 	}
 	
 	public static boolean isWificonnected(Context context){
+		if(context==null)
+			return false;
     	ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     	if(!ConnectivityManager.isNetworkTypeValid(ConnectivityManager.TYPE_WIFI))
     		return false;

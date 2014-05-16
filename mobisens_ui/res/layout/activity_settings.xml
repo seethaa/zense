@@ -38,6 +38,13 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btnStartStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Start/Stop Service" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"

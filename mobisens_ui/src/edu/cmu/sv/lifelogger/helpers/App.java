@@ -15,9 +15,14 @@ import android.app.Application;
 import android.content.Context;
 
 public class App extends Application {
-    public LocalDbAdapter db;
+    /* List of global variables, to be shared across activities */
+	public LocalDbAdapter db;
+    
     // Store the latest activity shown in timeline here(Data Sharing)
     public Date lastTimelineActivityDate;
+    
+    // Store the service state
+    public static boolean serviceStarted = false;
 
     @Override
     public void onCreate() {

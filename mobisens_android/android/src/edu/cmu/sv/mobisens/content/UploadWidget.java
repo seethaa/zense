@@ -69,7 +69,7 @@ public class UploadWidget extends PeriodicNetworkRequestWidget {
 		if(!canUpload() && this.isRequestByUser == false)
 			return;
 		
-		if(Network.isWificonnected(getContext())
+		if(Network.isWificonnected(this.getContext())
 				&& this.isRequestByUser == false)
 			return;
 		
