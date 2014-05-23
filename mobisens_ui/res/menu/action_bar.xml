@@ -7,7 +7,7 @@
     
     <item android:id="@+id/profile"
           android:showAsAction="ifRoom"
-          android:icon="@drawable/user_white" />
+          android:icon="@drawable/ic_action_navigation_refresh" />
     
       <item android:id="@+id/settings"
           android:showAsAction="ifRoom"

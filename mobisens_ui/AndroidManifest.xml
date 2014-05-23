@@ -61,6 +61,12 @@
 		<activity android:name="edu.cmu.sv.lifelogger.FBLoginActivity"
 			android:label="@string/app_name" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
 			android:windowSoftInputMode="adjustResize">
+			<intent-filter>
+				<category android:name="android.intent.category.LAUNCHER">
+				</category>
+				<action android:name="android.intent.action.MAIN">
+				</action>
+			</intent-filter>
 
 		</activity>
 		<activity android:name="edu.cmu.sv.lifelogger.TextReaderActivity"
@@ -101,12 +107,7 @@
 			android:label="@string/app_name" android:persistent="true"
 			android:launchMode="singleTask" android:screenOrientation="portrait"
 			android:windowSoftInputMode="adjustResize">
-			<intent-filter>
-				<category android:name="android.intent.category.LAUNCHER">
-				</category>
-				<action android:name="android.intent.action.MAIN">
-				</action>
-			</intent-filter>
+			
 		</activity>
 		<activity android:name="com.facebook.LoginActivity"
 			android:label="@string/app_name" android:theme="@android:style/Theme.Translucent.NoTitleBar" />
