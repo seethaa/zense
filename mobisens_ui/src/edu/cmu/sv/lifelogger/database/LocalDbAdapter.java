@@ -1,5 +1,7 @@
 package edu.cmu.sv.lifelogger.database;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -14,11 +16,14 @@ import com.google.android.gms.maps.model.LatLng;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
+import au.com.bytecode.opencsv.CSVWriter;
 import edu.cmu.sv.lifelogger.entities.Activity;
 import edu.cmu.sv.lifelogger.entities.ActivityItem;
 import edu.cmu.sv.lifelogger.entities.TimelineItem;
@@ -41,12 +46,13 @@ public class LocalDbAdapter {
 	private Context mCtx;
 	/* @TODO another decision to add  */
 	private static String imagesTableCreate = "create table Image (imageName text,  location text, activityID integer)";
+	private static String IMAGE_TABLE_NAME = "Image";
 	private static String activityTableCreate = "create table ActivityTable "
 			+ "(activityID integer, activityName text,  description text, "
 			+ "activityType text,startLocation text," +
 			"endLocation text, startTime text, endTime text, startLocationLat text, startLocationLng text, "
 			+ "endLocationLat text, endLocationLng text)";
-	private static String Activity_TABLE_NAME = "ActivityTable";
+	private static String ACTIVITY_TABLE_NAME = "ActivityTable";
 	private static String userTableCreate = "create table Users( userID integer, userName text,  email text, about text, profilePictureLocation text)";
 	private static String USERS_TABLE_NAME = "Users";
 
@@ -166,7 +172,7 @@ public class LocalDbAdapter {
 			initialValues.put("endTime", endTime);
 
 			System.out.println("HIMZ: creating values");
-			return db.insert(Activity_TABLE_NAME, null, initialValues);
+			return db.insert(ACTIVITY_TABLE_NAME, null, initialValues);
 
 		}
 
@@ -769,6 +775,137 @@ public class LocalDbAdapter {
 		}
 		return about ;
 	}
+	/**
+	 * Overloaded function - should never be used, apart from testing purposes
+	 * @return
+	 */
+	private boolean backupDB(){
+		String appDirectory = "/data/data/edu.cmu.sv.mobisens_ui/files/";
+		return backupDB(appDirectory);
+	}
+	
+	/**
+	 * Backup all the database in the directory name provided here. 
+	 * @param directoryName
+	 * @return
+	 */
+	public boolean backupDB(String directoryName){
+		boolean result = false;
+		// Loop through all the tables and send it to the csv creating function
+		 ArrayList<String[]> values = new ArrayList<String[]>();
+		Cursor c = null;
+		//1 ActivityTable
+		try{
+			String tableName = ACTIVITY_TABLE_NAME;
+			c = mDb.rawQuery("select  * from " + tableName , null);
+			if (c.moveToFirst()) {
+				do {
+					ArrayList<String> temp =new ArrayList<String>();
+					temp.add(c.getString(0));temp.add(c.getString(1));temp.add(c.getString(2));temp.add(c.getString(3));temp.add(c.getString(4));temp.add(c.getString(5));temp.add(c.getString(6));temp.add(c.getString(7));temp.add(c.getString(8));temp.add(c.getString(9));temp.add(c.getString(10));temp.add(c.getString(11));
+					String[] stringArray = temp.toArray(new String[temp.size()]);
+					values.add(stringArray);
+				} while (c.moveToNext());
+			}
+			createCSV(values, directoryName, tableName);
+			
+			//2 DashboardSummary
+			values = new ArrayList<String[]>();
+			tableName = DASHBOARD_SUMMARY_TABLE_NAME;
+			c = mDb.rawQuery("select  * from " + tableName , null);
+			if (c.moveToFirst()) {
+				do {
+					ArrayList<String> temp =new ArrayList<String>();
+					temp.add(c.getString(0)); temp.add(c.getString(1));
+					String[] stringArray = temp.toArray(new String[temp.size()]);
+					values.add(stringArray);
+				} while (c.moveToNext());
+			}
+			createCSV(values, directoryName, tableName);
+			
+			//3 Image
+			values = new ArrayList<String[]>();
+			tableName = IMAGE_TABLE_NAME;
+			c = mDb.rawQuery("select  * from " + tableName , null);
+			if (c.moveToFirst()) {
+				do {
+					ArrayList<String> temp =new ArrayList<String>();
+					temp.add(c.getString(0));temp.add(c.getString(1));temp.add(c.getString(2));
+					String[] stringArray = temp.toArray(new String[temp.size()]);
+					values.add(stringArray);
+				} while (c.moveToNext());
+			}
+			createCSV(values, directoryName, tableName);
+			
+			//4 TaggedLocations
+			values = new ArrayList<String[]>();
+			tableName = TAGGED_LOCATIONS_TABLE_NAME;
+			c = mDb.rawQuery("select  * from " + tableName , null);
+			if (c.moveToFirst()) {
+				do {
+					ArrayList<String> temp =new ArrayList<String>();
+					temp.add(c.getString(0));temp.add(c.getString(1));temp.add(c.getString(2));temp.add(c.getString(3));
+					String[] stringArray = temp.toArray(new String[temp.size()]);
+					values.add(stringArray);
+				} while (c.moveToNext());
+			}
+			createCSV(values, directoryName, tableName);
+			
+			//5 Users
+			values = new ArrayList<String[]>();
+			tableName = USERS_TABLE_NAME;
+			c = mDb.rawQuery("select  * from " + tableName , null);
+			if (c.moveToFirst()) {
+				do {
+					ArrayList<String> temp =new ArrayList<String>();
+					temp.add(c.getString(0));temp.add(c.getString(1));temp.add(c.getString(2));temp.add(c.getString(3));temp.add(c.getString(4));
+					String[] stringArray = temp.toArray(new String[temp.size()]);
+					values.add(stringArray);
+				} while (c.moveToNext());
+			}
+			createCSV(values, directoryName, tableName);
+			
+			//6 locations
+			values = new ArrayList<String[]>();
+			tableName = LOCATIONS_TABLE_NAME;
+			c = mDb.rawQuery("select  * from " + tableName , null);
+			if (c.moveToFirst()) {
+				do {
+					ArrayList<String> temp =new ArrayList<String>();
+					temp.add(c.getString(0));temp.add(c.getString(1));temp.add(c.getString(2));temp.add(c.getString(3));
+					String[] stringArray = temp.toArray(new String[temp.size()]);
+					values.add(stringArray);
+				} while (c.moveToNext());
+			}
+			createCSV(values, directoryName, tableName);
+			
+			System.out.println("LocalDbAdapter: All the tables backedup");
+			result = true;
+			// closing connection
+			c.close();
+		}
+		catch(Exception e){
+			result = false;
+			System.out.println("LocalDbAdapter: There was an error backing up the tables");
+		}
+		return result;
+	}
+	
+	public void createCSV(ArrayList<String[]> values, String directoryName ,String tableName){
+		CSVWriter writer = null;
+		// Iterate through the cursor
+		try 
+		{	
+			writer = new CSVWriter(new FileWriter(directoryName +  tableName + ".csv"), ',');
+			for(String[] entries : values) {
+				writer.writeNext(entries); 
+			}
+			writer.close();
+		} 
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 
 	public String getActivityID(String activityType,String startLocation, String endLocation, String startTime, 
@@ -907,7 +1044,7 @@ public class LocalDbAdapter {
 		initialValues.put("endLocationLng", endLocationLng);
 
 		System.out.println("HIMZ: creating values");
-		return mDb.insert(Activity_TABLE_NAME, null, initialValues);
+		return mDb.insert(ACTIVITY_TABLE_NAME, null, initialValues);
 
 	}
 	/**
@@ -949,6 +1086,8 @@ public class LocalDbAdapter {
 	}
 
 
+	
+	
 	private static ArrayList<String> convertStringToArray(String str)
 	{
 		List<String> items = new ArrayList<String>(Arrays.asList(str.split("\\s*,\\s*")));
@@ -956,6 +1095,8 @@ public class LocalDbAdapter {
 		return (ArrayList<String>) items;
 	}
 
+	
+	
 	public int isUserExist(String userEmail) {
 		// TODO Auto-generated method stub
 

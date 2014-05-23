@@ -10,11 +10,14 @@ import edu.cmu.sv.lifelogger.helpers.DefinitionHelper;
 import edu.cmu.sv.mobisens_ui.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 
@@ -22,6 +25,7 @@ public class SettingsActivity extends Activity
 {
 	TextView txtName ;
 	TextView txtEmail ;
+	static App app;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -84,11 +88,54 @@ public class SettingsActivity extends Activity
 			}
 		});
 		
- 
+		final Context ctx = this;
+		
+		RelativeLayout rl1 = (RelativeLayout)findViewById(R.id.rl1);
+		rl1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent1 = new Intent(ctx, TextReaderActivity.class);
+				intent1.putExtra("textType", "ABOUT");
+				startActivity(intent1);
+			}
+		});
+		
+		RelativeLayout rl2 = (RelativeLayout)findViewById(R.id.rl2);
+		rl2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent1 = new Intent(ctx, TextReaderActivity.class);
+				intent1.putExtra("textType", "FAQ");
+				startActivity(intent1);
+			}
+		});
+		
+		Button btnBackup = (Button) findViewById(R.id.backupDB);
+		btnBackup.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// Call the backup database routine
+				app = ((App)ctx.getApplicationContext());
+				//String directoryName = ctx.getFilesDir().getPath();
+				String directoryPath = ctx.getApplicationInfo().dataDir;
+				String directoryName = ctx.getDir("backup",	0).getName();
+				directoryName = directoryPath + "/" + directoryName + "/";
+				boolean backupSuccess = app.db.backupDB(directoryName);
+				if(backupSuccess) 
+					Toast.makeText(getApplicationContext(), 
+						"Backup was successful", Toast.LENGTH_LONG).show();
+				else
+					Toast.makeText(getApplicationContext(), 
+                            "Backup was not successful", Toast.LENGTH_LONG).show();
+				
+			}
+		});
+		
 	}
 	
 	public void tosClicked(final View view){
 		Intent intent1 = new Intent(this, TextReaderActivity.class);
+		intent1.putExtra("textType", "EULA_formal");
 		startActivity(intent1);
 	}
 

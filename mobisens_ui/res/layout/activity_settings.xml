@@ -86,7 +86,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout  android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:orientation="vertical" >
@@ -130,7 +130,7 @@
             android:src="@drawable/right_arrow" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/rl2"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="vertical" >
@@ -138,9 +138,10 @@
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/next"
             android:text="FAQ"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -160,5 +161,12 @@
         android:clickable="true"
         android:onClick="tosClicked"
         android:text="Terms of Services" />
+    
+    <Button
+        android:id="@+id/backupDB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="TBackup Database" />
 
 </LinearLayout>
