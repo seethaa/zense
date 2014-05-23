@@ -264,7 +264,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -305,7 +305,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 		/* Create the percentages and store them */
 
@@ -367,7 +367,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 		return data1;
 	}
@@ -481,7 +481,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -523,7 +523,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -557,7 +557,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -589,7 +589,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -618,7 +618,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -650,7 +650,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -682,7 +682,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -713,7 +713,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -741,7 +741,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 
 
@@ -771,7 +771,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 		return about ;
 	}
@@ -931,7 +931,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 		return activityIDStr ;
 	}
@@ -1117,7 +1117,7 @@ public class LocalDbAdapter {
 			c.close();
 		}
 		catch(Exception e){
-			System.out.println("asdf");
+			e.printStackTrace();
 		}
 		return count ;	
 	}

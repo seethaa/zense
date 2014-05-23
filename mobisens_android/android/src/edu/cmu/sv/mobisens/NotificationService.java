@@ -16,6 +16,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
 
 // Maintain all the notification in status bar.
@@ -77,8 +78,11 @@ public class NotificationService extends Service {
 
 		CharSequence contentTitle = getString(R.string.service_running_notify_ticker_text);
 		CharSequence contentText = getString(R.string.service_running_notify_content_text);
-
-		Intent launcherIntent = new Intent(this, MobiSensLauncher.class);
+		
+		PackageManager pm = context.getPackageManager();
+		String pmName = context.getPackageName();
+		Intent launcherIntent=pm.getLaunchIntentForPackage(pmName);
+		//Intent launcherIntent = new Intent(this, context.get);
 		launcherIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, launcherIntent, 0);
