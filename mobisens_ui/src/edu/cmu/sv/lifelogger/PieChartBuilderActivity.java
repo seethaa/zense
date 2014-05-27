@@ -117,6 +117,11 @@ public class PieChartBuilderActivity extends Activity {
 		ArrayList<ActivityItem> dataList = new ArrayList<ActivityItem>();
 		//dataList = DashboardManager.getAllPieChartData();
 		dataList = DashboardManager.getAllPieChartData(this.getApplicationContext());
+		if(dataList.size() ==0){
+			// Add one dummy item
+			ActivityItem t1 = new ActivityItem("No Activity", 100.0);
+			dataList.add(t1);
+		}
 		double value = 0;
 		int i = 0;
 		isFirstRun++;

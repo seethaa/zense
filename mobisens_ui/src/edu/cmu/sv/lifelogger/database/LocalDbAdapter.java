@@ -271,7 +271,7 @@ public class LocalDbAdapter {
 		return labels ;
 	}
 
-
+	
 	public void doDashboardSummaryAnalysis(){
 		// Get All the rows from activityTable
 		// Create hashmap for each activityType and update the total time taken there.
@@ -351,7 +351,11 @@ public class LocalDbAdapter {
 		return mDb.insert(DASHBOARD_SUMMARY_TABLE_NAME, null, initialValues);
 	}
 
-
+	/**
+	 * Get dashboard summary data
+	 * 
+	 * @return
+	 */
 	public ArrayList<ActivityItem> getAllDashboardSummary(){
 		ArrayList<ActivityItem> data1 = new ArrayList<ActivityItem>();
 		Cursor c = null;
