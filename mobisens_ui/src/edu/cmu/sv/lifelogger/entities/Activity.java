@@ -210,7 +210,9 @@ public class Activity {
 	public String getmStart_location() {
 		/* @TODO Use GoogleApi to get Area/City Name for the start location*/
 		if(mStart_location == null) {
-			mStart_location = "Sunnyvale";
+			//Put the location as null value
+			mStart_location = "";
+
 		}
 		return mStart_location;
 	}
@@ -223,8 +225,10 @@ public class Activity {
 
 	public String getmEnd_location() {
 		/* @TODO Use GoogleApi to get Area/City Name for the start location*/
+
 		if(mEnd_location == null){
-			mEnd_location = "Mountain View";
+			//Put the location as null value
+			mEnd_location = "";
 		}
 		return mEnd_location;
 	}
